@@ -1,0 +1,33 @@
+{
+"Items": [
+	{
+		"title": "doog flips",
+		"requiredCoinz": 15,
+		"coinzPerSecond": 0.1
+	},
+
+	{
+		"title": "hog flips",
+		"requiredCoinz": 100,
+		"coinzPerSecond": 1
+	},
+
+	{
+		"title": "bob does it",
+		"requiredCoinz": 1100,
+		"coinzPerSecond": 8
+	},
+
+	{
+		"title": "little bobby",
+		"requiredCoinz": 12000,
+		"coinzPerSecond": 47
+	},
+
+	{
+		"title": "hot dug",
+		"requiredCoinz": 130000,
+		"coinzPerSecond": 260
+	}
+]
+}
