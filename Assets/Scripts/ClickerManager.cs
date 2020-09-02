@@ -14,18 +14,21 @@ public class ClickerManager : MonoBehaviour
         public float coinzPerSecond;
     }
 
-    private SaveData playerData;
-    private ClickerData[] videos;
+    [SerializeField]
+    GameObject coinzText = null;
+    [SerializeField]
+    GameObject coinzPerSecondText = null;
+    [SerializeField]
+    GameObject buttonScrollRect = null;
+    [SerializeField]
+    GameObject buttonPrefab = null;
+    [SerializeField]
+    ParticleSystem particles = null;
+    [SerializeField]
+    TextAsset clickerData = null;
 
-    public GameObject coinzText;
-    public GameObject coinzPerSecondText;
-    public GameObject buttonA;
-    public GameObject buttonB;
-    public GameObject buttonC;
-    public GameObject buttonD;
-    public ParticleSystem particles;
-    public TextAsset clickerData;
-
+    private SaveData playerData = null;
+    private ClickerData[] videos = null;
     private string[] soundNames = new string[] {"woof", "woof", "arf", "bark", "bork" };
 
     // Start is called before the first frame update
@@ -66,17 +69,13 @@ public class ClickerManager : MonoBehaviour
             IncrementCoinz(-(videos[videoNumber].requiredCoinz));
             playerData.playerData.clickerVideos[videoNumber]++;
             playerData.playerData.coinzPerSecond += videos[videoNumber].coinzPerSecond;
+            ModifyButton(buttonScrollRect.transform.Find("Button " + videoNumber.ToString()).gameObject, "Count Text", playerData.playerData.clickerVideos[videoNumber].ToString());
             UpdateText();
         }
     }
 
     public void UpdateText()
     {
-        // TODO: change to button array
-        ModifyButton(buttonA, "Count Text", playerData.playerData.clickerVideos[0].ToString());
-        ModifyButton(buttonB, "Count Text", playerData.playerData.clickerVideos[1].ToString());
-        ModifyButton(buttonC, "Count Text", playerData.playerData.clickerVideos[2].ToString());
-        ModifyButton(buttonD, "Count Text", playerData.playerData.clickerVideos[3].ToString());
         coinzPerSecondText.GetComponent<TextMeshProUGUI>().text = playerData.playerData.coinzPerSecond.ToString("F1") + " subscribers";
         coinzText.GetComponent<TextMeshProUGUI>().text = playerData.playerData.coinz.ToString("F1") + " views";  
     }
@@ -93,6 +92,8 @@ public class ClickerManager : MonoBehaviour
         InvokeRepeating("Woof", 0.0f, 1.0f / GlobalConfig.incrementsPerSecond);
         InvokeRepeating("UpdateStats", 60f, 60f * 1f);
         UpdateText();
+        for (int i = 0; i < videos.Length; i++)
+            ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Count Text", playerData.playerData.clickerVideos[i].ToString());
     }
 
     void OnDisable()
@@ -103,13 +104,18 @@ public class ClickerManager : MonoBehaviour
 
     public void LoadClickerData()
     {
-        string json = clickerData.text;
-        videos = JsonHelper.FromJson<ClickerData>(json);
+        videos = JsonHelper.FromJson<ClickerData>(clickerData.text);
 
-        ModifyButton(buttonA, "Name Text", videos[0].title);
-        ModifyButton(buttonB, "Name Text", videos[1].title);
-        ModifyButton(buttonC, "Name Text", videos[2].title);
-        ModifyButton(buttonD, "Name Text", videos[3].title);
+        for (int i = 0; i < videos.Length; i++)
+        {
+            int value = i;
+            GameObject popupInstance = Instantiate(buttonPrefab);
+            popupInstance.name = "Button " + i.ToString();
+            popupInstance.transform.SetParent(buttonScrollRect.transform);
+            popupInstance.transform.localScale = buttonPrefab.transform.localScale;
+            LoadButton(popupInstance, videos[i]);
+            popupInstance.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {AddVideo(value);});
+        }
     }
 
     public void UpdateStats()
@@ -121,6 +127,8 @@ public class ClickerManager : MonoBehaviour
 
     void ModifyButton(GameObject button, string component, string text)
     {
+        if (component == "Cost Text")
+            text = text + " coinz needed";
         button.transform.Find(component).gameObject.GetComponent<TextMeshProUGUI>().SetText(text);
     }
 
