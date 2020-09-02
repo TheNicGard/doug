@@ -346,12 +346,24 @@ public class HomeScreenManager : MonoBehaviour
 
     public float GetDougWeightScale()
     {
+        
         float weight = (float)playerData.playerData.weight / (float)GlobalConfig.maxWeight;
+        Debug.Log("Weight = " + weight.ToString());
         if (weight < 0.25)
-            return (weight * 3f) + 2f;
+        {
+            Debug.Log("Weight scale = " + ((weight * 2f) + .5f).ToString());
+            return (weight * 2f) + .5f;
+        }
         else if (weight > 0.75)
+        {
+            Debug.Log("Weight scale = " + ((weight * 8f) - 5f).ToString());
             return (weight * 8f) - 5f;
-        else return 1f;
+        }
+        else
+        {
+            Debug.Log("Weight scale = " + 1f.ToString());
+            return 1f;
+        }
     }
 
     public string GetAgeOfDoug()
