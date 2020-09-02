@@ -46,12 +46,15 @@ public class ClickerManager : MonoBehaviour
     public void IncrementCoinz(float dCoinz)
     {
         playerData.playerData.coinz += dCoinz;
-        coinzText.GetComponent<TextMeshProUGUI>().text = playerData.playerData.coinz.ToString("F1") + " coinz";
+        coinzText.GetComponent<TextMeshProUGUI>().text = ConvertToShortNumber(playerData.playerData.coinz) + " coinz";
     }
 
     public void Woof()
     {
         IncrementCoinz(playerData.playerData.coinzPerSecond / GlobalConfig.incrementsPerSecond);
+        for (int i = 0; i < videos.Length; i++)
+            buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject.transform.Find("Cost Text").gameObject.GetComponent<TextMeshProUGUI>().color = 
+                (playerData.playerData.coinz > videos[i].requiredCoinz) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
     }
 
     public void PressDoug()
@@ -59,7 +62,6 @@ public class ClickerManager : MonoBehaviour
         IncrementCoinz(1f);
         particles.Emit(1);
         GetComponent<AudioManager>().PlayRandomSound(soundNames);
-        
     }
 
     public void AddVideo(int videoNumber)
@@ -77,7 +79,9 @@ public class ClickerManager : MonoBehaviour
     public void UpdateText()
     {
         coinzPerSecondText.GetComponent<TextMeshProUGUI>().text = playerData.playerData.coinzPerSecond.ToString("F1") + " subscribers";
-        coinzText.GetComponent<TextMeshProUGUI>().text = playerData.playerData.coinz.ToString("F1") + " views";  
+        //coinzText.GetComponent<TextMeshProUGUI>().text = ConvertToShortNumber(playerData.playerData.coinz) + " coinz"; //playerData.playerData.coinz.ToString("F1") + " views";
+        for (int i = 0; i < videos.Length; i++)
+            ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Count Text", playerData.playerData.clickerVideos[i].ToString());
     }
 
     public void GoToHomeScreen()
@@ -92,8 +96,6 @@ public class ClickerManager : MonoBehaviour
         InvokeRepeating("Woof", 0.0f, 1.0f / GlobalConfig.incrementsPerSecond);
         InvokeRepeating("UpdateStats", 60f, 60f * 1f);
         UpdateText();
-        for (int i = 0; i < videos.Length; i++)
-            ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Count Text", playerData.playerData.clickerVideos[i].ToString());
     }
 
     void OnDisable()
@@ -135,7 +137,31 @@ public class ClickerManager : MonoBehaviour
     void LoadButton(GameObject button, ClickerData video)
     {
         ModifyButton(button, "Name Text", video.title);
-        ModifyButton(button, "Cost Text", video.requiredCoinz.ToString());
+        ModifyButton(button, "Cost Text", ConvertToShortNumber(video.requiredCoinz));
+    }
+
+    string ConvertToShortNumber(long number)
+    {
+        if (number < 1000 * 1000)
+            return number.ToString("N0");
+        else if (number < 1000 * 1000 * 1000)
+            return (number / (1000 * 1000)).ToString("0.##") + " million";
+        else if (number < (long) 1000 * 1000 * 1000 * 1000)
+            return (number / (1000 * 1000 * 1000)).ToString("0.##") + " billion";
+        else
+            return number.ToString("E2");
+    }
+
+    string ConvertToShortNumber(double number)
+    {
+        if (number < 1000 * 1000)
+            return number.ToString("N0");
+        else if (number < 1000 * 1000 * 1000)
+            return (number / (1000 * 1000)).ToString("0.##") + " million";
+        else if (number < (double) 1000 * 1000 * 1000 * 1000)
+            return (number / (1000 * 1000 * 1000)).ToString("0.##") + " billion";
+        else
+            return number.ToString("E2");
     }
 }
 
