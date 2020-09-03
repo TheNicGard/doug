@@ -138,6 +138,8 @@ public class HomeScreenManager : MonoBehaviour
             {
                 go.GetComponent<PanelBounce>().Close();
                 go.SetActive(false);
+                if (go.transform.Find("Info Button/Info Panel") != null && go.transform.Find("Info Button/Info Panel").gameObject.activeSelf)
+                    go.transform.Find("Info Button/Info Panel").gameObject.SetActive(false);
             }
         }
 
@@ -159,7 +161,13 @@ public class HomeScreenManager : MonoBehaviour
         foreach(GameObject go in panels)
         {
             if (go.name == panelName)
+            {
+                if (go.transform.Find("Info Button/Info Panel") != null && go.transform.Find("Info Button/Info Panel").gameObject.activeSelf)
+                    go.transform.Find("Info Button/Info Panel").gameObject.SetActive(false);
+                go.GetComponent<PanelBounce>().Close();
                 go.SetActive(false);
+                
+            }
         }
     }
 
@@ -348,20 +356,20 @@ public class HomeScreenManager : MonoBehaviour
     {
         
         float weight = (float)playerData.playerData.weight / (float)GlobalConfig.maxWeight;
-        Debug.Log("Weight = " + weight.ToString());
+        //Debug.Log("Weight = " + weight.ToString());
         if (weight < 0.25)
         {
-            Debug.Log("Weight scale = " + ((weight * 2f) + .5f).ToString());
+            //Debug.Log("Weight scale = " + ((weight * 2f) + .5f).ToString());
             return (weight * 2f) + .5f;
         }
         else if (weight > 0.75)
         {
-            Debug.Log("Weight scale = " + ((weight * 8f) - 5f).ToString());
+            //Debug.Log("Weight scale = " + ((weight * 8f) - 5f).ToString());
             return (weight * 8f) - 5f;
         }
         else
         {
-            Debug.Log("Weight scale = " + 1f.ToString());
+            //Debug.Log("Weight scale = " + 1f.ToString());
             return 1f;
         }
     }
@@ -418,6 +426,11 @@ public class HomeScreenManager : MonoBehaviour
             chachaGameButton.transform.Find("Unlock Text").gameObject.SetActive(false);
 
         }
+    }
+
+    public void CloseInfoPanel()
+    {
+
     }
 
 
