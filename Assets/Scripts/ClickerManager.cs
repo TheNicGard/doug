@@ -54,7 +54,7 @@ public class ClickerManager : MonoBehaviour
         IncrementCoinz(playerData.playerData.coinzPerSecond / GlobalConfig.incrementsPerSecond);
         for (int i = 0; i < videos.Length; i++)
             buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject.transform.Find("Cost Text").gameObject.GetComponent<TextMeshProUGUI>().color = 
-                (playerData.playerData.coinz > videos[i].requiredCoinz) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
+                (playerData.playerData.coinz > requiredCoinz(i)) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
     }
 
     public void PressDoug()
@@ -64,14 +64,20 @@ public class ClickerManager : MonoBehaviour
         GetComponent<AudioManager>().PlayRandomSound(soundNames);
     }
 
+    public long requiredCoinz(int videoNumber)
+    {
+        return (long) Mathf.Ceil(videos[videoNumber].requiredCoinz * Mathf.Pow(1.15f, playerData.playerData.clickerVideos[videoNumber]));
+    }
+
     public void AddVideo(int videoNumber)
     {
-        if (playerData.playerData.coinz >= videos[videoNumber].requiredCoinz && playerData.playerData.clickerVideos[videoNumber] <= 9000)
+        long tempRequiredCoinz = requiredCoinz(videoNumber);
+        //Debug.Log(tempRequiredCoinz.ToString());
+        if (playerData.playerData.coinz >= tempRequiredCoinz && playerData.playerData.clickerVideos[videoNumber] <= 9000)
         {
-            IncrementCoinz(-(videos[videoNumber].requiredCoinz));
+            IncrementCoinz(-tempRequiredCoinz);
             playerData.playerData.clickerVideos[videoNumber]++;
             playerData.playerData.coinzPerSecond += videos[videoNumber].coinzPerSecond;
-            ModifyButton(buttonScrollRect.transform.Find("Button " + videoNumber.ToString()).gameObject, "Count Text", playerData.playerData.clickerVideos[videoNumber].ToString());
             UpdateText();
         }
     }
@@ -80,8 +86,11 @@ public class ClickerManager : MonoBehaviour
     {
         coinzPerSecondText.GetComponent<TextMeshProUGUI>().text = playerData.playerData.coinzPerSecond.ToString("F1") + " subscribers";
         //coinzText.GetComponent<TextMeshProUGUI>().text = ConvertToShortNumber(playerData.playerData.coinz) + " coinz"; //playerData.playerData.coinz.ToString("F1") + " views";
-        for (int i = 0; i < videos.Length; i++)
+        for (int i = 0; i < videos.Length; i++) 
+        {
             ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Count Text", playerData.playerData.clickerVideos[i].ToString());
+            ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Cost Text", requiredCoinz(i).ToString());
+        }
     }
 
     public void GoToHomeScreen()
