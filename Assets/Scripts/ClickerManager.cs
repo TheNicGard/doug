@@ -117,6 +117,7 @@ public class ClickerManager : MonoBehaviour
             popupInstance.transform.localScale = buttonPrefab.transform.localScale;
             LoadButton(popupInstance, videos[i]);
             popupInstance.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {AddVideo(value);});
+            popupInstance.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {GetComponent<AudioManager>().PlaySound("click");});
         }
     }
 
