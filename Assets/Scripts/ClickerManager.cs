@@ -19,6 +19,8 @@ public class ClickerManager : MonoBehaviour
     [SerializeField]
     GameObject coinzPerSecondText = null;
     [SerializeField]
+    GameObject stardomCounter = null;
+    [SerializeField]
     GameObject buttonScrollRect = null;
     [SerializeField]
     GameObject buttonPrefab = null;
@@ -45,7 +47,7 @@ public class ClickerManager : MonoBehaviour
 
     public void IncrementCoinz(float dCoinz)
     {
-        playerData.playerData.coinz += dCoinz;
+        playerData.playerData.coinz +=  (1f + (playerData.playerData.stardomBonus / 100f)) * dCoinz;
         coinzText.GetComponent<TextMeshProUGUI>().text = ConvertToShortNumber(playerData.playerData.coinz) + " coinz";
     }
 
@@ -62,6 +64,13 @@ public class ClickerManager : MonoBehaviour
         IncrementCoinz(1f);
         particles.Emit(1);
         GetComponent<AudioManager>().PlayRandomSound(soundNames);
+
+        Random.InitState(System.DateTime.Now.Millisecond);
+        if(Random.Range(0, 5) == 0)
+        {
+            playerData.playerData.stardomBonus += 1;
+            UpdateText();
+        }
     }
 
     public long requiredCoinz(int videoNumber)
@@ -84,12 +93,23 @@ public class ClickerManager : MonoBehaviour
 
     public void UpdateText()
     {
-        coinzPerSecondText.GetComponent<TextMeshProUGUI>().text = playerData.playerData.coinzPerSecond.ToString("F1") + " subscribers";
+        coinzPerSecondText.GetComponent<TextMeshProUGUI>().text =
+            ((1 + (playerData.playerData.stardomBonus / 100f)) * playerData.playerData.coinzPerSecond).ToString("F1") + " subscribers";
         //coinzText.GetComponent<TextMeshProUGUI>().text = ConvertToShortNumber(playerData.playerData.coinz) + " coinz"; //playerData.playerData.coinz.ToString("F1") + " views";
         for (int i = 0; i < videos.Length; i++) 
         {
             ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Count Text", playerData.playerData.clickerVideos[i].ToString());
             ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Cost Text", requiredCoinz(i).ToString());
+        }
+
+        if (playerData.playerData.stardomBonus > 0)
+        {
+            stardomCounter.SetActive(true);
+            stardomCounter.GetComponent<TextMeshProUGUI>().text = playerData.playerData.stardomBonus + "% stardum power";
+        }
+        else
+        {
+            stardomCounter.SetActive(false);
         }
     }
 
@@ -104,6 +124,7 @@ public class ClickerManager : MonoBehaviour
         playerData = SerializationManager.Load("save") as SaveData;
         InvokeRepeating("Woof", 0.0f, 1.0f / GlobalConfig.incrementsPerSecond);
         InvokeRepeating("UpdateStats", 60f, 60f * 1f);
+        InvokeRepeating("DepleteStardom", 15f, 15f * 1f);
         UpdateText();
     }
 
@@ -135,6 +156,12 @@ public class ClickerManager : MonoBehaviour
         HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Boredom, -2, playerData.playerData);
         HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Weight, -1, playerData.playerData);
         SerializationManager.Save("save", playerData);
+    }
+
+    public void DepleteStardom()
+    {
+        HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Stardom, -1, playerData.playerData);
+        UpdateText();
     }
 
     void ModifyButton(GameObject button, string component, string text)

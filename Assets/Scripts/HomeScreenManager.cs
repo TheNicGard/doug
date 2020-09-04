@@ -14,9 +14,8 @@ public class HomeScreenManager : MonoBehaviour
 
     public enum Stat
     {
-        Hunger, Boredom, Weight, Love
-    }
-    
+        Hunger, Boredom, Weight, Love, Stardom
+    }    
 
     [SerializeField]
     GameObject coinzText = null;
@@ -83,6 +82,7 @@ public class HomeScreenManager : MonoBehaviour
         ModifyStat(Stat.Hunger, 1, playerData.playerData);
         ModifyStat(Stat.Boredom, 1, playerData.playerData);
         ModifyStat(Stat.Love, -1, playerData.playerData);
+        ModifyStat(Stat.Stardom, -4, playerData.playerData);
     }
 
     public void SaveGame()
@@ -349,6 +349,11 @@ public class HomeScreenManager : MonoBehaviour
                     saveData.love = 0;
                 else saveData.love += amount;
                 break;
+            case Stat.Stardom:
+                if (saveData.stardomBonus + amount < 0)
+                    saveData.stardomBonus = 0;
+                else saveData.stardomBonus += amount;
+                break;
         }
     }
 
@@ -437,7 +442,7 @@ public class HomeScreenManager : MonoBehaviour
     //TODO: separate this from a scene-tied script?
     public void IncrementCoinz(float dCoinz)
     {
-        playerData.playerData.coinz += dCoinz;
+        playerData.playerData.coinz += (1f + (playerData.playerData.stardomBonus / 100f)) * dCoinz;
         coinzText.GetComponent<TextMeshProUGUI>().text = playerData.playerData.coinz.ToString("F1") + " coinz";
     }
 

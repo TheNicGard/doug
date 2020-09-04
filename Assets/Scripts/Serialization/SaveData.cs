@@ -33,6 +33,7 @@ public class SaveData
         playerData.acquisitionDate = System.DateTime.Now;
         playerData.unlockedGuessing = false;
         playerData.unlockedChachaTrail = false;
+        playerData.stardomBonus = 0;
         PlayerPrefs.SetInt("soundEnabled", 1);
         PlayerPrefs.SetInt("musicEnabled", 1);
         PlayerPrefs.SetInt("adsEnabled", 1);

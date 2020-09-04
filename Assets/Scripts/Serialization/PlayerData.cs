@@ -16,4 +16,5 @@ public class PlayerData
     public System.DateTime acquisitionDate;
     public bool unlockedGuessing;
     public bool unlockedChachaTrail;
+    public int stardomBonus;
 }
