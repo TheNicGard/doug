@@ -23,6 +23,8 @@ public class ClickerManager : MonoBehaviour
     [SerializeField]
     GameObject buttonScrollRect = null;
     [SerializeField]
+    GameObject videoButtons = null;
+    [SerializeField]
     GameObject buttonPrefab = null;
     [SerializeField]
     ParticleSystem particles = null;
@@ -32,6 +34,7 @@ public class ClickerManager : MonoBehaviour
     private SaveData playerData = null;
     private ClickerData[] videos = null;
     private string[] soundNames = new string[] {"woof", "woof", "arf", "bark", "bork" };
+    private int lastClickedVideo = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -45,23 +48,24 @@ public class ClickerManager : MonoBehaviour
         
     }
 
-    public void IncrementCoinz(float dCoinz)
+    public void IncrementCoinz(float dCoinz, bool useStardom)
     {
-        playerData.playerData.coinz +=  (1f + (playerData.playerData.stardomBonus / 100f)) * dCoinz;
+        if (useStardom)
+            playerData.playerData.coinz += (1f + (playerData.playerData.stardomBonus / 100f)) * dCoinz;
+        else
+            playerData.playerData.coinz += dCoinz;
         coinzText.GetComponent<TextMeshProUGUI>().text = ConvertToShortNumber(playerData.playerData.coinz) + " coinz";
     }
 
     public void Woof()
     {
-        IncrementCoinz(playerData.playerData.coinzPerSecond / GlobalConfig.incrementsPerSecond);
-        for (int i = 0; i < videos.Length; i++)
-            buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject.transform.Find("Cost Text").gameObject.GetComponent<TextMeshProUGUI>().color = 
-                (playerData.playerData.coinz > requiredCoinz(i)) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
+        IncrementCoinz(playerData.playerData.coinzPerSecond / GlobalConfig.incrementsPerSecond, true);
+        UpdateTextColors();
     }
 
     public void PressDoug()
     {
-        IncrementCoinz(1f);
+        IncrementCoinz(1f, true);
         particles.Emit(1);
         GetComponent<AudioManager>().PlayRandomSound(soundNames);
 
@@ -81,25 +85,44 @@ public class ClickerManager : MonoBehaviour
     public void AddVideo(int videoNumber)
     {
         long tempRequiredCoinz = requiredCoinz(videoNumber);
-        //Debug.Log(tempRequiredCoinz.ToString());
+        
         if (playerData.playerData.coinz >= tempRequiredCoinz && playerData.playerData.clickerVideos[videoNumber] <= 9000)
         {
-            IncrementCoinz(-tempRequiredCoinz);
+            IncrementCoinz(-tempRequiredCoinz, false);
             playerData.playerData.clickerVideos[videoNumber]++;
             playerData.playerData.coinzPerSecond += videos[videoNumber].coinzPerSecond;
             UpdateText();
+            Debug.Log("bought " + videoNumber.ToString() + " for " + tempRequiredCoinz.ToString() + " coinz!");
         }
+    }
+
+    public void AssignVideoButtons(int videoNumber)
+    {
+        Debug.Log("clicked on " + videoNumber.ToString() + "!");
+        lastClickedVideo = videoNumber;
+        UpdateTextColors();
+        videoButtons.transform.Find("Add Video Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text =
+            "upload \"" + videos[videoNumber].title + "\":\n" + ConvertToShortNumber(requiredCoinz(videoNumber)) + " coinz";
+        
+        videoButtons.transform.Find("Add Video Button").GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
+
+        videoButtons.transform.Find("Add Video Button").GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {AddVideo(videoNumber);});
+        videoButtons.transform.Find("Add Video Button").GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {gameObject.GetComponent<AudioManager>().PlaySound("click");});
+
+        videoButtons.transform.Find("Buy Comment 1 Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "buy comment:\n1 coinz";
+        videoButtons.transform.Find("Buy Comment 2 Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "buy comment:\n1 coinz";
+        videoButtons.transform.Find("Buy Comment 3 Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "buy comment:\n1 coinz";
     }
 
     public void UpdateText()
     {
         coinzPerSecondText.GetComponent<TextMeshProUGUI>().text =
             ((1 + (playerData.playerData.stardomBonus / 100f)) * playerData.playerData.coinzPerSecond).ToString("F1") + " subscribers";
-        //coinzText.GetComponent<TextMeshProUGUI>().text = ConvertToShortNumber(playerData.playerData.coinz) + " coinz"; //playerData.playerData.coinz.ToString("F1") + " views";
+            
         for (int i = 0; i < videos.Length; i++) 
         {
             ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Count Text", playerData.playerData.clickerVideos[i].ToString());
-            ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Cost Text", requiredCoinz(i).ToString());
+            ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Cost Text", videos[i].coinzPerSecond.ToString() + " coinz/sec");
         }
 
         if (playerData.playerData.stardomBonus > 0)
@@ -111,6 +134,24 @@ public class ClickerManager : MonoBehaviour
         {
             stardomCounter.SetActive(false);
         }
+
+        AssignVideoButtons(lastClickedVideo);
+    }
+
+    public void UpdateTextColors()
+    {
+        for (int i = 0; i < videos.Length; i++)
+            buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject.transform.Find("Cost Text").gameObject.GetComponent<TextMeshProUGUI>().color = 
+                (playerData.playerData.coinz > requiredCoinz(i)) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
+
+        videoButtons.transform.Find("Add Video Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color =
+            (playerData.playerData.coinz > requiredCoinz(lastClickedVideo)) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
+        videoButtons.transform.Find("Buy Comment 1 Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = 
+            (playerData.playerData.coinz > requiredCoinz(lastClickedVideo)) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
+        videoButtons.transform.Find("Buy Comment 2 Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = 
+            (playerData.playerData.coinz > requiredCoinz(lastClickedVideo)) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
+        videoButtons.transform.Find("Buy Comment 3 Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = 
+            (playerData.playerData.coinz > requiredCoinz(lastClickedVideo)) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
     }
 
     public void GoToHomeScreen()
@@ -146,13 +187,16 @@ public class ClickerManager : MonoBehaviour
             popupInstance.transform.SetParent(buttonScrollRect.transform);
             popupInstance.transform.localScale = buttonPrefab.transform.localScale;
             LoadButton(popupInstance, videos[i]);
-            popupInstance.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {AddVideo(value);});
+            popupInstance.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {AssignVideoButtons(value);});
             popupInstance.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {GetComponent<AudioManager>().PlaySound("click");});
         }
     }
 
     public void UpdateStats()
     {
+        if (playerData.playerData.hunger <= 0)
+             HomeScreenManager.ModifyStat( HomeScreenManager.Stat.Weight, -1, playerData.playerData);
+         HomeScreenManager.ModifyStat( HomeScreenManager.Stat.Hunger, 1, playerData.playerData);
         HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Boredom, -2, playerData.playerData);
         HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Weight, -1, playerData.playerData);
         SerializationManager.Save("save", playerData);
@@ -166,15 +210,15 @@ public class ClickerManager : MonoBehaviour
 
     void ModifyButton(GameObject button, string component, string text)
     {
-        if (component == "Cost Text")
-            text = text + " coinz needed";
+        //if (component == "Cost Text")
+        //    text = text + " coinz needed";
         button.transform.Find(component).gameObject.GetComponent<TextMeshProUGUI>().SetText(text);
     }
 
     void LoadButton(GameObject button, ClickerData video)
     {
         ModifyButton(button, "Name Text", video.title);
-        ModifyButton(button, "Cost Text", ConvertToShortNumber(video.requiredCoinz));
+        ModifyButton(button, "Cost Text", video.coinzPerSecond.ToString() + " coinz/sec");
     }
 
     string ConvertToShortNumber(long number)
