@@ -442,7 +442,7 @@ public class HomeScreenManager : MonoBehaviour
     //TODO: separate this from a scene-tied script?
     public void IncrementCoinz(float dCoinz)
     {
-        playerData.playerData.coinz += (1f + (playerData.playerData.stardomBonus / 100f)) * dCoinz;
+        playerData.playerData.coinz += dCoinz;
         coinzText.GetComponent<TextMeshProUGUI>().text = playerData.playerData.coinz.ToString("F1") + " coinz";
     }
 
