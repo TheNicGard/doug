@@ -24,9 +24,11 @@ public class MainMenuManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Pointer.current.press.wasPressedThisFrame)
-        {
-            SceneManager.LoadScene("HomeScreen");
-        }
+        
+    }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("HomeScreen");
     }
 }
