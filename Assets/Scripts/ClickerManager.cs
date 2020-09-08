@@ -163,7 +163,7 @@ public class ClickerManager : MonoBehaviour
         for (int i = 0; i < videos.Length; i++) 
         {
             ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Count Text", playerData.playerData.clickerVideos[i].ToString());
-            ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Cost Text", "+" + videos[i].coinzPerSecond.ToString() + " subscribers");
+            ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Cost Text", "+" + ConvertToShortNumber(videos[i].coinzPerSecond).ToString() + " subscribers");
         }
 
         if (playerData.playerData.stardomBonus > 0)
