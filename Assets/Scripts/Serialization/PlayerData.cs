@@ -12,6 +12,7 @@ public class PlayerData
     public float coinz;
     public float coinzPerSecond;
     public int[] clickerVideos;
+    public int[] clickerVideosComments;
     public System.DateTime lastDate;
     public System.DateTime acquisitionDate;
     public bool unlockedGuessing;

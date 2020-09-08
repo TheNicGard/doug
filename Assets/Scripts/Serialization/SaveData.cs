@@ -29,6 +29,7 @@ public class SaveData
         playerData.coinz = 0f;
         playerData.coinzPerSecond = 0f;
         playerData.clickerVideos = new int [12] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        playerData.clickerVideosComments = new int [12] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
         playerData.lastDate = System.DateTime.Now;
         playerData.acquisitionDate = System.DateTime.Now;
         playerData.unlockedGuessing = false;
@@ -37,5 +38,30 @@ public class SaveData
         PlayerPrefs.SetInt("soundEnabled", 1);
         PlayerPrefs.SetInt("musicEnabled", 1);
         PlayerPrefs.SetInt("adsEnabled", 1);
+    }
+
+    override public string ToString()
+    {
+        string temp = "";
+
+        temp +=
+        "Hunger: " + playerData.hunger + "\n" +
+        "Boredom: " + playerData.boredom + "\n" +
+        "Weight: " + playerData.weight + "\n" +
+        "Love: " + playerData.love + "\n" +
+        "Coinz: " + playerData.coinz + "\n" +
+        "Coinz Per Second: " + playerData.coinzPerSecond + "\n";
+        
+        temp += "Videos: {";
+        for (int i = 0; i < playerData.clickerVideos.Length; i++)
+            temp += playerData.clickerVideos[i].ToString() + ", ";
+        temp += "}\n";
+
+        temp += "Comments: {";
+        for (int i = 0; i < playerData.clickerVideosComments.Length; i++)
+            temp += playerData.clickerVideosComments[i].ToString() + ", ";
+        temp += "}\n";
+
+        return temp;
     }
 }
