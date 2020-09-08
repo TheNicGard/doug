@@ -39,7 +39,7 @@ public class ClickerManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        GetComponent<AudioManager>().PlaySound("music");
     }
 
     // Update is called once per frame
@@ -212,6 +212,7 @@ public class ClickerManager : MonoBehaviour
         InvokeRepeating("UpdateStats", 60f, 60f * 1f);
         InvokeRepeating("DepleteStardom", 15f, 15f * 1f);
         UpdateText();
+        
     }
 
     void OnDisable()
