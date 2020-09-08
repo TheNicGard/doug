@@ -278,6 +278,8 @@ public class ClickerManager : MonoBehaviour
 
     string ConvertToShortNumber(double number)
     {
+        if (number < 1)
+            return number.ToString("N1");
         if (number < 1000 * 1000)
             return number.ToString("N0");
         else if (number < 1000 * 1000 * 1000)
