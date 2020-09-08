@@ -71,12 +71,14 @@ public class Sound
     public float pitchAdjustment = 0f;
     public bool isSound = true;
     public bool isMusic = false;
+    public bool loops = false;
     private AudioSource source;
 
     public void SetSource(AudioSource _source)
     {
         source = _source;
         source.clip = clip;
+        source.loop = loops;
     }
 
     public void Play()
