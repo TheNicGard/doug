@@ -379,7 +379,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: -1 weiht
+          m_StringArgument: -5 weiht
           m_BoolArgument: 0
         m_CallState: 1
       - m_Target: {fileID: 1075124075}
@@ -10710,14 +10710,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'it appears that your doug has been "deactivated" due to <cause>!
+  m_text: 'it appears that your doug has been "deactivated" due to {0}!
 
 
     you
     are being delivered a new doug:
 
 
-    doug #{0}
+    doug #{1}
 
     sassiness: #
 
@@ -11945,6 +11945,7 @@ GameObject:
   - component: {fileID: 1027803930}
   - component: {fileID: 1027803929}
   - component: {fileID: 1027803928}
+  - component: {fileID: 1027803932}
   m_Layer: 5
   m_Name: Deactivation Panel
   m_TagString: Panel
@@ -12037,6 +12038,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1027803926}
   m_CullTransparentMesh: 0
+--- !u!114 &1027803932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1027803926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74ea84e7799c8a54fb1caf8689580cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 1075124073}
 --- !u!1 &1033699994
 GameObject:
   m_ObjectHideFlags: 0

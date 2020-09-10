@@ -133,6 +133,7 @@ public class HomeScreenManager : MonoBehaviour
         UnlockMinigame(-1);
         UpdateBars();
         SaveGame();
+        CheckDeactivateDoug();
     }
 
     void OnDisable()
@@ -352,7 +353,7 @@ public class HomeScreenManager : MonoBehaviour
                 if (saveData.weight + amount > GlobalConfig.maxWeight)
                     saveData.weight = GlobalConfig.maxWeight;
                 else if (saveData.weight + amount < 0)
-                    saveData.weight = 1;
+                    saveData.weight = 0;
                 else saveData.weight += amount;
                 break;
             case Stat.Love:
@@ -444,7 +445,7 @@ public class HomeScreenManager : MonoBehaviour
 
     public void TempDecreaseWeight()
     {
-        ModifyStat(Stat.Weight, -1, playerData.playerData);
+        ModifyStat(Stat.Weight, -5, playerData.playerData);
     }
 
     public bool CheckDeactivateDoug()
@@ -455,20 +456,8 @@ public class HomeScreenManager : MonoBehaviour
             {
                 bool deathByWeight = playerData.playerData.weight <= 0;
                 deactivated = true;
-                doug.transform.eulerAngles = new Vector3(0f, 0f, 180f);
-                Debug.Log("deactivated!");
-                disableInteractionPanel.SetActive(true);
-                string t = deactivationPanel.transform.Find("Deactivation Layout/Deactivation Text").GetComponent<TextMeshProUGUI>().text.Replace("{0}", (deathByWeight) ? "starvation" : "boredom")
-                .Replace("{1}", Random.Range(int.Parse("100000", System.Globalization.NumberStyles.HexNumber), int.Parse("1000000", System.Globalization.NumberStyles.HexNumber)).ToString("X"));
-                deactivationPanel.transform.Find("Deactivation Layout/Deactivation Text").GetComponent<TextMeshProUGUI>().text = t;
-                StartCoroutine(wait(5));
-                disableInteractionPanel.SetActive(false);
-                deactivationPanel.SetActive(true);
-                playerData.ResetPlayerData(true);
-                UpdateBars();
-                SaveGame();
+                StartCoroutine(DeactivateDoug(deathByWeight));
                 CheckDeactivateDoug();
-                // disable all buttons for three seconds, make popup to deliver new doug, delivery animation, reset stats regardless of press
             }
             return true;
         }
@@ -480,9 +469,34 @@ public class HomeScreenManager : MonoBehaviour
         }
     }
 
-    IEnumerator wait(int seconds)
+    IEnumerator DeactivateDoug(bool deathByWeight)
     {
-        yield return new WaitForSeconds(seconds);
+        doug.transform.eulerAngles = new Vector3(0f, 0f, 180f);
+        Debug.Log("deactivated!");
+        disableInteractionPanel.SetActive(true);
+        string t = deactivationPanel.transform.Find("Deactivation Layout/Deactivation Text").GetComponent<TextMeshProUGUI>().text.Replace("{0}", (deathByWeight) ? "starvation" : "boredom")
+        .Replace("{1}", Random.Range(int.Parse("100000", System.Globalization.NumberStyles.HexNumber), int.Parse("1000000", System.Globalization.NumberStyles.HexNumber)).ToString("X"));
+        deactivationPanel.transform.Find("Deactivation Layout/Deactivation Text").GetComponent<TextMeshProUGUI>().text = t;
+        yield return new WaitForSeconds(3.5f);
+        disableInteractionPanel.SetActive(false);
+        deactivationPanel.SetActive(true);
+        playerData.ResetPlayerData(true);
+        SaveGame();
+    }
+
+    public void StartRemoveDougCoroutine()
+    {
+        StartCoroutine(RemoveDoug());
+    }
+
+    public IEnumerator RemoveDoug()
+    {
+        LeanTween.moveLocalX(doug, 1500f, 1.2f).setEaseInQuart();
+        yield return new WaitForSeconds(1.5f);
+        doug.transform.localPosition = new Vector3(-1500f, 0f, 0f);
+        UpdateBars();
+        doug.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+        LeanTween.moveLocalX(doug, 0, 1.2f).setEaseOutQuart();
     }
 
 
