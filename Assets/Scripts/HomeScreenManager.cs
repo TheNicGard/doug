@@ -464,7 +464,6 @@ public class HomeScreenManager : MonoBehaviour
         else
         {
             doug.transform.eulerAngles = new Vector3(0f, 0f, 0f);
-            Debug.Log("activated!");
             return false;
         }
     }
@@ -472,7 +471,6 @@ public class HomeScreenManager : MonoBehaviour
     IEnumerator DeactivateDoug(bool deathByWeight)
     {
         doug.transform.eulerAngles = new Vector3(0f, 0f, 180f);
-        Debug.Log("deactivated!");
         disableInteractionPanel.SetActive(true);
         string t = deactivationPanel.transform.Find("Deactivation Layout/Deactivation Text").GetComponent<TextMeshProUGUI>().text.Replace("{0}", (deathByWeight) ? "starvation" : "boredom")
         .Replace("{1}", Random.Range(int.Parse("100000", System.Globalization.NumberStyles.HexNumber), int.Parse("1000000", System.Globalization.NumberStyles.HexNumber)).ToString("X"));
