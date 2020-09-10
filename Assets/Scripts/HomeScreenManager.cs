@@ -101,23 +101,24 @@ public class HomeScreenManager : MonoBehaviour
         SerializationManager.Save("save", playerData);
     }
 
-    public void GoToClicker()
+    public void GoToScene(string scene_name)
     {
-        SceneManager.LoadScene("Clicker");
-    }
+        switch (scene_name)
+        {
+            case "Clicker":
+                SceneManager.LoadScene("Clicker");
+                break;
+            case "Guessing":
+                if (playerData.playerData.unlockedGuessing)
+                    SceneManager.LoadScene("Guessing");
+                    break;
+            case "Chacha Trail":
+                if (playerData.playerData.unlockedChachaTrail)
+                MakePopup("NYI!");
+                break;
 
-    public void GoToGuessing()
-    {
-        Debug.Log("unlocked guessing: " + playerData.playerData.unlockedGuessing.ToString());
-        if (playerData.playerData.unlockedGuessing)
-            SceneManager.LoadScene("Clicker");
-    }
-
-    public void GoToChachaTrail()
-    {
-        Debug.Log("unlocked chacha: " + playerData.playerData.unlockedChachaTrail.ToString());
-        if (playerData.playerData.unlockedChachaTrail)
-            SceneManager.LoadScene("Clicker");
+        }
+        Debug.Log(playerData.ToString());
     }
 
     void OnEnable()

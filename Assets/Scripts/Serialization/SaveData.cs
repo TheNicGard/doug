@@ -66,6 +66,9 @@ public class SaveData
             temp += playerData.clickerVideosComments[i].ToString() + ", ";
         temp += "}\n";
 
+        temp += "Unlocked Guessing Game: " + playerData.unlockedGuessing.ToString() + "\n";
+        temp += "Unlocked Chacha Trail: " + playerData.unlockedChachaTrail.ToString() + "\n";
+
         return temp;
     }
 }
