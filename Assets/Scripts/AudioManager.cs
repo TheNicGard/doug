@@ -13,10 +13,7 @@ public class AudioManager : MonoBehaviour
             Debug.LogError("AudioManager: More than one AudioManager in the scene!");
         else
             instance = this;
-    }
-        
-    void Start()
-    {
+
         for (int i = 0; i < sounds.Length; i++)
         {
             GameObject _go = new GameObject("Sound_" + i + "_" + sounds[i].name);
@@ -52,6 +49,15 @@ public class AudioManager : MonoBehaviour
         }
         
         Debug.LogError("AudioManager: Sound \"" + soundName + "\" not found!");
+    }
+
+    public void StopMusic()
+    {
+        for (int i = 0; i < sounds.Length; i++)
+        {
+            if (sounds[i].isMusic)
+                sounds[i].Stop();
+        }
     }
 }
 
@@ -89,5 +95,10 @@ public class Sound
             source.pitch = pitch + Random.Range(-pitchAdjustment, pitchAdjustment);
             source.Play();
         }
+    }
+
+    public void Stop()
+    {
+        source.Stop();
     }
 }

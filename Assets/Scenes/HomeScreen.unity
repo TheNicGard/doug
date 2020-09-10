@@ -12085,6 +12085,7 @@ MonoBehaviour:
     pitchAdjustment: 0.05
     isSound: 1
     isMusic: 0
+    loops: 0
   - name: click
     clip: {fileID: 8300000, guid: 0e6d4d48fef8bd34f9a18cc6b7ed156c, type: 3}
     volume: 1
@@ -12093,6 +12094,7 @@ MonoBehaviour:
     pitchAdjustment: 0
     isSound: 1
     isMusic: 0
+    loops: 0
   - name: close_click
     clip: {fileID: 8300000, guid: 0e6d4d48fef8bd34f9a18cc6b7ed156c, type: 3}
     volume: 1
@@ -12101,6 +12103,16 @@ MonoBehaviour:
     pitchAdjustment: 0
     isSound: 1
     isMusic: 0
+    loops: 0
+  - name: music
+    clip: {fileID: 8300000, guid: 9847d25292a2db34a978bc3a3233c5f2, type: 3}
+    volume: 0.25
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0
+    isSound: 0
+    isMusic: 1
+    loops: 1
 --- !u!1 &1099723989
 GameObject:
   m_ObjectHideFlags: 0

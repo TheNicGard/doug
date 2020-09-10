@@ -67,6 +67,7 @@ public class HomeScreenManager : MonoBehaviour
         InvokeRepeating("SaveGame", 60f, 60f * 5f);
         doug.transform.localScale = new Vector3(dougSpriteDefaultScale.x * GetDougWeightScale(), dougSpriteDefaultScale.y, dougSpriteDefaultScale.z);
         dougSpriteDefaultPosition = doug.transform.position;
+        GetComponent<AudioManager>().PlaySound("music");
     }
 
     // Update is called once per frame
@@ -200,11 +201,13 @@ public class HomeScreenManager : MonoBehaviour
         {
             PlayerPrefs.SetInt("musicEnabled", 0);
             toggleMusicButtonText.GetComponent<TextMeshProUGUI>().text = "music: off";
+            GetComponent<AudioManager>().StopMusic();
         }
         else
         {
             PlayerPrefs.SetInt("musicEnabled", 1);
             toggleMusicButtonText.GetComponent<TextMeshProUGUI>().text = "music: on";
+            GetComponent<AudioManager>().PlaySound("music");
         }
     }
 
