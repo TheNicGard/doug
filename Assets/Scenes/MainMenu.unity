@@ -141,7 +141,7 @@ PrefabInstance:
     - target: {fileID: 6807190244393987012, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 466.4
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244393987012, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
@@ -165,7 +165,66 @@ PrefabInstance:
         Licensed
         under Creative Commons: By Attribution 3.0
 
-        http://creativecommons.org/licenses/by/3.0/'
+        http://creativecommons.org/licenses/by/3.0/
+
+
+        Wholesome
+        by Kevin MacLeod
+
+        Link: https://incompetech.filmmusic.io/song/5050-wholesome
+
+        License:
+        http://creativecommons.org/licenses/by/4.0/'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244393987013, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244393987013, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244393987013, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 41
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244393987013, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244393987013, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_textInfo.materialCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244393987013, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_subTextObjects.Array.data[1]
+      value: 
+      objectReference: {fileID: 1219805055}
+    - target: {fileID: 6807190244393987013, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_subTextObjects.Array.data[2]
+      value: 
+      objectReference: {fileID: 1811046127}
+    - target: {fileID: 6807190244393987013, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 295
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244393987013, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 29.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244393987013, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 29.75
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708158, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
@@ -290,12 +349,12 @@ PrefabInstance:
     - target: {fileID: 6807190244715232992, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 466.4
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244715232992, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -20.7
       objectReference: {fileID: 0}
     - target: {fileID: 6807190245759220562, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
@@ -305,12 +364,12 @@ PrefabInstance:
     - target: {fileID: 6807190245759220563, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 1469.9
+      value: 932.8
       objectReference: {fileID: 0}
     - target: {fileID: 6807190245759220563, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -733.3
+      value: -464
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb22ee586e082c844a6b35f1ec73cc1c, type: 3}
@@ -1470,7 +1529,7 @@ MonoBehaviour:
   m_material: {fileID: 0}
   m_sharedMaterial: {fileID: 0}
   m_isDefaultMaterial: 0
-  m_padding: 1.25
+  m_padding: 0
   m_canvasRenderer: {fileID: 1811046128}
   m_TextComponent: {fileID: 58708836}
   m_materialReferenceIndex: 1
