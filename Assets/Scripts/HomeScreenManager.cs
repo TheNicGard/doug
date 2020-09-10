@@ -54,10 +54,16 @@ public class HomeScreenManager : MonoBehaviour
     [SerializeField]
     GameObject imagePopup = null;
 
+    [SerializeField]
+    GameObject deactivationPanel = null;
+    [SerializeField]
+    GameObject disableInteractionPanel = null;
+
 
     private Vector3 dougSpriteDefaultScale = new Vector3(3f, 3f, 1f);
     private Vector3 dougSpriteDefaultPosition;
     private SaveData playerData;
+    private bool deactivated = false;
 
     // Start is called before the first frame update
     void Start()
@@ -65,6 +71,7 @@ public class HomeScreenManager : MonoBehaviour
         InvokeRepeating("Woof", 0.0f, 1.0f / GlobalConfig.incrementsPerSecond);
         InvokeRepeating("UpdateStats", GlobalConfig.depletionTickTime * 0.8f, GlobalConfig.depletionTickTime);
         InvokeRepeating("SaveGame", 60f, 60f * 5f);
+        InvokeRepeating("CheckDeactivateDoug", 0f, 60f * 1f);
         doug.transform.localScale = new Vector3(dougSpriteDefaultScale.x * GetDougWeightScale(), dougSpriteDefaultScale.y, dougSpriteDefaultScale.z);
         dougSpriteDefaultPosition = doug.transform.position;
         GetComponent<AudioManager>().PlaySound("music");
@@ -78,12 +85,15 @@ public class HomeScreenManager : MonoBehaviour
 
     public void UpdateStats()
     {
-        if (playerData.playerData.hunger <= 0)
-            ModifyStat(Stat.Weight, -1, playerData.playerData);
-        ModifyStat(Stat.Hunger, 1, playerData.playerData);
-        ModifyStat(Stat.Boredom, 1, playerData.playerData);
-        ModifyStat(Stat.Love, -1, playerData.playerData);
-        ModifyStat(Stat.Stardom, -4, playerData.playerData);
+        if (!CheckDeactivateDoug())
+        {
+            if (playerData.playerData.hunger >= GlobalConfig.maxHunger)
+                ModifyStat(Stat.Weight, -1, playerData.playerData);
+            ModifyStat(Stat.Hunger, 1, playerData.playerData);
+            ModifyStat(Stat.Boredom, 1, playerData.playerData);
+            ModifyStat(Stat.Love, -1, playerData.playerData);
+            ModifyStat(Stat.Stardom, -4, playerData.playerData);
+        }
     }
 
     public void SaveGame()
@@ -174,7 +184,7 @@ public class HomeScreenManager : MonoBehaviour
 
     public void ClearSave()
     {
-        playerData.ResetPlayerData();
+        playerData.ResetPlayerData(false);
         PlayerPrefs.SetInt("soundEnabled", 1);
         PlayerPrefs.SetInt("musicEnabled", 1);
         PlayerPrefs.SetInt("adsEnabled", 1);
@@ -341,7 +351,7 @@ public class HomeScreenManager : MonoBehaviour
             case Stat.Weight:
                 if (saveData.weight + amount > GlobalConfig.maxWeight)
                     saveData.weight = GlobalConfig.maxWeight;
-                else if (saveData.weight + amount < 1)
+                else if (saveData.weight + amount < 0)
                     saveData.weight = 1;
                 else saveData.weight += amount;
                 break;
@@ -364,20 +374,16 @@ public class HomeScreenManager : MonoBehaviour
     {
         
         float weight = (float)playerData.playerData.weight / (float)GlobalConfig.maxWeight;
-        //Debug.Log("Weight = " + weight.ToString());
         if (weight < 0.25)
         {
-            //Debug.Log("Weight scale = " + ((weight * 2f) + .5f).ToString());
             return (weight * 2f) + .5f;
         }
         else if (weight > 0.75)
         {
-            //Debug.Log("Weight scale = " + ((weight * 8f) - 5f).ToString());
             return (weight * 8f) - 5f;
         }
         else
         {
-            //Debug.Log("Weight scale = " + 1f.ToString());
             return 1f;
         }
     }
@@ -436,9 +442,47 @@ public class HomeScreenManager : MonoBehaviour
         }
     }
 
-    public void CloseInfoPanel()
+    public void TempDecreaseWeight()
     {
+        ModifyStat(Stat.Weight, -1, playerData.playerData);
+    }
 
+    public bool CheckDeactivateDoug()
+    {
+        if (playerData.playerData.weight <= 0 || playerData.playerData.boredom >= GlobalConfig.maxBoredom)
+        {
+            if (!deactivated)
+            {
+                bool deathByWeight = playerData.playerData.weight <= 0;
+                deactivated = true;
+                doug.transform.eulerAngles = new Vector3(0f, 0f, 180f);
+                Debug.Log("deactivated!");
+                disableInteractionPanel.SetActive(true);
+                string t = deactivationPanel.transform.Find("Deactivation Layout/Deactivation Text").GetComponent<TextMeshProUGUI>().text.Replace("{0}", (deathByWeight) ? "starvation" : "boredom")
+                .Replace("{1}", Random.Range(int.Parse("100000", System.Globalization.NumberStyles.HexNumber), int.Parse("1000000", System.Globalization.NumberStyles.HexNumber)).ToString("X"));
+                deactivationPanel.transform.Find("Deactivation Layout/Deactivation Text").GetComponent<TextMeshProUGUI>().text = t;
+                StartCoroutine(wait(5));
+                disableInteractionPanel.SetActive(false);
+                deactivationPanel.SetActive(true);
+                playerData.ResetPlayerData(true);
+                UpdateBars();
+                SaveGame();
+                CheckDeactivateDoug();
+                // disable all buttons for three seconds, make popup to deliver new doug, delivery animation, reset stats regardless of press
+            }
+            return true;
+        }
+        else
+        {
+            doug.transform.eulerAngles = new Vector3(0f, 0f, 0f);
+            Debug.Log("activated!");
+            return false;
+        }
+    }
+
+    IEnumerator wait(int seconds)
+    {
+        yield return new WaitForSeconds(seconds);
     }
 
 

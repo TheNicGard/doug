@@ -16,7 +16,7 @@ public class MainMenuManager : MonoBehaviour
 
         if (!SerializationManager.DoesFileExist("save"))
         {
-            playerData.ResetPlayerData();
+            playerData.ResetPlayerData(false);
             SerializationManager.Save("save", playerData);
         }
     }

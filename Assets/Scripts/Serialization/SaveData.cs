@@ -19,25 +19,29 @@ public class SaveData
 
     public PlayerData playerData;
 
-    public void ResetPlayerData()
+    public void ResetPlayerData(bool dougIsDeactivated)
     {
-        PlayerPrefs.DeleteAll();
+        if (!dougIsDeactivated)
+        {
+            PlayerPrefs.DeleteAll();
+            playerData.coinzPerSecond = 0f;
+            playerData.clickerVideos = new int [12] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+            playerData.clickerVideosComments = new int [12] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
+            playerData.lastDate = System.DateTime.Now;
+            playerData.unlockedGuessing = false;
+            playerData.unlockedChachaTrail = false;
+            playerData.stardomBonus = 0;
+            PlayerPrefs.SetInt("soundEnabled", 1);
+            PlayerPrefs.SetInt("musicEnabled", 1);
+            PlayerPrefs.SetInt("adsEnabled", 1);
+        }
+        
         playerData.hunger = 50;
         playerData.boredom = 50;
         playerData.weight = 75;
         playerData.love = 0;
         playerData.coinz = 0f;
-        playerData.coinzPerSecond = 0f;
-        playerData.clickerVideos = new int [12] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-        playerData.clickerVideosComments = new int [12] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-        playerData.lastDate = System.DateTime.Now;
         playerData.acquisitionDate = System.DateTime.Now;
-        playerData.unlockedGuessing = false;
-        playerData.unlockedChachaTrail = false;
-        playerData.stardomBonus = 0;
-        PlayerPrefs.SetInt("soundEnabled", 1);
-        PlayerPrefs.SetInt("musicEnabled", 1);
-        PlayerPrefs.SetInt("adsEnabled", 1);
     }
 
     override public string ToString()
