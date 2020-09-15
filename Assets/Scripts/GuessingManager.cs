@@ -24,11 +24,11 @@ public class GuessingManager : MonoBehaviour
     [SerializeField]
     GameObject cup3Line = null;
     [SerializeField]
-    int timesToSwap = 5;
+    GameObject easyDifficultyButton = null;
     [SerializeField]
-    float swapSpeed = .4f;
+    GameObject normalDifficultyButton = null;
     [SerializeField]
-    float swapDelay = .4f;
+    GameObject hardDifficultyButton = null;
 
     private Queue<KeyValuePair<int, int>> swaps = new Queue<KeyValuePair<int, int>>();
     private int randomCup = 1;
@@ -38,6 +38,8 @@ public class GuessingManager : MonoBehaviour
     private float cup1X;
     private float cup2X;
     private float cup3X;
+    private int timesToSwap = 1;
+    private float swapSpeed = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -65,8 +67,27 @@ public class GuessingManager : MonoBehaviour
     }
 
 
-    public void StartSwapping()
+    public void StartSwapping(int difficulty)
     {
+        switch (difficulty)
+        {
+            case 0:
+                timesToSwap = GlobalConfig.easyTimesToSwap;
+                swapSpeed = GlobalConfig.easyswapSpeed;
+                break;
+            case 1:
+                timesToSwap = GlobalConfig.normalTimesToSwap;
+                swapSpeed = GlobalConfig.normalswapSpeed;
+                break;
+            case 2:
+                timesToSwap = GlobalConfig.hardTimesToSwap;
+                swapSpeed = GlobalConfig.hardswapSpeed;
+                break;
+        }
+        
+        easyDifficultyButton.SetActive(false);
+        normalDifficultyButton.SetActive(false);
+        hardDifficultyButton.SetActive(false);
         if (!swapping)
         {
             swapping = true;
@@ -112,7 +133,7 @@ public class GuessingManager : MonoBehaviour
 
         cupAObject.LeanMoveLocalY(cupBPosition.y + 200, speed / 2f).setEaseOutQuad().setLoopPingPong(1).trans.LeanMoveLocalX(cupBPosition.x, speed);
         cupBObject.LeanMoveLocalY(cupAPosition.y - 200, speed / 2f).setEaseOutQuad().setLoopPingPong(1).trans.LeanMoveLocalX(cupAPosition.x, speed);
-        yield return new WaitForSeconds(swapDelay);
+        yield return new WaitForSeconds(swapSpeed);
         NextAnimation();
     }
 
@@ -122,11 +143,18 @@ public class GuessingManager : MonoBehaviour
         {
             cup1.LeanMoveLocalY(biscoHeight, 1f);
             cup2.LeanMoveLocalY(biscoHeight, 1f);
-            cup3.LeanMoveLocalY(biscoHeight, 1f);
+            cup3.LeanMoveLocalY(biscoHeight, 1f).setOnComplete(() => {SetCupButtonActive(true);});
             return;
         }
         KeyValuePair<int, int> temp = swaps.Dequeue();
         StartCoroutine(Swap(temp.Key, temp.Value, swapSpeed));
+    }
+
+    public void SetCupButtonActive(bool state)
+    {
+        cup1.GetComponent<UnityEngine.UI.Button>().interactable = state;
+        cup2.GetComponent<UnityEngine.UI.Button>().interactable = state;
+        cup3.GetComponent<UnityEngine.UI.Button>().interactable = state;
     }
 
     public void RevealBisco(int i)
@@ -163,8 +191,11 @@ public class GuessingManager : MonoBehaviour
         randomCup = ClosestPosition(bisco);
         cup1.LeanMoveLocalX(cup1X, .5f).trans.LeanMoveLocalY(cupHeight, .5f);
         cup2.LeanMoveLocalX(cup2X, .5f).trans.LeanMoveLocalY(cupHeight, .5f);
-        cup3.LeanMoveLocalX(cup3X, .5f).trans.LeanMoveLocalY(cupHeight, .5f);
+        cup3.LeanMoveLocalX(cup3X, .5f).trans.LeanMoveLocalY(cupHeight, .5f).setOnComplete(() => {SetCupButtonActive(false);});
         swapping = false;
+        easyDifficultyButton.SetActive(true);
+        normalDifficultyButton.SetActive(true);
+        hardDifficultyButton.SetActive(true);
     }
 
     // oh my god there has to be an easier way to do this

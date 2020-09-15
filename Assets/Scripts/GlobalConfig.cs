@@ -10,4 +10,11 @@
     public static UnityEngine.Color textColor = new UnityEngine.Color(50 / 255f, 50 / 255f, 50 / 255f);
     public static UnityEngine.Color disabledTextColor = new UnityEngine.Color(140 / 255f, 140 / 255f, 140 / 255f);
     public static float stardomChance = 0.1f;
+
+    public static int easyTimesToSwap = 10;
+    public static int normalTimesToSwap = 20;
+    public static int hardTimesToSwap = 40;
+    public static float easyswapSpeed = .4f;
+    public static float normalswapSpeed = .3f;
+    public static float hardswapSpeed = .2f;
 }
