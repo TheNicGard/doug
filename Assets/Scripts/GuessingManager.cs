@@ -29,6 +29,18 @@ public class GuessingManager : MonoBehaviour
     GameObject normalDifficultyButton = null;
     [SerializeField]
     GameObject hardDifficultyButton = null;
+    [SerializeField]
+    GameObject canvas = null;
+    [SerializeField]
+    GameObject passDougPopup = null;
+    [SerializeField]
+    GameObject failDougPopup = null;
+    [SerializeField]
+    GameObject passDougPopupStartPositionObject = null;
+    [SerializeField]
+    GameObject failDougPopupStartPositionObject = null;
+    [SerializeField]
+    GameObject failDougPopupEndPositionObject = null;
 
     private Queue<KeyValuePair<int, int>> swaps = new Queue<KeyValuePair<int, int>>();
     private int randomCup = 1;
@@ -40,6 +52,9 @@ public class GuessingManager : MonoBehaviour
     private float cup3X;
     private int timesToSwap = 1;
     private float swapSpeed = 1f;
+    private Vector3 passPopupStartPosition;
+    private Vector3 failPopupStartPosition;
+    private Vector3 failPopupEndPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -49,6 +64,9 @@ public class GuessingManager : MonoBehaviour
         cup1X = cup1Line.transform.localPosition.x;
         cup2X = cup2Line.transform.localPosition.x;
         cup3X = cup3Line.transform.localPosition.x;
+        passPopupStartPosition = passDougPopupStartPositionObject.transform.localPosition;
+        failPopupStartPosition = failDougPopupStartPositionObject.transform.localPosition;
+        failPopupEndPosition = failDougPopupEndPositionObject.transform.localPosition;
 
         cup1.transform.LeanSetLocalPosY(cupHeight);
         cup2.transform.LeanSetLocalPosY(cupHeight);
@@ -84,7 +102,7 @@ public class GuessingManager : MonoBehaviour
                 swapSpeed = GlobalConfig.hardswapSpeed;
                 break;
         }
-        
+
         easyDifficultyButton.SetActive(false);
         normalDifficultyButton.SetActive(false);
         hardDifficultyButton.SetActive(false);
@@ -162,27 +180,45 @@ public class GuessingManager : MonoBehaviour
         if (cup1.transform.Find("Bisco") != null)
         {
             if (i == 0)
-                Debug.Log("good!");
+            {
+                MakePopupDoug(true);
+                GetComponent<AudioManager>().PlaySound("bork");
+            }
             else
-                Debug.Log("bad!");
+            {
+                MakePopupDoug(false);
+                GetComponent<AudioManager>().PlaySound("boo");
+            }
             bisco.transform.SetParent(cup1.transform.parent);
             bisco.transform.localPosition = cup1.transform.localPosition;
         }
         else if (cup2.transform.Find("Bisco") != null)
         {
             if (i == 1)
-                Debug.Log("good!");
+            {
+                MakePopupDoug(true);
+                GetComponent<AudioManager>().PlaySound("bork");
+            }
             else
-                Debug.Log("bad!");
+            {
+                MakePopupDoug(false);
+                GetComponent<AudioManager>().PlaySound("boo");
+            }
             bisco.transform.SetParent(cup2.transform.parent);
             bisco.transform.localPosition = cup2.transform.localPosition;
         }
         else if (cup3.transform.Find("Bisco") != null)
         {
             if (i == 2)
-                Debug.Log("good!");
+            {
+                MakePopupDoug(true);
+                GetComponent<AudioManager>().PlaySound("bork");
+            }
             else
-                Debug.Log("bad!");
+            {
+                MakePopupDoug(false);
+                GetComponent<AudioManager>().PlaySound("boo");
+            }
             bisco.transform.SetParent(cup3.transform.parent);
             bisco.transform.localPosition = cup3.transform.localPosition;
         }
@@ -219,5 +255,27 @@ public class GuessingManager : MonoBehaviour
             }
 
         return pos;
+    }
+
+    public void MakePopupDoug(bool pass)
+    {
+        GameObject popupInstance;
+        if (pass)
+        {
+            popupInstance = Instantiate(passDougPopup, canvas.transform.Find("Background Image").transform, true);
+            popupInstance.transform.localPosition = passPopupStartPosition;
+            popupInstance.transform.localScale = passDougPopup.transform.localScale;
+            popupInstance.LeanRotateZ(-1500f, 2f);
+        } 
+        else
+        {
+            float popupTime = 1.5f;
+            popupInstance = Instantiate(failDougPopup, canvas.transform.Find("Background Image").transform, true);
+            popupInstance.transform.localPosition = failPopupStartPosition;
+            popupInstance.transform.localScale = failDougPopup.transform.localScale;
+            popupInstance.LeanRotateZ(-1500f, popupTime);
+            popupInstance.LeanMoveLocalY(cupHeight, popupTime / 2).setEaseOutQuart().setLoopPingPong(1);
+            popupInstance.LeanMoveLocalX(failPopupEndPosition.x, popupTime).setOnComplete(() => {Destroy(popupInstance, 0f);});
+        }
     }
 }
