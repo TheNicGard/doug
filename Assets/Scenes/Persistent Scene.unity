@@ -460,6 +460,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   loadingScreen: {fileID: 654876482}
   currentScene: 0
+  loadedGame: 0
+  playerData:
+    playerData:
+      hunger: 0
+      boredom: 0
+      weight: 0
+      love: 0
+      coinz: 0
+      clickerVideos: 
+      clickerVideosComments: 
+      unlockedGuessing: 0
+      unlockedChachaTrail: 0
+      stardomBonus: 0
+      guessingEasyHiScore: 0
+      guessingNormalHiScore: 0
+      guessingHardHiScore: 0
+  videos: []
+  clickerData: {fileID: 4900000, guid: 8c5324903bb3ed94eb0859563c156751, type: 3}
 --- !u!4 &2120454825
 Transform:
   m_ObjectHideFlags: 0

@@ -24,7 +24,6 @@ public class SaveData
         if (!dougIsDeactivated)
         {
             PlayerPrefs.DeleteAll();
-            playerData.coinzPerSecond = 0f;
             playerData.clickerVideos = new int [12] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
             playerData.clickerVideosComments = new int [12] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
             playerData.lastDate = System.DateTime.Now;
@@ -56,8 +55,7 @@ public class SaveData
         "Boredom: " + playerData.boredom + "\n" +
         "Weight: " + playerData.weight + "\n" +
         "Love: " + playerData.love + "\n" +
-        "Coinz: " + playerData.coinz + "\n" +
-        "Coinz Per Second: " + playerData.coinzPerSecond + "\n";
+        "Coinz: " + playerData.coinz + "\n";
         
         temp += "Videos: {";
         for (int i = 0; i < playerData.clickerVideos.Length; i++)

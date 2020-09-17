@@ -12,6 +12,9 @@ public class PersistentGameManager : MonoBehaviour
     public int currentScene = 0;
     public bool loadedGame = false;
     public SaveData playerData;
+    public ClickerData[] videos = null;
+    [SerializeField]
+    TextAsset clickerData = null;
 
     private void Awake()
     {
@@ -25,11 +28,15 @@ public class PersistentGameManager : MonoBehaviour
             SaveGame();
         }
         LoadSave();
+        LoadClickerData();
 
         int minutes = (int) System.DateTime.Now.Subtract(playerData.playerData.lastDate).TotalMinutes;
         for (int i = 0; i < minutes; i++)
             UpdateStats();
         InvokeRepeating("UpdateStats", 60f, 60f * 1f);
+        InvokeRepeating("Woof", 0.0f, 1.0f / GlobalConfig.incrementsPerSecond);
+        InvokeRepeating("DepleteStardom", 15f, 15f * 1f);
+        PersistentGameManager.instance.playerData.playerData.coinz += minutes * 60f * CoinzPerSecond(false);
 
         if (currentScene == (int) SceneIndexes.MANAGER)
             SceneManager.LoadSceneAsync((int) SceneIndexes.MAIN_MENU, LoadSceneMode.Additive);
@@ -105,7 +112,6 @@ public class PersistentGameManager : MonoBehaviour
                 else if (playerData.playerData.love + amount < 0)
                     playerData.playerData.love = 0;
                 else playerData.playerData.love += amount;
-                Debug.Log("updated love!");
                 break;
             case Stat.Stardom:
                 if (playerData.playerData.stardomBonus + amount < 0)
@@ -135,7 +141,6 @@ public class PersistentGameManager : MonoBehaviour
                     ModifyStat(Stat.Love, -1);
                     ModifyStat(Stat.Stardom, -4);
                 }
-                Debug.Log("finally ticked on home screen! (" + updateStatsCounter + "/" + depletionTickTime + ")");
                 break;
             case (int) SceneIndexes.CLICKER:
                 ModifyStat(Stat.Boredom, -2);
@@ -146,13 +151,52 @@ public class PersistentGameManager : MonoBehaviour
                 break;
         }
 
-        Debug.Log("updated on scene " + currentScene);
-
         SaveGame();
     }
 
     void OnDisable()
     {
         SaveGame();
+    }
+
+    /*~~~~~ Clicker Management ~~~~~*/
+    [System.Serializable]
+    public class ClickerData
+    {
+        public string title;
+        public float requiredCoinz;
+        public float coinzPerSecond;
+    }
+
+    public void IncrementCoinz(float dCoinz)
+    {
+        playerData.playerData.coinz += dCoinz;
+    }
+
+    public void Woof()
+    {
+        IncrementCoinz(CoinzPerSecond(true) / GlobalConfig.incrementsPerSecond);
+    }
+
+    public void DepleteStardom()
+    {
+        ModifyStat(Stat.Stardom, -1);
+    }
+
+    public float CoinzPerSecond(bool useStardom)
+    {
+        float coinzPerSecond = 0f;
+        for (int i = 0; i < videos.Length; i++)
+            coinzPerSecond += videos[i].coinzPerSecond * 
+            playerData.playerData.clickerVideos[i] * 
+            playerData.playerData.clickerVideosComments[i];
+        if (useStardom)
+            coinzPerSecond *= (1f + (playerData.playerData.stardomBonus / 100f));
+        return coinzPerSecond;
+    }
+
+    public void LoadClickerData()
+    {
+        videos = JsonHelper.FromJson<ClickerData>(clickerData.text);
     }
 }

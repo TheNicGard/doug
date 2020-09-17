@@ -1,18 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 
 public class ClickerManager : MonoBehaviour
 {
-    [System.Serializable]
-    public class ClickerData
-    {
-        public string title;
-        public float requiredCoinz;
-        public float coinzPerSecond;
-    }
-
     [SerializeField]
     GameObject coinzText = null;
     [SerializeField]
@@ -27,10 +17,7 @@ public class ClickerManager : MonoBehaviour
     GameObject buttonPrefab = null;
     [SerializeField]
     ParticleSystem particles = null;
-    [SerializeField]
-    TextAsset clickerData = null;
-
-    private ClickerData[] videos = null;
+    
     private string[] soundNames = new string[] {"woof", "woof", "arf", "bark", "bork" };
     private int lastClickedVideo = 0;
 
@@ -43,36 +30,35 @@ public class ClickerManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    public float CoinzPerSecond(bool useStardom)
-    {
-        float coinzPerSecond = 0f;
-        for (int i = 0; i < videos.Length; i++)
-            coinzPerSecond += videos[i].coinzPerSecond * 
-            PersistentGameManager.instance.playerData.playerData.clickerVideos[i] * 
-            PersistentGameManager.instance.playerData.playerData.clickerVideosComments[i];
-        if (useStardom)
-            coinzPerSecond *= (1f + (PersistentGameManager.instance.playerData.playerData.stardomBonus / 100f));
-        return coinzPerSecond;
-    }
-
-    public void IncrementCoinz(float dCoinz)
-    {
-        PersistentGameManager.instance.playerData.playerData.coinz += dCoinz;
         coinzText.GetComponent<TextMeshProUGUI>().text = ConvertToShortNumber(PersistentGameManager.instance.playerData.playerData.coinz) + " coinz";
+        UpdateTextColors();
     }
 
-    public void Woof()
+    void OnEnable()
     {
-        IncrementCoinz(CoinzPerSecond(true) / GlobalConfig.incrementsPerSecond);
-        UpdateTextColors();
+        for (int i = 0; i < PersistentGameManager.instance.videos.Length; i++)
+        {
+            int value = i;
+            GameObject popupInstance = Instantiate(buttonPrefab);
+            popupInstance.name = "Button " + i.ToString();
+            popupInstance.transform.SetParent(buttonScrollRect.transform);
+            popupInstance.transform.localScale = buttonPrefab.transform.localScale;
+            LoadButton(popupInstance, PersistentGameManager.instance.videos[i]);
+            popupInstance.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {AssignVideoButtons(value);});
+            popupInstance.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {GetComponent<AudioManager>().PlaySound("click");});
+        }
+
+        UpdateText();
+    }
+
+    void OnDisable()
+    {
+        PersistentGameManager.instance.SaveGame();
     }
 
     public void PressDoug()
     {
-        IncrementCoinz(1f);
+        PersistentGameManager.instance.IncrementCoinz(1f);
         particles.Emit(1);
         GetComponent<AudioManager>().PlayRandomSound(soundNames);
 
@@ -86,7 +72,7 @@ public class ClickerManager : MonoBehaviour
 
     public long requiredCoinz(int videoNumber)
     {
-        return (long) Mathf.Ceil(videos[videoNumber].requiredCoinz * Mathf.Pow(1.15f, PersistentGameManager.instance.playerData.playerData.clickerVideos[videoNumber]));
+        return (long) Mathf.Ceil(PersistentGameManager.instance.videos[videoNumber].requiredCoinz * Mathf.Pow(1.15f, PersistentGameManager.instance.playerData.playerData.clickerVideos[videoNumber]));
     }
 
     public void AddVideo(int videoNumber)
@@ -95,7 +81,7 @@ public class ClickerManager : MonoBehaviour
         
         if (PersistentGameManager.instance.playerData.playerData.coinz >= tempRequiredCoinz && PersistentGameManager.instance.playerData.playerData.clickerVideos[videoNumber] <= 9000)
         {
-            IncrementCoinz(-tempRequiredCoinz);
+            PersistentGameManager.instance.IncrementCoinz(-tempRequiredCoinz);
             PersistentGameManager.instance.playerData.playerData.clickerVideos[videoNumber]++;
             UpdateText();
         }
@@ -103,7 +89,7 @@ public class ClickerManager : MonoBehaviour
 
     public long CommentCost(int videoNumber, int commentNumber)
     {
-        return (long) videos[videoNumber].requiredCoinz * 500 * (commentNumber + 1);
+        return (long) PersistentGameManager.instance.videos[videoNumber].requiredCoinz * 500 * (commentNumber + 1);
     }
 
     public void BuyComment(int videoNumber, int commentNumber) //commentNumber is the comment that is being bought
@@ -114,7 +100,7 @@ public class ClickerManager : MonoBehaviour
                 (commentNumber == 1 && PersistentGameManager.instance.playerData.playerData.clickerVideosComments[videoNumber] == 2) ||
                 (commentNumber == 2 && PersistentGameManager.instance.playerData.playerData.clickerVideosComments[videoNumber] == 4))
             {
-                IncrementCoinz(-CommentCost(videoNumber, commentNumber));
+                PersistentGameManager.instance.IncrementCoinz(-CommentCost(videoNumber, commentNumber));
                 PersistentGameManager.instance.playerData.playerData.clickerVideosComments[videoNumber] *= 2;
                 AssignVideoButtons(videoNumber);
                 UpdateText();
@@ -127,7 +113,7 @@ public class ClickerManager : MonoBehaviour
         lastClickedVideo = videoNumber;
         UpdateTextColors();
         videoButtons.transform.Find("Add Video Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text =
-            "uplaod \"" + videos[videoNumber].title + "\":\n" + ConvertToShortNumber(requiredCoinz(videoNumber)) + " coinz";
+            "uplaod \"" + PersistentGameManager.instance.videos[videoNumber].title + "\":\n" + ConvertToShortNumber(requiredCoinz(videoNumber)) + " coinz";
         
         videoButtons.transform.Find("Add Video Button").GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
 
@@ -153,12 +139,12 @@ public class ClickerManager : MonoBehaviour
     public void UpdateText()
     {
         coinzPerSecondText.GetComponent<TextMeshProUGUI>().text =
-            ((1 + (PersistentGameManager.instance.playerData.playerData.stardomBonus / 100f)) * CoinzPerSecond(true)).ToString("F1") + " subscribers";
+            ((1 + (PersistentGameManager.instance.playerData.playerData.stardomBonus / 100f)) * PersistentGameManager.instance.CoinzPerSecond(true)).ToString("F1") + " subscribers";
             
-        for (int i = 0; i < videos.Length; i++) 
+        for (int i = 0; i < PersistentGameManager.instance.videos.Length; i++) 
         {
             ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Count Text", PersistentGameManager.instance.playerData.playerData.clickerVideos[i].ToString());
-            ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Cost Text", "+" + ConvertToShortNumber(videos[i].coinzPerSecond).ToString() + " subscribers");
+            ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Cost Text", "+" + ConvertToShortNumber(PersistentGameManager.instance.videos[i].coinzPerSecond).ToString() + " subscribers");
         }
 
         if (PersistentGameManager.instance.playerData.playerData.stardomBonus > 0)
@@ -176,7 +162,7 @@ public class ClickerManager : MonoBehaviour
 
     public void UpdateTextColors()
     {
-        for (int i = 0; i < videos.Length; i++)
+        for (int i = 0; i < PersistentGameManager.instance.videos.Length; i++)
             buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject.transform.Find("Name Text").gameObject.GetComponent<TextMeshProUGUI>().color = 
                 (PersistentGameManager.instance.playerData.playerData.coinz > requiredCoinz(i)) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
 
@@ -199,49 +185,12 @@ public class ClickerManager : MonoBehaviour
         PersistentGameManager.instance.SwitchScene((int) SceneIndexes.HOME_SCREEN);
     }
 
-    void OnEnable()
-    {
-        LoadClickerData();
-        InvokeRepeating("Woof", 0.0f, 1.0f / GlobalConfig.incrementsPerSecond);
-        InvokeRepeating("DepleteStardom", 15f, 15f * 1f);
-        UpdateText();
-    }
-
-    void OnDisable()
-    {
-        PersistentGameManager.instance.playerData.playerData.coinzPerSecond = CoinzPerSecond(false);
-        PersistentGameManager.instance.SaveGame();
-    }
-
-    public void LoadClickerData()
-    {
-        videos = JsonHelper.FromJson<ClickerData>(clickerData.text);
-
-        for (int i = 0; i < videos.Length; i++)
-        {
-            int value = i;
-            GameObject popupInstance = Instantiate(buttonPrefab);
-            popupInstance.name = "Button " + i.ToString();
-            popupInstance.transform.SetParent(buttonScrollRect.transform);
-            popupInstance.transform.localScale = buttonPrefab.transform.localScale;
-            LoadButton(popupInstance, videos[i]);
-            popupInstance.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {AssignVideoButtons(value);});
-            popupInstance.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {GetComponent<AudioManager>().PlaySound("click");});
-        }
-    }
-
-    public void DepleteStardom()
-    {
-        PersistentGameManager.instance.ModifyStat(Stat.Stardom, -1);
-        UpdateText();
-    }
-
     void ModifyButton(GameObject button, string component, string text)
     {
         button.transform.Find(component).gameObject.GetComponent<TextMeshProUGUI>().SetText(text);
     }
 
-    void LoadButton(GameObject button, ClickerData video)
+    void LoadButton(GameObject button, PersistentGameManager.ClickerData video)
     {
         ModifyButton(button, "Name Text", video.title);
         ModifyButton(button, "Cost Text", video.coinzPerSecond.ToString() + " coinz/sec");
@@ -275,21 +224,5 @@ public class ClickerManager : MonoBehaviour
             return (number / ((double) 1000 * 1000 * 1000 * 1000)).ToString("0.##") + " trillion";
         else
             return number.ToString("E2");
-    }
-}
-
-public static class JsonHelper
-{
-    //thanks to: https://stackoverflow.com/a/36244111/4200551
-    [System.Serializable]
-    private class Wrapper<T>
-    {
-        public T[] Items = null;
-    }
-
-    public static T[] FromJson<T>(string json)
-    {
-        Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(json);
-        return wrapper.Items;
     }
 }

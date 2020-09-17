@@ -61,7 +61,6 @@ public class HomeScreenManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("Woof", 0.0f, 1.0f / GlobalConfig.incrementsPerSecond);
         InvokeRepeating("CheckDeactivateDoug", 0f, 60f * 1f);
         doug.transform.localScale = new Vector3(dougSpriteDefaultScale.x * GetDougWeightScale(), dougSpriteDefaultScale.y, dougSpriteDefaultScale.z);
         dougSpriteDefaultPosition = doug.transform.position;
@@ -71,7 +70,7 @@ public class HomeScreenManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        coinzText.GetComponent<TextMeshProUGUI>().text = PersistentGameManager.instance.playerData.playerData.coinz.ToString("F1") + " coinz";
     }
 
     public void GoToScene(string scene_name)
@@ -95,7 +94,6 @@ public class HomeScreenManager : MonoBehaviour
 
     void OnEnable()
     {
-        //TODO PersistentGameManager.instance.playerData.playerData.coinz += minutes * 60f * PersistentGameManager.instance.playerData.playerData.coinzPerSecond;
         coinzText.GetComponent<TextMeshProUGUI>().text = PersistentGameManager.instance.playerData.playerData.coinz.ToString("F1") + " coinz";
         UpdateText();
         UnlockMinigame(-1);
@@ -420,18 +418,4 @@ public class HomeScreenManager : MonoBehaviour
         doug.transform.eulerAngles = new Vector3(0f, 0f, 0f);
         LeanTween.moveLocalX(doug, 0, 1.2f).setEaseOutQuart();
     }
-
-
-    //TODO: separate this from a scene-tied script?
-    public void IncrementCoinz(float dCoinz)
-    {
-        PersistentGameManager.instance.playerData.playerData.coinz += dCoinz;
-        coinzText.GetComponent<TextMeshProUGUI>().text = PersistentGameManager.instance.playerData.playerData.coinz.ToString("F1") + " coinz";
-    }
-
-    public void Woof()
-    {
-        IncrementCoinz(PersistentGameManager.instance.playerData.playerData.coinzPerSecond / GlobalConfig.incrementsPerSecond);
-    }
-
 }

@@ -10,7 +10,6 @@ public class PlayerData
     public int weight;
     public int love;
     public float coinz;
-    public float coinzPerSecond;
     public int[] clickerVideos;
     public int[] clickerVideosComments;
     public System.DateTime lastDate;
