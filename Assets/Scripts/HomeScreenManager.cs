@@ -11,11 +11,6 @@ public class HomeScreenManager : MonoBehaviour
         FoodA, FoodB, FoodC
     }
 
-    public enum Stat
-    {
-        Hunger, Boredom, Weight, Love, Stardom
-    }    
-
     [SerializeField]
     GameObject coinzText = null;
     [SerializeField]
@@ -67,7 +62,6 @@ public class HomeScreenManager : MonoBehaviour
     void Start()
     {
         InvokeRepeating("Woof", 0.0f, 1.0f / GlobalConfig.incrementsPerSecond);
-        InvokeRepeating("UpdateStats", GlobalConfig.depletionTickTime * 0.8f, GlobalConfig.depletionTickTime);
         InvokeRepeating("CheckDeactivateDoug", 0f, 60f * 1f);
         doug.transform.localScale = new Vector3(dougSpriteDefaultScale.x * GetDougWeightScale(), dougSpriteDefaultScale.y, dougSpriteDefaultScale.z);
         dougSpriteDefaultPosition = doug.transform.position;
@@ -78,19 +72,6 @@ public class HomeScreenManager : MonoBehaviour
     void Update()
     {
         
-    }
-
-    public void UpdateStats()
-    {
-        if (!CheckDeactivateDoug())
-        {
-            if (PersistentGameManager.instance.playerData.playerData.hunger >= GlobalConfig.maxHunger)
-                ModifyStat(Stat.Weight, -1, PersistentGameManager.instance.playerData.playerData);
-            ModifyStat(Stat.Hunger, 1, PersistentGameManager.instance.playerData.playerData);
-            ModifyStat(Stat.Boredom, 1, PersistentGameManager.instance.playerData.playerData);
-            ModifyStat(Stat.Love, -1, PersistentGameManager.instance.playerData.playerData);
-            ModifyStat(Stat.Stardom, -4, PersistentGameManager.instance.playerData.playerData);
-        }
     }
 
     public void GoToScene(string scene_name)
@@ -114,11 +95,7 @@ public class HomeScreenManager : MonoBehaviour
 
     void OnEnable()
     {
-        int minutes = (int) System.DateTime.Now.Subtract(PersistentGameManager.instance.playerData.playerData.lastDate).TotalMinutes;
-        int updatesToDo = (int)(minutes / ((float)GlobalConfig.totalDepletionTimeInMinutes / GlobalConfig.maxHunger));
-        for (int i = 0; i < updatesToDo; i++)
-            UpdateStats();
-        PersistentGameManager.instance.playerData.playerData.coinz += minutes * 60f * PersistentGameManager.instance.playerData.playerData.coinzPerSecond;
+        //TODO PersistentGameManager.instance.playerData.playerData.coinz += minutes * 60f * PersistentGameManager.instance.playerData.playerData.coinzPerSecond;
         coinzText.GetComponent<TextMeshProUGUI>().text = PersistentGameManager.instance.playerData.playerData.coinz.ToString("F1") + " coinz";
         UpdateText();
         UnlockMinigame(-1);
@@ -275,7 +252,7 @@ public class HomeScreenManager : MonoBehaviour
         if (Random.Range(0, 4) == 3)
         {
             MakePopupHeart();
-            ModifyStat(Stat.Love, 1, PersistentGameManager.instance.playerData.playerData);
+            PersistentGameManager.instance.ModifyStat(Stat.Love, 1);
         }
 
         //Vector3 a = ;
@@ -289,19 +266,19 @@ public class HomeScreenManager : MonoBehaviour
         switch ((Food) food)
         {
             case Food.FoodA:
-                ModifyStat(Stat.Hunger, -1, PersistentGameManager.instance.playerData.playerData);
-                ModifyStat(Stat.Weight, 1, PersistentGameManager.instance.playerData.playerData);
+                PersistentGameManager.instance.ModifyStat(Stat.Hunger, -1);
+                PersistentGameManager.instance.ModifyStat(Stat.Weight, 1);
                 MakePopup("-1 hungy\n+1 weiht");
                 break;
             case Food.FoodB:
-                ModifyStat(Stat.Hunger, -2, PersistentGameManager.instance.playerData.playerData);
-                ModifyStat(Stat.Weight, 2, PersistentGameManager.instance.playerData.playerData);
-                ModifyStat(Stat.Love, 1, PersistentGameManager.instance.playerData.playerData);
+                PersistentGameManager.instance.ModifyStat(Stat.Hunger, -2);
+                PersistentGameManager.instance.ModifyStat(Stat.Weight, 2);
+                PersistentGameManager.instance.ModifyStat(Stat.Love, 1);
                 MakePopup("-2 hungy\n+2 weiht\n+1 luv");
                 break;
             case Food.FoodC:
-                ModifyStat(Stat.Hunger, -3, PersistentGameManager.instance.playerData.playerData);
-                ModifyStat(Stat.Love, -1, PersistentGameManager.instance.playerData.playerData);
+                PersistentGameManager.instance.ModifyStat(Stat.Hunger, -3);
+                PersistentGameManager.instance.ModifyStat(Stat.Love, -1);
                 MakePopup("-3 hungy\n-1 luv");
                 break;
         }
@@ -316,45 +293,7 @@ public class HomeScreenManager : MonoBehaviour
         doug.transform.localScale = new Vector3(dougSpriteDefaultScale.x * GetDougWeightScale(), dougSpriteDefaultScale.y, dougSpriteDefaultScale.z);
     }
 
-    public static void ModifyStat(Stat stat, int amount, PlayerData saveData)
-    {
-        switch (stat)
-        {
-            case Stat.Hunger:
-                if (saveData.hunger + amount > GlobalConfig.maxHunger)
-                    saveData.hunger = GlobalConfig.maxHunger;
-                else if (saveData.hunger + amount < 0)
-                    saveData.hunger = 0;
-                else saveData.hunger += amount;
-                break;
-            case Stat.Boredom:
-                if (saveData.boredom + amount > GlobalConfig.maxBoredom)
-                    saveData.boredom = GlobalConfig.maxBoredom;
-                else if (saveData.boredom + amount < 0)
-                    saveData.boredom = 0;
-                else saveData.boredom += amount;
-                break;
-            case Stat.Weight:
-                if (saveData.weight + amount > GlobalConfig.maxWeight)
-                    saveData.weight = GlobalConfig.maxWeight;
-                else if (saveData.weight + amount < 0)
-                    saveData.weight = 0;
-                else saveData.weight += amount;
-                break;
-            case Stat.Love:
-                if (saveData.love + amount > GlobalConfig.maxLove)
-                    saveData.love = GlobalConfig.maxLove;
-                else if (saveData.love + amount < 0)
-                    saveData.love = 0;
-                else saveData.love += amount;
-                break;
-            case Stat.Stardom:
-                if (saveData.stardomBonus + amount < 0)
-                    saveData.stardomBonus = 0;
-                else saveData.stardomBonus += amount;
-                break;
-        }
-    }
+    
 
     public float GetDougWeightScale()
     {
@@ -430,7 +369,7 @@ public class HomeScreenManager : MonoBehaviour
 
     public void TempDecreaseWeight()
     {
-        ModifyStat(Stat.Weight, -5, PersistentGameManager.instance.playerData.playerData);
+        PersistentGameManager.instance.ModifyStat(Stat.Weight, -5);
     }
 
     public bool CheckDeactivateDoug()

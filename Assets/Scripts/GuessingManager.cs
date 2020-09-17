@@ -62,8 +62,6 @@ public class GuessingManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InvokeRepeating("UpdateStats", 60f, 60f * 1f);
-
         cupHeight = cupHeightLine.transform.localPosition.y;
         biscoHeight = biscoHeightLine.transform.localPosition.y;
         cup1X = cup1Line.transform.localPosition.x;
@@ -78,18 +76,6 @@ public class GuessingManager : MonoBehaviour
         cup3.transform.LeanSetLocalPosY(cupHeight);
 
         UpdateText();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public void UpdateStats()
-    {
-        HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Weight, -1, PersistentGameManager.instance.playerData.playerData);
-        PersistentGameManager.instance.SaveGame();
     }
 
     public void GoToHomeScreen()
@@ -216,7 +202,7 @@ public class GuessingManager : MonoBehaviour
                 PersistentGameManager.instance.playerData.playerData.guessingHardHiScore++;
                 break;
         }
-        HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Boredom, -2, PersistentGameManager.instance.playerData.playerData);
+        PersistentGameManager.instance.ModifyStat(Stat.Boredom, -2);
         PersistentGameManager.instance.SaveGame();
         UpdateText();
     }

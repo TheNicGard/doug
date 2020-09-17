@@ -98,7 +98,6 @@ public class ClickerManager : MonoBehaviour
             IncrementCoinz(-tempRequiredCoinz);
             PersistentGameManager.instance.playerData.playerData.clickerVideos[videoNumber]++;
             UpdateText();
-            Debug.Log("bought " + videoNumber.ToString() + " for " + tempRequiredCoinz.ToString() + " coinz!");
         }
     }
 
@@ -109,7 +108,6 @@ public class ClickerManager : MonoBehaviour
 
     public void BuyComment(int videoNumber, int commentNumber) //commentNumber is the comment that is being bought
     {
-        Debug.Log("attempting to buy comment " + commentNumber.ToString());
         if (PersistentGameManager.instance.playerData.playerData.coinz >= CommentCost(videoNumber, commentNumber))
         {
             if ((commentNumber == 0 && PersistentGameManager.instance.playerData.playerData.clickerVideosComments[videoNumber] == 1) ||
@@ -126,7 +124,6 @@ public class ClickerManager : MonoBehaviour
 
     public void AssignVideoButtons(int videoNumber)
     {
-        Debug.Log("clicked on " + videoNumber.ToString() + "!");
         lastClickedVideo = videoNumber;
         UpdateTextColors();
         videoButtons.transform.Find("Add Video Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text =
@@ -206,7 +203,6 @@ public class ClickerManager : MonoBehaviour
     {
         LoadClickerData();
         InvokeRepeating("Woof", 0.0f, 1.0f / GlobalConfig.incrementsPerSecond);
-        InvokeRepeating("UpdateStats", 60f, 60f * 1f);
         InvokeRepeating("DepleteStardom", 15f, 15f * 1f);
         UpdateText();
     }
@@ -234,16 +230,9 @@ public class ClickerManager : MonoBehaviour
         }
     }
 
-    public void UpdateStats()
-    {
-        HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Boredom, -2, PersistentGameManager.instance.playerData.playerData);
-        HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Weight, -1, PersistentGameManager.instance.playerData.playerData);
-        SerializationManager.Save("save", PersistentGameManager.instance.playerData);
-    }
-
     public void DepleteStardom()
     {
-        HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Stardom, -1, PersistentGameManager.instance.playerData.playerData);
+        PersistentGameManager.instance.ModifyStat(Stat.Stardom, -1);
         UpdateText();
     }
 
