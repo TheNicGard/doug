@@ -18,4 +18,7 @@ public class PlayerData
     public bool unlockedGuessing;
     public bool unlockedChachaTrail;
     public int stardomBonus;
+    public int guessingEasyHiScore;
+    public int guessingNormalHiScore;
+    public int guessingHardHiScore;
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -41,7 +42,10 @@ public class GuessingManager : MonoBehaviour
     GameObject failDougPopupStartPositionObject = null;
     [SerializeField]
     GameObject failDougPopupEndPositionObject = null;
+    [SerializeField]
+    GameObject scorePanel = null;
 
+    private SaveData playerData;
     private Queue<KeyValuePair<int, int>> swaps = new Queue<KeyValuePair<int, int>>();
     private int randomCup = 1;
     private bool swapping = false;
@@ -52,13 +56,16 @@ public class GuessingManager : MonoBehaviour
     private float cup3X;
     private int timesToSwap = 1;
     private float swapSpeed = 1f;
+    private int difficulty = -1;
     private Vector3 passPopupStartPosition;
     private Vector3 failPopupStartPosition;
     private Vector3 failPopupEndPosition;
-
+    
     // Start is called before the first frame update
     void Start()
     {
+        playerData = SerializationManager.Load("save") as SaveData;
+
         cupHeight = cupHeightLine.transform.localPosition.y;
         biscoHeight = biscoHeightLine.transform.localPosition.y;
         cup1X = cup1Line.transform.localPosition.x;
@@ -71,6 +78,8 @@ public class GuessingManager : MonoBehaviour
         cup1.transform.LeanSetLocalPosY(cupHeight);
         cup2.transform.LeanSetLocalPosY(cupHeight);
         cup3.transform.LeanSetLocalPosY(cupHeight);
+
+        UpdateText();
     }
 
     // Update is called once per frame
@@ -85,9 +94,10 @@ public class GuessingManager : MonoBehaviour
     }
 
 
-    public void StartSwapping(int difficulty)
+    public void StartSwapping(int _difficulty)
     {
-        switch (difficulty)
+        difficulty = _difficulty;
+        switch (_difficulty)
         {
             case 0:
                 timesToSwap = GlobalConfig.easyTimesToSwap;
@@ -106,6 +116,7 @@ public class GuessingManager : MonoBehaviour
         easyDifficultyButton.SetActive(false);
         normalDifficultyButton.SetActive(false);
         hardDifficultyButton.SetActive(false);
+        scorePanel.LeanMoveLocalX(scorePanel.transform.localPosition.x + 400f, 1f);
         if (!swapping)
         {
             swapping = true;
@@ -175,6 +186,42 @@ public class GuessingManager : MonoBehaviour
         cup3.GetComponent<UnityEngine.UI.Button>().interactable = state;
     }
 
+    public void SaveGame()
+    {
+        SerializationManager.Save("save", playerData);
+    }
+
+    public void ModifyText(TMP_Text text, string str)
+    {
+        text.SetText(str);
+    }
+
+    public void UpdateText()
+    {
+        ModifyText(scorePanel.transform.Find("Easy Score Text").GetComponent<TextMeshProUGUI>(), "easy: " + playerData.playerData.guessingEasyHiScore.ToString());
+        ModifyText(scorePanel.transform.Find("Normal Score Text").GetComponent<TextMeshProUGUI>(), "normal: " + playerData.playerData.guessingNormalHiScore.ToString());
+        ModifyText(scorePanel.transform.Find("Hard Score Text").GetComponent<TextMeshProUGUI>(), "hard: " + playerData.playerData.guessingHardHiScore.ToString());
+        Debug.Log("I have updated the text! ");
+    }
+
+    public void IncrementScore()
+    {
+        switch (difficulty)
+        {
+            case 0:
+                playerData.playerData.guessingEasyHiScore++;
+                break;
+            case 1:
+                playerData.playerData.guessingNormalHiScore++;
+                break;
+            case 2:
+                playerData.playerData.guessingHardHiScore++;
+                break;
+        }
+        SaveGame();
+        UpdateText();
+    }
+
     public void RevealBisco(int i)
     {
         if (cup1.transform.Find("Bisco") != null)
@@ -183,6 +230,7 @@ public class GuessingManager : MonoBehaviour
             {
                 MakePopupDoug(true);
                 GetComponent<AudioManager>().PlaySound("bork");
+                IncrementScore();
             }
             else
             {
@@ -190,7 +238,7 @@ public class GuessingManager : MonoBehaviour
                 GetComponent<AudioManager>().PlaySound("boo");
             }
             bisco.transform.SetParent(cup1.transform.parent);
-            bisco.transform.localPosition = cup1.transform.localPosition;
+            bisco.transform.localPosition = new Vector3(cup1.transform.localPosition.x, biscoHeight, bisco.transform.localPosition.z);
         }
         else if (cup2.transform.Find("Bisco") != null)
         {
@@ -198,6 +246,7 @@ public class GuessingManager : MonoBehaviour
             {
                 MakePopupDoug(true);
                 GetComponent<AudioManager>().PlaySound("bork");
+                IncrementScore();
             }
             else
             {
@@ -205,7 +254,7 @@ public class GuessingManager : MonoBehaviour
                 GetComponent<AudioManager>().PlaySound("boo");
             }
             bisco.transform.SetParent(cup2.transform.parent);
-            bisco.transform.localPosition = cup2.transform.localPosition;
+            bisco.transform.localPosition = new Vector3(cup2.transform.localPosition.x, biscoHeight, bisco.transform.localPosition.z);
         }
         else if (cup3.transform.Find("Bisco") != null)
         {
@@ -213,6 +262,7 @@ public class GuessingManager : MonoBehaviour
             {
                 MakePopupDoug(true);
                 GetComponent<AudioManager>().PlaySound("bork");
+                IncrementScore();
             }
             else
             {
@@ -220,7 +270,7 @@ public class GuessingManager : MonoBehaviour
                 GetComponent<AudioManager>().PlaySound("boo");
             }
             bisco.transform.SetParent(cup3.transform.parent);
-            bisco.transform.localPosition = cup3.transform.localPosition;
+            bisco.transform.localPosition = new Vector3(cup3.transform.localPosition.x, biscoHeight, bisco.transform.localPosition.z);
         }
 
         bisco.SetActive(true);
@@ -232,6 +282,7 @@ public class GuessingManager : MonoBehaviour
         easyDifficultyButton.SetActive(true);
         normalDifficultyButton.SetActive(true);
         hardDifficultyButton.SetActive(true);
+        scorePanel.LeanMoveLocalX(scorePanel.transform.localPosition.x - 400f, 1f);
     }
 
     // oh my god there has to be an easier way to do this
@@ -260,16 +311,16 @@ public class GuessingManager : MonoBehaviour
     public void MakePopupDoug(bool pass)
     {
         GameObject popupInstance;
+        float popupTime = 1.5f;
         if (pass)
         {
             popupInstance = Instantiate(passDougPopup, canvas.transform.Find("Background Image").transform, true);
             popupInstance.transform.localPosition = passPopupStartPosition;
             popupInstance.transform.localScale = passDougPopup.transform.localScale;
-            popupInstance.LeanRotateZ(-1500f, 2f);
-        } 
+            popupInstance.LeanRotateZ(-1500f, popupTime).setOnComplete(() => {Destroy(popupInstance, 0f);});
+        }
         else
         {
-            float popupTime = 1.5f;
             popupInstance = Instantiate(failDougPopup, canvas.transform.Find("Background Image").transform, true);
             popupInstance.transform.localPosition = failPopupStartPosition;
             popupInstance.transform.localScale = failDougPopup.transform.localScale;

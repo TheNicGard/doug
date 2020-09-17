@@ -42,6 +42,9 @@ public class SaveData
         playerData.love = 0;
         playerData.coinz = 0f;
         playerData.acquisitionDate = System.DateTime.Now;
+        playerData.guessingEasyHiScore = 0;
+        playerData.guessingNormalHiScore = 0;
+        playerData.guessingHardHiScore = 0;
     }
 
     override public string ToString()
