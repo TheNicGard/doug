@@ -9,6 +9,7 @@ public class OnDeactivationPanelClose : MonoBehaviour
 
     void OnDisable()
     {
-        manager.GetComponent<HomeScreenManager>().StartRemoveDougCoroutine();
+        if (manager != null)
+            manager.GetComponent<HomeScreenManager>().StartRemoveDougCoroutine();
     }
 }

@@ -44,7 +44,6 @@ public class GuessingManager : MonoBehaviour
     [SerializeField]
     GameObject scorePanel = null;
 
-    private SaveData playerData;
     private Queue<KeyValuePair<int, int>> swaps = new Queue<KeyValuePair<int, int>>();
     private int randomCup = 1;
     private bool swapping = false;
@@ -63,7 +62,6 @@ public class GuessingManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerData = SerializationManager.Load("save") as SaveData;
         InvokeRepeating("UpdateStats", 60f, 60f * 1f);
 
         cupHeight = cupHeightLine.transform.localPosition.y;
@@ -90,8 +88,8 @@ public class GuessingManager : MonoBehaviour
 
     public void UpdateStats()
     {
-        HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Weight, -1, playerData.playerData);
-        SaveGame();
+        HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Weight, -1, PersistentGameManager.instance.playerData.playerData);
+        PersistentGameManager.instance.SaveGame();
     }
 
     public void GoToHomeScreen()
@@ -192,11 +190,6 @@ public class GuessingManager : MonoBehaviour
         cup3.GetComponent<UnityEngine.UI.Button>().interactable = state;
     }
 
-    public void SaveGame()
-    {
-        SerializationManager.Save("save", playerData);
-    }
-
     public void ModifyText(TMP_Text text, string str)
     {
         text.SetText(str);
@@ -204,9 +197,9 @@ public class GuessingManager : MonoBehaviour
 
     public void UpdateText()
     {
-        ModifyText(scorePanel.transform.Find("Easy Score Text").GetComponent<TextMeshProUGUI>(), "easy: " + playerData.playerData.guessingEasyHiScore.ToString());
-        ModifyText(scorePanel.transform.Find("Normal Score Text").GetComponent<TextMeshProUGUI>(), "ok: " + playerData.playerData.guessingNormalHiScore.ToString());
-        ModifyText(scorePanel.transform.Find("Hard Score Text").GetComponent<TextMeshProUGUI>(), "no: " + playerData.playerData.guessingHardHiScore.ToString());
+        ModifyText(scorePanel.transform.Find("Easy Score Text").GetComponent<TextMeshProUGUI>(), "easy: " + PersistentGameManager.instance.playerData.playerData.guessingEasyHiScore.ToString());
+        ModifyText(scorePanel.transform.Find("Normal Score Text").GetComponent<TextMeshProUGUI>(), "ok: " + PersistentGameManager.instance.playerData.playerData.guessingNormalHiScore.ToString());
+        ModifyText(scorePanel.transform.Find("Hard Score Text").GetComponent<TextMeshProUGUI>(), "no: " + PersistentGameManager.instance.playerData.playerData.guessingHardHiScore.ToString());
     }
 
     public void IncrementScore()
@@ -214,17 +207,17 @@ public class GuessingManager : MonoBehaviour
         switch (difficulty)
         {
             case 0:
-                playerData.playerData.guessingEasyHiScore++;
+                PersistentGameManager.instance.playerData.playerData.guessingEasyHiScore++;
                 break;
             case 1:
-                playerData.playerData.guessingNormalHiScore++;
+                PersistentGameManager.instance.playerData.playerData.guessingNormalHiScore++;
                 break;
             case 2:
-                playerData.playerData.guessingHardHiScore++;
+                PersistentGameManager.instance.playerData.playerData.guessingHardHiScore++;
                 break;
         }
-        HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Boredom, -2, playerData.playerData);
-        SaveGame();
+        HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Boredom, -2, PersistentGameManager.instance.playerData.playerData);
+        PersistentGameManager.instance.SaveGame();
         UpdateText();
     }
 

@@ -6,27 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
-    private SaveData playerData;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        playerData = new SaveData();
-        playerData.playerData = new PlayerData();
-
-        if (!SerializationManager.DoesFileExist("save"))
-        {
-            playerData.ResetPlayerData(false);
-            SerializationManager.Save("save", playerData);
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void StartGame()
     {
         PersistentGameManager.instance.LoadGame();

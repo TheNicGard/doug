@@ -30,7 +30,6 @@ public class ClickerManager : MonoBehaviour
     [SerializeField]
     TextAsset clickerData = null;
 
-    private SaveData playerData = null;
     private ClickerData[] videos = null;
     private string[] soundNames = new string[] {"woof", "woof", "arf", "bark", "bork" };
     private int lastClickedVideo = 0;
@@ -52,17 +51,17 @@ public class ClickerManager : MonoBehaviour
         float coinzPerSecond = 0f;
         for (int i = 0; i < videos.Length; i++)
             coinzPerSecond += videos[i].coinzPerSecond * 
-            playerData.playerData.clickerVideos[i] * 
-            playerData.playerData.clickerVideosComments[i];
+            PersistentGameManager.instance.playerData.playerData.clickerVideos[i] * 
+            PersistentGameManager.instance.playerData.playerData.clickerVideosComments[i];
         if (useStardom)
-            coinzPerSecond *= (1f + (playerData.playerData.stardomBonus / 100f));
+            coinzPerSecond *= (1f + (PersistentGameManager.instance.playerData.playerData.stardomBonus / 100f));
         return coinzPerSecond;
     }
 
     public void IncrementCoinz(float dCoinz)
     {
-        playerData.playerData.coinz += dCoinz;
-        coinzText.GetComponent<TextMeshProUGUI>().text = ConvertToShortNumber(playerData.playerData.coinz) + " coinz";
+        PersistentGameManager.instance.playerData.playerData.coinz += dCoinz;
+        coinzText.GetComponent<TextMeshProUGUI>().text = ConvertToShortNumber(PersistentGameManager.instance.playerData.playerData.coinz) + " coinz";
     }
 
     public void Woof()
@@ -80,24 +79,24 @@ public class ClickerManager : MonoBehaviour
         Random.InitState(System.DateTime.Now.Millisecond);
         if(Random.Range(0, (int) (1 / GlobalConfig.stardomChance)) == 0)
         {
-            playerData.playerData.stardomBonus += 1;
+            PersistentGameManager.instance.playerData.playerData.stardomBonus += 1;
             UpdateText();
         }
     }
 
     public long requiredCoinz(int videoNumber)
     {
-        return (long) Mathf.Ceil(videos[videoNumber].requiredCoinz * Mathf.Pow(1.15f, playerData.playerData.clickerVideos[videoNumber]));
+        return (long) Mathf.Ceil(videos[videoNumber].requiredCoinz * Mathf.Pow(1.15f, PersistentGameManager.instance.playerData.playerData.clickerVideos[videoNumber]));
     }
 
     public void AddVideo(int videoNumber)
     {
         long tempRequiredCoinz = requiredCoinz(videoNumber);
         
-        if (playerData.playerData.coinz >= tempRequiredCoinz && playerData.playerData.clickerVideos[videoNumber] <= 9000)
+        if (PersistentGameManager.instance.playerData.playerData.coinz >= tempRequiredCoinz && PersistentGameManager.instance.playerData.playerData.clickerVideos[videoNumber] <= 9000)
         {
             IncrementCoinz(-tempRequiredCoinz);
-            playerData.playerData.clickerVideos[videoNumber]++;
+            PersistentGameManager.instance.playerData.playerData.clickerVideos[videoNumber]++;
             UpdateText();
             Debug.Log("bought " + videoNumber.ToString() + " for " + tempRequiredCoinz.ToString() + " coinz!");
         }
@@ -111,14 +110,14 @@ public class ClickerManager : MonoBehaviour
     public void BuyComment(int videoNumber, int commentNumber) //commentNumber is the comment that is being bought
     {
         Debug.Log("attempting to buy comment " + commentNumber.ToString());
-        if (playerData.playerData.coinz >= CommentCost(videoNumber, commentNumber))
+        if (PersistentGameManager.instance.playerData.playerData.coinz >= CommentCost(videoNumber, commentNumber))
         {
-            if ((commentNumber == 0 && playerData.playerData.clickerVideosComments[videoNumber] == 1) ||
-                (commentNumber == 1 && playerData.playerData.clickerVideosComments[videoNumber] == 2) ||
-                (commentNumber == 2 && playerData.playerData.clickerVideosComments[videoNumber] == 4))
+            if ((commentNumber == 0 && PersistentGameManager.instance.playerData.playerData.clickerVideosComments[videoNumber] == 1) ||
+                (commentNumber == 1 && PersistentGameManager.instance.playerData.playerData.clickerVideosComments[videoNumber] == 2) ||
+                (commentNumber == 2 && PersistentGameManager.instance.playerData.playerData.clickerVideosComments[videoNumber] == 4))
             {
                 IncrementCoinz(-CommentCost(videoNumber, commentNumber));
-                playerData.playerData.clickerVideosComments[videoNumber] *= 2;
+                PersistentGameManager.instance.playerData.playerData.clickerVideosComments[videoNumber] *= 2;
                 AssignVideoButtons(videoNumber);
                 UpdateText();
             }
@@ -139,11 +138,11 @@ public class ClickerManager : MonoBehaviour
         videoButtons.transform.Find("Add Video Button").GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {gameObject.GetComponent<AudioManager>().PlaySound("click");});
 
         videoButtons.transform.Find("Buy Comment 1 Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text =
-            (playerData.playerData.clickerVideosComments[videoNumber] >= 2) ? "(x2 cps) wow funny dog" : "buy comment:\n" + ConvertToShortNumber(CommentCost(videoNumber, 0)) + " coinz";
+            (PersistentGameManager.instance.playerData.playerData.clickerVideosComments[videoNumber] >= 2) ? "(x2 cps) wow funny dog" : "buy comment:\n" + ConvertToShortNumber(CommentCost(videoNumber, 0)) + " coinz";
         videoButtons.transform.Find("Buy Comment 2 Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text =
-            (playerData.playerData.clickerVideosComments[videoNumber] >= 4) ? "(x2 cps) wow funny dog" : "buy comment:\n" + ConvertToShortNumber(CommentCost(videoNumber, 1)) + " coinz";
+            (PersistentGameManager.instance.playerData.playerData.clickerVideosComments[videoNumber] >= 4) ? "(x2 cps) wow funny dog" : "buy comment:\n" + ConvertToShortNumber(CommentCost(videoNumber, 1)) + " coinz";
         videoButtons.transform.Find("Buy Comment 3 Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text =
-            (playerData.playerData.clickerVideosComments[videoNumber] >= 8) ? "(x2 cps) wow funny dog" : "buy comment:\n" + ConvertToShortNumber(CommentCost(videoNumber, 2)) + " coinz";
+            (PersistentGameManager.instance.playerData.playerData.clickerVideosComments[videoNumber] >= 8) ? "(x2 cps) wow funny dog" : "buy comment:\n" + ConvertToShortNumber(CommentCost(videoNumber, 2)) + " coinz";
 
         for (int i = 0; i < 3; i++)
         {
@@ -157,18 +156,18 @@ public class ClickerManager : MonoBehaviour
     public void UpdateText()
     {
         coinzPerSecondText.GetComponent<TextMeshProUGUI>().text =
-            ((1 + (playerData.playerData.stardomBonus / 100f)) * CoinzPerSecond(true)).ToString("F1") + " subscribers";
+            ((1 + (PersistentGameManager.instance.playerData.playerData.stardomBonus / 100f)) * CoinzPerSecond(true)).ToString("F1") + " subscribers";
             
         for (int i = 0; i < videos.Length; i++) 
         {
-            ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Count Text", playerData.playerData.clickerVideos[i].ToString());
+            ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Count Text", PersistentGameManager.instance.playerData.playerData.clickerVideos[i].ToString());
             ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Cost Text", "+" + ConvertToShortNumber(videos[i].coinzPerSecond).ToString() + " subscribers");
         }
 
-        if (playerData.playerData.stardomBonus > 0)
+        if (PersistentGameManager.instance.playerData.playerData.stardomBonus > 0)
         {
             stardomCounter.SetActive(true);
-            stardomCounter.GetComponent<TextMeshProUGUI>().text = playerData.playerData.stardomBonus + "% stardum power";
+            stardomCounter.GetComponent<TextMeshProUGUI>().text = PersistentGameManager.instance.playerData.playerData.stardomBonus + "% stardum power";
         }
         else
         {
@@ -182,19 +181,19 @@ public class ClickerManager : MonoBehaviour
     {
         for (int i = 0; i < videos.Length; i++)
             buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject.transform.Find("Name Text").gameObject.GetComponent<TextMeshProUGUI>().color = 
-                (playerData.playerData.coinz > requiredCoinz(i)) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
+                (PersistentGameManager.instance.playerData.playerData.coinz > requiredCoinz(i)) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
 
         videoButtons.transform.Find("Add Video Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color =
-            (playerData.playerData.coinz > requiredCoinz(lastClickedVideo)) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
+            (PersistentGameManager.instance.playerData.playerData.coinz > requiredCoinz(lastClickedVideo)) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
 
         videoButtons.transform.Find("Buy Comment 1 Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = 
-            (playerData.playerData.clickerVideosComments[lastClickedVideo] >= 2 || playerData.playerData.coinz > CommentCost(lastClickedVideo, 0))
+            (PersistentGameManager.instance.playerData.playerData.clickerVideosComments[lastClickedVideo] >= 2 || PersistentGameManager.instance.playerData.playerData.coinz > CommentCost(lastClickedVideo, 0))
                 ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
         videoButtons.transform.Find("Buy Comment 2 Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = 
-            (playerData.playerData.clickerVideosComments[lastClickedVideo] >= 4 || playerData.playerData.coinz > CommentCost(lastClickedVideo, 1))
+            (PersistentGameManager.instance.playerData.playerData.clickerVideosComments[lastClickedVideo] >= 4 || PersistentGameManager.instance.playerData.playerData.coinz > CommentCost(lastClickedVideo, 1))
                 ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
         videoButtons.transform.Find("Buy Comment 3 Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = 
-            playerData.playerData.clickerVideosComments[lastClickedVideo] >= 8 || (playerData.playerData.coinz > CommentCost(lastClickedVideo, 2))
+            PersistentGameManager.instance.playerData.playerData.clickerVideosComments[lastClickedVideo] >= 8 || (PersistentGameManager.instance.playerData.playerData.coinz > CommentCost(lastClickedVideo, 2))
                 ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
     }
 
@@ -206,19 +205,16 @@ public class ClickerManager : MonoBehaviour
     void OnEnable()
     {
         LoadClickerData();
-        playerData = SerializationManager.Load("save") as SaveData;
         InvokeRepeating("Woof", 0.0f, 1.0f / GlobalConfig.incrementsPerSecond);
         InvokeRepeating("UpdateStats", 60f, 60f * 1f);
         InvokeRepeating("DepleteStardom", 15f, 15f * 1f);
         UpdateText();
-        
     }
 
     void OnDisable()
     {
-        playerData.playerData.coinzPerSecond = CoinzPerSecond(false);
-        playerData.playerData.lastDate = System.DateTime.Now;
-        SerializationManager.Save("save", playerData);
+        PersistentGameManager.instance.playerData.playerData.coinzPerSecond = CoinzPerSecond(false);
+        PersistentGameManager.instance.SaveGame();
     }
 
     public void LoadClickerData()
@@ -240,14 +236,14 @@ public class ClickerManager : MonoBehaviour
 
     public void UpdateStats()
     {
-        HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Boredom, -2, playerData.playerData);
-        HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Weight, -1, playerData.playerData);
-        SerializationManager.Save("save", playerData);
+        HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Boredom, -2, PersistentGameManager.instance.playerData.playerData);
+        HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Weight, -1, PersistentGameManager.instance.playerData.playerData);
+        SerializationManager.Save("save", PersistentGameManager.instance.playerData);
     }
 
     public void DepleteStardom()
     {
-        HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Stardom, -1, playerData.playerData);
+        HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Stardom, -1, PersistentGameManager.instance.playerData.playerData);
         UpdateText();
     }
 

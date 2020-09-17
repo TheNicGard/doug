@@ -61,7 +61,6 @@ public class HomeScreenManager : MonoBehaviour
 
     private Vector3 dougSpriteDefaultScale = new Vector3(3f, 3f, 1f);
     private Vector3 dougSpriteDefaultPosition;
-    private SaveData playerData;
     private bool deactivated = false;
 
     // Start is called before the first frame update
@@ -69,7 +68,6 @@ public class HomeScreenManager : MonoBehaviour
     {
         InvokeRepeating("Woof", 0.0f, 1.0f / GlobalConfig.incrementsPerSecond);
         InvokeRepeating("UpdateStats", GlobalConfig.depletionTickTime * 0.8f, GlobalConfig.depletionTickTime);
-        InvokeRepeating("SaveGame", 60f, 60f * 5f);
         InvokeRepeating("CheckDeactivateDoug", 0f, 60f * 1f);
         doug.transform.localScale = new Vector3(dougSpriteDefaultScale.x * GetDougWeightScale(), dougSpriteDefaultScale.y, dougSpriteDefaultScale.z);
         dougSpriteDefaultPosition = doug.transform.position;
@@ -86,18 +84,13 @@ public class HomeScreenManager : MonoBehaviour
     {
         if (!CheckDeactivateDoug())
         {
-            if (playerData.playerData.hunger >= GlobalConfig.maxHunger)
-                ModifyStat(Stat.Weight, -1, playerData.playerData);
-            ModifyStat(Stat.Hunger, 1, playerData.playerData);
-            ModifyStat(Stat.Boredom, 1, playerData.playerData);
-            ModifyStat(Stat.Love, -1, playerData.playerData);
-            ModifyStat(Stat.Stardom, -4, playerData.playerData);
+            if (PersistentGameManager.instance.playerData.playerData.hunger >= GlobalConfig.maxHunger)
+                ModifyStat(Stat.Weight, -1, PersistentGameManager.instance.playerData.playerData);
+            ModifyStat(Stat.Hunger, 1, PersistentGameManager.instance.playerData.playerData);
+            ModifyStat(Stat.Boredom, 1, PersistentGameManager.instance.playerData.playerData);
+            ModifyStat(Stat.Love, -1, PersistentGameManager.instance.playerData.playerData);
+            ModifyStat(Stat.Stardom, -4, PersistentGameManager.instance.playerData.playerData);
         }
-    }
-
-    public void SaveGame()
-    {
-        SerializationManager.Save("save", playerData);
     }
 
     public void GoToScene(string scene_name)
@@ -108,38 +101,30 @@ public class HomeScreenManager : MonoBehaviour
                 PersistentGameManager.instance.SwitchScene((int) SceneIndexes.CLICKER);
                 break;
             case "Guessing":
-                if (playerData.playerData.unlockedGuessing)
+                if (PersistentGameManager.instance.playerData.playerData.unlockedGuessing)
                     PersistentGameManager.instance.SwitchScene((int) SceneIndexes.GUESSING);
                     break;
             case "Chacha Trail":
-                if (playerData.playerData.unlockedChachaTrail)
+                if (PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail)
                     MakePopup("NYI!");
                 break;
 
         }
-        Debug.Log(playerData.ToString());
     }
 
     void OnEnable()
     {
-        playerData = SerializationManager.Load("save") as SaveData;
-        int minutes = (int) System.DateTime.Now.Subtract(playerData.playerData.lastDate).TotalMinutes;
+        int minutes = (int) System.DateTime.Now.Subtract(PersistentGameManager.instance.playerData.playerData.lastDate).TotalMinutes;
         int updatesToDo = (int)(minutes / ((float)GlobalConfig.totalDepletionTimeInMinutes / GlobalConfig.maxHunger));
         for (int i = 0; i < updatesToDo; i++)
             UpdateStats();
-        playerData.playerData.coinz += minutes * 60f * playerData.playerData.coinzPerSecond;
-        coinzText.GetComponent<TextMeshProUGUI>().text = playerData.playerData.coinz.ToString("F1") + " coinz";
+        PersistentGameManager.instance.playerData.playerData.coinz += minutes * 60f * PersistentGameManager.instance.playerData.playerData.coinzPerSecond;
+        coinzText.GetComponent<TextMeshProUGUI>().text = PersistentGameManager.instance.playerData.playerData.coinz.ToString("F1") + " coinz";
         UpdateText();
         UnlockMinigame(-1);
         UpdateBars();
-        SaveGame();
+        PersistentGameManager.instance.SaveGame();
         CheckDeactivateDoug();
-    }
-
-    void OnDisable()
-    {
-        playerData.playerData.lastDate = System.DateTime.Now;
-        SerializationManager.Save("save", playerData);
     }
 
     public void EnablePanel(string panelName)
@@ -185,7 +170,7 @@ public class HomeScreenManager : MonoBehaviour
 
     public void ClearSave()
     {
-        playerData.ResetPlayerData(false);
+        PersistentGameManager.instance.playerData.ResetPlayerData(false);
         PlayerPrefs.SetInt("soundEnabled", 1);
         PlayerPrefs.SetInt("musicEnabled", 1);
         PlayerPrefs.SetInt("adsEnabled", 1);
@@ -239,7 +224,7 @@ public class HomeScreenManager : MonoBehaviour
 
     public void UpdateText()
     {
-        coinzText.GetComponent<TextMeshProUGUI>().text = playerData.playerData.coinz.ToString("F1") + " coinz";
+        coinzText.GetComponent<TextMeshProUGUI>().text = PersistentGameManager.instance.playerData.playerData.coinz.ToString("F1") + " coinz";
         ageText.GetComponent<TextMeshProUGUI>().text = GetAgeOfDoug();
         if (PlayerPrefs.GetInt("soundEnabled") == 1)
             toggleSoundButtonText.GetComponent<TextMeshProUGUI>().text = "sound: on";
@@ -290,7 +275,7 @@ public class HomeScreenManager : MonoBehaviour
         if (Random.Range(0, 4) == 3)
         {
             MakePopupHeart();
-            ModifyStat(Stat.Love, 1, playerData.playerData);
+            ModifyStat(Stat.Love, 1, PersistentGameManager.instance.playerData.playerData);
         }
 
         //Vector3 a = ;
@@ -304,19 +289,19 @@ public class HomeScreenManager : MonoBehaviour
         switch ((Food) food)
         {
             case Food.FoodA:
-                ModifyStat(Stat.Hunger, -1, playerData.playerData);
-                ModifyStat(Stat.Weight, 1, playerData.playerData);
+                ModifyStat(Stat.Hunger, -1, PersistentGameManager.instance.playerData.playerData);
+                ModifyStat(Stat.Weight, 1, PersistentGameManager.instance.playerData.playerData);
                 MakePopup("-1 hungy\n+1 weiht");
                 break;
             case Food.FoodB:
-                ModifyStat(Stat.Hunger, -2, playerData.playerData);
-                ModifyStat(Stat.Weight, 2, playerData.playerData);
-                ModifyStat(Stat.Love, 1, playerData.playerData);
+                ModifyStat(Stat.Hunger, -2, PersistentGameManager.instance.playerData.playerData);
+                ModifyStat(Stat.Weight, 2, PersistentGameManager.instance.playerData.playerData);
+                ModifyStat(Stat.Love, 1, PersistentGameManager.instance.playerData.playerData);
                 MakePopup("-2 hungy\n+2 weiht\n+1 luv");
                 break;
             case Food.FoodC:
-                ModifyStat(Stat.Hunger, -3, playerData.playerData);
-                ModifyStat(Stat.Love, -1, playerData.playerData);
+                ModifyStat(Stat.Hunger, -3, PersistentGameManager.instance.playerData.playerData);
+                ModifyStat(Stat.Love, -1, PersistentGameManager.instance.playerData.playerData);
                 MakePopup("-3 hungy\n-1 luv");
                 break;
         }
@@ -324,10 +309,10 @@ public class HomeScreenManager : MonoBehaviour
 
     public void UpdateBars()
     {
-        modifyBar((float)playerData.playerData.hunger / GlobalConfig.maxHunger, "hungy: " + playerData.playerData.hunger.ToString() + "/" + GlobalConfig.maxHunger.ToString(), hungerStat);
-        modifyBar((float)playerData.playerData.boredom / GlobalConfig.maxBoredom, "bord: " + playerData.playerData.boredom.ToString() + "/" + GlobalConfig.maxBoredom.ToString(), boredomStat);
-        modifyBar((float)playerData.playerData.weight / (float)GlobalConfig.maxWeight, "weiht: " + playerData.playerData.weight.ToString() + "/" + GlobalConfig.maxWeight.ToString(), weightStat);
-        modifyBar((float)playerData.playerData.love / GlobalConfig.maxLove, "luv: " + playerData.playerData.love.ToString() + "/" + GlobalConfig.maxLove.ToString(), loveStat);
+        modifyBar((float)PersistentGameManager.instance.playerData.playerData.hunger / GlobalConfig.maxHunger, "hungy: " + PersistentGameManager.instance.playerData.playerData.hunger.ToString() + "/" + GlobalConfig.maxHunger.ToString(), hungerStat);
+        modifyBar((float)PersistentGameManager.instance.playerData.playerData.boredom / GlobalConfig.maxBoredom, "bord: " + PersistentGameManager.instance.playerData.playerData.boredom.ToString() + "/" + GlobalConfig.maxBoredom.ToString(), boredomStat);
+        modifyBar((float)PersistentGameManager.instance.playerData.playerData.weight / (float)GlobalConfig.maxWeight, "weiht: " + PersistentGameManager.instance.playerData.playerData.weight.ToString() + "/" + GlobalConfig.maxWeight.ToString(), weightStat);
+        modifyBar((float)PersistentGameManager.instance.playerData.playerData.love / GlobalConfig.maxLove, "luv: " + PersistentGameManager.instance.playerData.playerData.love.ToString() + "/" + GlobalConfig.maxLove.ToString(), loveStat);
         doug.transform.localScale = new Vector3(dougSpriteDefaultScale.x * GetDougWeightScale(), dougSpriteDefaultScale.y, dougSpriteDefaultScale.z);
     }
 
@@ -374,7 +359,7 @@ public class HomeScreenManager : MonoBehaviour
     public float GetDougWeightScale()
     {
         
-        float weight = (float)playerData.playerData.weight / (float)GlobalConfig.maxWeight;
+        float weight = (float)PersistentGameManager.instance.playerData.playerData.weight / (float)GlobalConfig.maxWeight;
         if (weight < 0.25)
         {
             return (weight * 2f) + .5f;
@@ -391,7 +376,7 @@ public class HomeScreenManager : MonoBehaviour
 
     public string GetAgeOfDoug()
     {
-        System.TimeSpan age = System.DateTime.Now - playerData.playerData.acquisitionDate;
+        System.TimeSpan age = System.DateTime.Now - PersistentGameManager.instance.playerData.playerData.acquisitionDate;
         if (age.Hours < 1)
             return age.Minutes.ToString() + (age.Minutes == 1 ? " minute old" : " minutes old");
         else if (age.Days < 1)
@@ -404,20 +389,20 @@ public class HomeScreenManager : MonoBehaviour
     {
         if (i == 2)
         {
-            playerData.playerData.unlockedGuessing = true;
+            PersistentGameManager.instance.playerData.playerData.unlockedGuessing = true;
             UpdateText();
-            SaveGame();
-            Debug.Log("unlocked guessing: " + playerData.playerData.unlockedGuessing.ToString());
+            PersistentGameManager.instance.SaveGame();
+            Debug.Log("unlocked guessing: " + PersistentGameManager.instance.playerData.playerData.unlockedGuessing.ToString());
         }
-        else if (i == 3 && playerData.playerData.unlockedGuessing)
+        else if (i == 3 && PersistentGameManager.instance.playerData.playerData.unlockedGuessing)
         {
-            playerData.playerData.unlockedChachaTrail = true;
+            PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail = true;
             UpdateText();
-            SaveGame();
-            Debug.Log("unlocked chacha: " + playerData.playerData.unlockedChachaTrail.ToString());
+            PersistentGameManager.instance.SaveGame();
+            Debug.Log("unlocked chacha: " + PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail.ToString());
         }
 
-        if (!playerData.playerData.unlockedGuessing)
+        if (!PersistentGameManager.instance.playerData.playerData.unlockedGuessing)
         {
             guessingGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.disabledTextColor;
             guessingGameButton.transform.Find("Unlock Text").gameObject.SetActive(true);
@@ -428,10 +413,10 @@ public class HomeScreenManager : MonoBehaviour
             guessingGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "find the bisco";
             guessingGameButton.transform.Find("Unlock Text").gameObject.SetActive(false);
         }
-        if (!playerData.playerData.unlockedChachaTrail)
+        if (!PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail)
         {
             chachaGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.disabledTextColor;
-            if (playerData.playerData.unlockedGuessing)
+            if (PersistentGameManager.instance.playerData.playerData.unlockedGuessing)
                 chachaGameButton.transform.Find("Unlock Text").gameObject.SetActive(true);
         }
         else
@@ -445,16 +430,16 @@ public class HomeScreenManager : MonoBehaviour
 
     public void TempDecreaseWeight()
     {
-        ModifyStat(Stat.Weight, -5, playerData.playerData);
+        ModifyStat(Stat.Weight, -5, PersistentGameManager.instance.playerData.playerData);
     }
 
     public bool CheckDeactivateDoug()
     {
-        if (playerData.playerData.weight <= 0 || playerData.playerData.boredom >= GlobalConfig.maxBoredom)
+        if (PersistentGameManager.instance.playerData.playerData.weight <= 0 || PersistentGameManager.instance.playerData.playerData.boredom >= GlobalConfig.maxBoredom)
         {
             if (!deactivated)
             {
-                bool deathByWeight = playerData.playerData.weight <= 0;
+                bool deathByWeight = PersistentGameManager.instance.playerData.playerData.weight <= 0;
                 deactivated = true;
                 StartCoroutine(DeactivateDoug(deathByWeight));
                 CheckDeactivateDoug();
@@ -478,8 +463,8 @@ public class HomeScreenManager : MonoBehaviour
         yield return new WaitForSeconds(3.5f);
         disableInteractionPanel.SetActive(false);
         deactivationPanel.SetActive(true);
-        playerData.ResetPlayerData(true);
-        SaveGame();
+        PersistentGameManager.instance.playerData.ResetPlayerData(true);
+        PersistentGameManager.instance.SaveGame();
     }
 
     public void StartRemoveDougCoroutine()
@@ -501,13 +486,13 @@ public class HomeScreenManager : MonoBehaviour
     //TODO: separate this from a scene-tied script?
     public void IncrementCoinz(float dCoinz)
     {
-        playerData.playerData.coinz += dCoinz;
-        coinzText.GetComponent<TextMeshProUGUI>().text = playerData.playerData.coinz.ToString("F1") + " coinz";
+        PersistentGameManager.instance.playerData.playerData.coinz += dCoinz;
+        coinzText.GetComponent<TextMeshProUGUI>().text = PersistentGameManager.instance.playerData.playerData.coinz.ToString("F1") + " coinz";
     }
 
     public void Woof()
     {
-        IncrementCoinz(playerData.playerData.coinzPerSecond / GlobalConfig.incrementsPerSecond);
+        IncrementCoinz(PersistentGameManager.instance.playerData.playerData.coinzPerSecond / GlobalConfig.incrementsPerSecond);
     }
 
 }

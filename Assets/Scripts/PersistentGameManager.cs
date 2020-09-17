@@ -10,22 +10,31 @@ public class PersistentGameManager : MonoBehaviour
     GameObject loadingScreen = null;
     private List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
     public int currentScene = 0;
+    public bool loadedGame = false;
+    public SaveData playerData;
 
     private void Awake()
     {
         instance = this;
 
-        if (currentScene == 0)
+        playerData = new SaveData();
+        playerData.playerData = new PlayerData();
+        if (!SerializationManager.DoesFileExist("save"))
+        {
+            playerData.ResetPlayerData(false);
+            SaveGame();
+        }
+        LoadSave();
+        InvokeRepeating("SaveGame", 60f, 60f * 5f);
+
+        if (currentScene == (int) SceneIndexes.MANAGER)
             SceneManager.LoadSceneAsync((int) SceneIndexes.MAIN_MENU, LoadSceneMode.Additive);
     }
 
     public void LoadGame()
     {
-        loadingScreen.SetActive(true);
-        scenesLoading.Add(SceneManager.UnloadSceneAsync((int) SceneIndexes.MAIN_MENU));
-        scenesLoading.Add(SceneManager.LoadSceneAsync((int) SceneIndexes.HOME_SCREEN, LoadSceneMode.Additive));
-        currentScene = (int) SceneIndexes.HOME_SCREEN;
-        StartCoroutine(GetSceneLoadProgress());
+        currentScene = 1;
+        SwitchScene((int) SceneIndexes.HOME_SCREEN);
     }
 
     public void SwitchScene(int newSceneIndex)
@@ -34,10 +43,10 @@ public class PersistentGameManager : MonoBehaviour
         scenesLoading.Add(SceneManager.UnloadSceneAsync(currentScene));
         scenesLoading.Add(SceneManager.LoadSceneAsync(newSceneIndex, LoadSceneMode.Additive));
         currentScene = newSceneIndex;
-        StartCoroutine(GetSceneLoadProgress());
+        StartCoroutine(GetSceneLoadProgress(newSceneIndex == (int) SceneIndexes.HOME_SCREEN));
     }
 
-    public IEnumerator GetSceneLoadProgress()
+    public IEnumerator GetSceneLoadProgress(bool initialLoad)
     {
         for (int i = 0; i < scenesLoading.Count; i++)
         {
@@ -46,5 +55,23 @@ public class PersistentGameManager : MonoBehaviour
         }
 
         loadingScreen.SetActive(false);
+        if (initialLoad)
+            loadedGame = true;
+    }
+
+    public void SaveGame()
+    {
+        playerData.playerData.lastDate = System.DateTime.Now;
+        SerializationManager.Save("save", playerData);
+    }
+
+    public void LoadSave()
+    {
+        playerData = SerializationManager.Load("save") as SaveData;
+    }
+
+    void OnDisable()
+    {
+        SaveGame();
     }
 }
