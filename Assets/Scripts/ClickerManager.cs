@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 public class ClickerManager : MonoBehaviour
@@ -201,7 +200,7 @@ public class ClickerManager : MonoBehaviour
 
     public void GoToHomeScreen()
     {
-        SceneManager.LoadScene("HomeScreen");
+        PersistentGameManager.instance.SwitchScene((int) SceneIndexes.HOME_SCREEN);
     }
 
     void OnEnable()

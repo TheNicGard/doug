@@ -29,6 +29,6 @@ public class MainMenuManager : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("HomeScreen");
+        PersistentGameManager.instance.LoadGame();
     }
 }

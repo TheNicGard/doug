@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HomeScreenManager : MonoBehaviour
@@ -106,15 +105,15 @@ public class HomeScreenManager : MonoBehaviour
         switch (scene_name)
         {
             case "Clicker":
-                SceneManager.LoadScene("Clicker");
+                PersistentGameManager.instance.SwitchScene((int) SceneIndexes.CLICKER);
                 break;
             case "Guessing":
                 if (playerData.playerData.unlockedGuessing)
-                    SceneManager.LoadScene("Guessing");
+                    PersistentGameManager.instance.SwitchScene((int) SceneIndexes.GUESSING);
                     break;
             case "Chacha Trail":
                 if (playerData.playerData.unlockedChachaTrail)
-                MakePopup("NYI!");
+                    MakePopup("NYI!");
                 break;
 
         }
@@ -190,7 +189,7 @@ public class HomeScreenManager : MonoBehaviour
         PlayerPrefs.SetInt("soundEnabled", 1);
         PlayerPrefs.SetInt("musicEnabled", 1);
         PlayerPrefs.SetInt("adsEnabled", 1);
-        SceneManager.LoadScene("MainMenu");
+        PersistentGameManager.instance.SwitchScene((int) SceneIndexes.MAIN_MENU);
     }
 
     public void ToggleSound()

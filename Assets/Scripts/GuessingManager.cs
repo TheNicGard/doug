@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GuessingManager : MonoBehaviour
 {
@@ -97,7 +96,7 @@ public class GuessingManager : MonoBehaviour
 
     public void GoToHomeScreen()
     {
-        SceneManager.LoadScene("HomeScreen");
+        PersistentGameManager.instance.SwitchScene((int) SceneIndexes.HOME_SCREEN);
     }
 
 
