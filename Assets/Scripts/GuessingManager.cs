@@ -65,6 +65,7 @@ public class GuessingManager : MonoBehaviour
     void Start()
     {
         playerData = SerializationManager.Load("save") as SaveData;
+        InvokeRepeating("UpdateStats", 60f, 60f * 1f);
 
         cupHeight = cupHeightLine.transform.localPosition.y;
         biscoHeight = biscoHeightLine.transform.localPosition.y;
@@ -86,6 +87,12 @@ public class GuessingManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void UpdateStats()
+    {
+        HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Weight, -1, playerData.playerData);
+        SaveGame();
     }
 
     public void GoToHomeScreen()
@@ -199,9 +206,8 @@ public class GuessingManager : MonoBehaviour
     public void UpdateText()
     {
         ModifyText(scorePanel.transform.Find("Easy Score Text").GetComponent<TextMeshProUGUI>(), "easy: " + playerData.playerData.guessingEasyHiScore.ToString());
-        ModifyText(scorePanel.transform.Find("Normal Score Text").GetComponent<TextMeshProUGUI>(), "normal: " + playerData.playerData.guessingNormalHiScore.ToString());
-        ModifyText(scorePanel.transform.Find("Hard Score Text").GetComponent<TextMeshProUGUI>(), "hard: " + playerData.playerData.guessingHardHiScore.ToString());
-        Debug.Log("I have updated the text! ");
+        ModifyText(scorePanel.transform.Find("Normal Score Text").GetComponent<TextMeshProUGUI>(), "ok: " + playerData.playerData.guessingNormalHiScore.ToString());
+        ModifyText(scorePanel.transform.Find("Hard Score Text").GetComponent<TextMeshProUGUI>(), "no: " + playerData.playerData.guessingHardHiScore.ToString());
     }
 
     public void IncrementScore()
@@ -218,6 +224,7 @@ public class GuessingManager : MonoBehaviour
                 playerData.playerData.guessingHardHiScore++;
                 break;
         }
+        HomeScreenManager.ModifyStat(HomeScreenManager.Stat.Boredom, -2, playerData.playerData);
         SaveGame();
         UpdateText();
     }
