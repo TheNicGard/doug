@@ -53,7 +53,6 @@ public class HomeScreenManager : MonoBehaviour
     [SerializeField]
     GameObject disableInteractionPanel = null;
 
-
     private Vector3 dougSpriteDefaultScale = new Vector3(3f, 3f, 1f);
     private Vector3 dougSpriteDefaultPosition;
     private bool deactivated = false;
@@ -64,7 +63,6 @@ public class HomeScreenManager : MonoBehaviour
         InvokeRepeating("CheckDeactivateDoug", 0f, 60f * 1f);
         doug.transform.localScale = new Vector3(dougSpriteDefaultScale.x * GetDougWeightScale(), dougSpriteDefaultScale.y, dougSpriteDefaultScale.z);
         dougSpriteDefaultPosition = doug.transform.position;
-        GetComponent<AudioManager>().PlaySound("music");
     }
 
     // Update is called once per frame
@@ -157,13 +155,15 @@ public class HomeScreenManager : MonoBehaviour
         if (PlayerPrefs.GetInt("soundEnabled") == 1)
         {
             PlayerPrefs.SetInt("soundEnabled", 0);
-            toggleSoundButtonText.GetComponent<TextMeshProUGUI>().text = "sound: off";
+            PersistentGameManager.instance.audioManager.ToggleSoundFXVolume(false);
         }
         else
         {
             PlayerPrefs.SetInt("soundEnabled", 1);
-            toggleSoundButtonText.GetComponent<TextMeshProUGUI>().text = "sound: on";
+            PersistentGameManager.instance.audioManager.ToggleSoundFXVolume(true);
         }
+        
+        UpdateText();
     }
 
     public void ToggleMusic()
@@ -171,15 +171,15 @@ public class HomeScreenManager : MonoBehaviour
         if (PlayerPrefs.GetInt("musicEnabled") == 1)
         {
             PlayerPrefs.SetInt("musicEnabled", 0);
-            toggleMusicButtonText.GetComponent<TextMeshProUGUI>().text = "music: off";
-            GetComponent<AudioManager>().StopMusic();
+            PersistentGameManager.instance.audioManager.ToggleMusicVolume(false);
         }
         else
         {
             PlayerPrefs.SetInt("musicEnabled", 1);
-            toggleMusicButtonText.GetComponent<TextMeshProUGUI>().text = "music: on";
-            GetComponent<AudioManager>().PlaySound("music");
+            PersistentGameManager.instance.audioManager.ToggleMusicVolume(true);
         }
+
+        UpdateText();
     }
 
     public void ToggleAds()
@@ -188,13 +188,13 @@ public class HomeScreenManager : MonoBehaviour
         if (PlayerPrefs.GetInt("adsEnabled") == 1)
         {
             PlayerPrefs.SetInt("adsEnabled", 0);
-            toggleAdsButtonText.GetComponent<TextMeshProUGUI>().text = "ads: off";
         }
         else
         {
             PlayerPrefs.SetInt("adsEnabled", 1);
-            toggleAdsButtonText.GetComponent<TextMeshProUGUI>().text = "ads: on";
         }
+
+        UpdateText();
     }
 
     public void UpdateText()
@@ -246,7 +246,7 @@ public class HomeScreenManager : MonoBehaviour
 
     public void PetDoug()
     {
-        GetComponent<AudioManager>().PlaySound("woof");
+        PersistentGameManager.instance.audioManager.PlaySound("woof");
         if (Random.Range(0, 4) == 3)
         {
             MakePopupHeart();

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Panel
+  - Close Button
+  - Button
   layers:
   - Default
   - TransparentFX

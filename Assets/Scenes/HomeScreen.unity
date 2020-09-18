@@ -269,7 +269,7 @@ GameObject:
   - component: {fileID: 52287818}
   m_Layer: 5
   m_Name: Store 1 Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -337,17 +337,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: click
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 1075124075}
         m_MethodName: MakePopup
         m_Mode: 5
@@ -417,13 +406,13 @@ PrefabInstance:
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1075124076}
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -448,6 +437,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: close_click
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 60686614}
+    - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244393987012, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
@@ -477,13 +476,13 @@ PrefabInstance:
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1075124076}
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -514,10 +513,25 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: click
       objectReference: {fileID: 0}
+    - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 60686614}
+    - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708158, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_Name
       value: Info Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244654708158, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Button
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708159, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
@@ -671,6 +685,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb22ee586e082c844a6b35f1ec73cc1c, type: 3}
+--- !u!1 &60686614 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6807190245759220562, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+    type: 3}
+  m_PrefabInstance: {fileID: 60686613}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &78814248
 GameObject:
   m_ObjectHideFlags: 0
@@ -791,7 +811,7 @@ GameObject:
   - component: {fileID: 80591863}
   m_Layer: 5
   m_Name: Food 1 Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -859,17 +879,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: click
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 1075124075}
         m_MethodName: UseFood
         m_Mode: 3
@@ -1191,7 +1200,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
+      - m_Target: {fileID: 0}
         m_MethodName: PlaySound
         m_Mode: 5
         m_Arguments:
@@ -1972,7 +1981,7 @@ GameObject:
   - component: {fileID: 247385119}
   m_Layer: 5
   m_Name: Closet Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2064,17 +2073,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: this does nothing!
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: click
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &247385121
@@ -6887,7 +6885,7 @@ GameObject:
   - component: {fileID: 283630894}
   m_Layer: 5
   m_Name: Close Store Button
-  m_TagString: Untagged
+  m_TagString: Close Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6955,17 +6953,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: close_click
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 1075124075}
         m_MethodName: DisablePanel
         m_Mode: 5
@@ -7096,7 +7083,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
+      - m_Target: {fileID: 0}
         m_MethodName: PlaySound
         m_Mode: 5
         m_Arguments:
@@ -7170,7 +7157,7 @@ GameObject:
   - component: {fileID: 330901814}
   m_Layer: 5
   m_Name: Store Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7262,17 +7249,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Store Panel
-          m_BoolArgument: 1
-        m_CallState: 2
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: click
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &330901816
@@ -7736,7 +7712,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
+      - m_Target: {fileID: 0}
         m_MethodName: PlaySound
         m_Mode: 5
         m_Arguments:
@@ -8515,7 +8491,7 @@ GameObject:
   - component: {fileID: 504487347}
   m_Layer: 5
   m_Name: Settings Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8583,17 +8559,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: click
-          m_BoolArgument: 1
-        m_CallState: 1
       - m_Target: {fileID: 1075124075}
         m_MethodName: EnablePanel
         m_Mode: 5
@@ -8745,7 +8710,7 @@ GameObject:
   - component: {fileID: 533613698}
   m_Layer: 5
   m_Name: Close Food Button
-  m_TagString: Untagged
+  m_TagString: Close Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8813,17 +8778,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: close_click
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 1075124075}
         m_MethodName: DisablePanel
         m_Mode: 5
@@ -10421,7 +10375,7 @@ GameObject:
   - component: {fileID: 885698446}
   m_Layer: 5
   m_Name: Clicker Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10498,17 +10452,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: click
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 1075124075}
         m_MethodName: GoToScene
         m_Mode: 5
@@ -11014,7 +10957,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
+      - m_Target: {fileID: 0}
         m_MethodName: PlaySound
         m_Mode: 5
         m_Arguments:
@@ -11080,16 +11023,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 555359002}
     m_Modifications:
+    - target: {fileID: 6807190244180491633, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Close Button
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1075124076}
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -11114,6 +11062,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: close_click
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 977302647}
+    - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244393987012, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
@@ -11144,13 +11102,13 @@ PrefabInstance:
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1075124076}
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -11181,10 +11139,25 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: click
       objectReference: {fileID: 0}
+    - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 977302647}
+    - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708158, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_Name
       value: Info Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244654708158, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Button
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708159, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
@@ -11348,6 +11321,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb22ee586e082c844a6b35f1ec73cc1c, type: 3}
+--- !u!1 &977302647 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6807190245759220562, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+    type: 3}
+  m_PrefabInstance: {fileID: 977302646}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1023108533
 GameObject:
   m_ObjectHideFlags: 0
@@ -11362,7 +11341,7 @@ GameObject:
   - component: {fileID: 1023108535}
   m_Layer: 5
   m_Name: Store 2 Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11430,17 +11409,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: click
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 1075124075}
         m_MethodName: UnlockMinigame
         m_Mode: 3
@@ -11891,7 +11859,7 @@ GameObject:
   - component: {fileID: 1059242900}
   m_Layer: 5
   m_Name: Food Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11970,17 +11938,6 @@ MonoBehaviour:
           m_StringArgument: Food Panel
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: click
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &1059242898
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12043,7 +12000,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1075124074}
   - component: {fileID: 1075124075}
-  - component: {fileID: 1075124076}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -12103,55 +12059,6 @@ MonoBehaviour:
     type: 3}
   deactivationPanel: {fileID: 1027803926}
   disableInteractionPanel: {fileID: 470528962}
---- !u!114 &1075124076
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1075124073}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 18bb3448351799b429ef48df4fb446ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sounds:
-  - name: woof
-    clip: {fileID: 8300000, guid: 1921a2bbb5e0b514ebdfe3997ddb5392, type: 3}
-    volume: 1
-    pitch: 1
-    volumeAdjustment: 0
-    pitchAdjustment: 0.05
-    isSound: 1
-    isMusic: 0
-    loops: 0
-  - name: click
-    clip: {fileID: 8300000, guid: 0e6d4d48fef8bd34f9a18cc6b7ed156c, type: 3}
-    volume: 1
-    pitch: 1
-    volumeAdjustment: 0
-    pitchAdjustment: 0
-    isSound: 1
-    isMusic: 0
-    loops: 0
-  - name: close_click
-    clip: {fileID: 8300000, guid: 0e6d4d48fef8bd34f9a18cc6b7ed156c, type: 3}
-    volume: 1
-    pitch: 0.75
-    volumeAdjustment: 0
-    pitchAdjustment: 0
-    isSound: 1
-    isMusic: 0
-    loops: 0
-  - name: music
-    clip: {fileID: 8300000, guid: 9847d25292a2db34a978bc3a3233c5f2, type: 3}
-    volume: 0.25
-    pitch: 1
-    volumeAdjustment: 0
-    pitchAdjustment: 0
-    isSound: 0
-    isMusic: 1
-    loops: 1
 --- !u!1 &1089955681
 GameObject:
   m_ObjectHideFlags: 0
@@ -12300,7 +12207,7 @@ GameObject:
   - component: {fileID: 1099723991}
   m_Layer: 5
   m_Name: Close Games Button
-  m_TagString: Untagged
+  m_TagString: Close Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12368,17 +12275,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: close_click
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 1075124075}
         m_MethodName: DisablePanel
         m_Mode: 5
@@ -12573,7 +12469,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
+      - m_Target: {fileID: 0}
         m_MethodName: PlaySound
         m_Mode: 5
         m_Arguments:
@@ -12775,7 +12671,7 @@ GameObject:
   - component: {fileID: 1165976440}
   m_Layer: 5
   m_Name: Close Stats Button
-  m_TagString: Untagged
+  m_TagString: Close Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12843,17 +12739,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: close_click
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 1075124075}
         m_MethodName: DisablePanel
         m_Mode: 5
@@ -13114,7 +12999,7 @@ GameObject:
   - component: {fileID: 1203595464}
   m_Layer: 5
   m_Name: Close Settings Button
-  m_TagString: Untagged
+  m_TagString: Close Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -13182,17 +13067,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: close_click
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 1075124075}
         m_MethodName: DisablePanel
         m_Mode: 5
@@ -13340,7 +13214,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1075124076}
+      - m_Target: {fileID: 0}
         m_MethodName: PlaySound
         m_Mode: 5
         m_Arguments:
@@ -13738,7 +13612,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
+      - m_Target: {fileID: 0}
         m_MethodName: PlaySound
         m_Mode: 5
         m_Arguments:
@@ -14725,7 +14599,7 @@ GameObject:
   - component: {fileID: 1614062324}
   m_Layer: 5
   m_Name: Chacha Trail Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14794,17 +14668,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: click
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 1075124075}
         m_MethodName: GoToScene
         m_Mode: 5
@@ -15174,7 +15037,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
+      - m_Target: {fileID: 0}
         m_MethodName: PlaySound
         m_Mode: 5
         m_Arguments:
@@ -15236,7 +15099,7 @@ GameObject:
   - component: {fileID: 1690772943}
   m_Layer: 5
   m_Name: Close Closet Button
-  m_TagString: Untagged
+  m_TagString: Close Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15304,17 +15167,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: close_click
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 1075124075}
         m_MethodName: DisablePanel
         m_Mode: 5
@@ -15755,7 +15607,7 @@ GameObject:
   - component: {fileID: 1733247239}
   m_Layer: 5
   m_Name: Stats Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -15834,17 +15686,6 @@ MonoBehaviour:
           m_StringArgument: Stats Panel
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: click
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &1733247237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15904,16 +15745,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1373687531}
     m_Modifications:
+    - target: {fileID: 6807190244180491633, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Close Button
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1075124076}
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -15938,6 +15784,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: close_click
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1835358972}
+    - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244393987012, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
@@ -15967,13 +15823,13 @@ PrefabInstance:
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1075124076}
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -16004,10 +15860,25 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: click
       objectReference: {fileID: 0}
+    - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1835358972}
+    - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708158, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_Name
       value: Info Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244654708158, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Button
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708159, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
@@ -16196,6 +16067,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb22ee586e082c844a6b35f1ec73cc1c, type: 3}
+--- !u!1 &1835358972 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6807190245759220562, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1835358971}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1854177570
 GameObject:
   m_ObjectHideFlags: 0
@@ -16210,7 +16087,7 @@ GameObject:
   - component: {fileID: 1854177572}
   m_Layer: 5
   m_Name: Guessing Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16279,17 +16156,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: click
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 1075124075}
         m_MethodName: GoToScene
         m_Mode: 5
@@ -16352,7 +16218,7 @@ GameObject:
   - component: {fileID: 1862989503}
   m_Layer: 5
   m_Name: Food 3 Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -16420,17 +16286,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: click
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 1075124075}
         m_MethodName: UseFood
         m_Mode: 3
@@ -17036,7 +16891,7 @@ GameObject:
   - component: {fileID: 1940958574}
   m_Layer: 5
   m_Name: Minigame Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17115,17 +16970,6 @@ MonoBehaviour:
           m_StringArgument: Games Panel
           m_BoolArgument: 1
         m_CallState: 2
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: click
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!114 &1940958572
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17185,16 +17029,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2114064540}
     m_Modifications:
+    - target: {fileID: 6807190244180491633, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Close Button
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1075124076}
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -17219,6 +17068,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: close_click
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1962048955}
+    - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244393987012, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
@@ -17300,13 +17159,13 @@ PrefabInstance:
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1075124076}
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -17336,6 +17195,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: click
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1962048955}
+    - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708158, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
@@ -17494,6 +17363,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb22ee586e082c844a6b35f1ec73cc1c, type: 3}
+--- !u!1 &1962048955 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6807190245759220562, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1962048954}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1967276905 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6807190244654708159, guid: bb22ee586e082c844a6b35f1ec73cc1c,
@@ -17855,7 +17730,7 @@ GameObject:
   - component: {fileID: 1990253545}
   m_Layer: 5
   m_Name: Food 2 Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -17923,17 +17798,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: click
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 1075124075}
         m_MethodName: UseFood
         m_Mode: 3
@@ -18072,16 +17936,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1703471116}
     m_Modifications:
+    - target: {fileID: 6807190244180491633, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Close Button
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1075124076}
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -18106,6 +17975,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: close_click
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2029529170}
+    - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244393987012, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
@@ -18194,13 +18073,13 @@ PrefabInstance:
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1075124076}
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -18231,10 +18110,25 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: click
       objectReference: {fileID: 0}
+    - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2029529170}
+    - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708158, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_Name
       value: Info Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244654708158, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Button
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708159, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
@@ -18388,6 +18282,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb22ee586e082c844a6b35f1ec73cc1c, type: 3}
+--- !u!1 &2029529170 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6807190245759220562, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2029529169}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2039009984
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18395,16 +18295,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 230080039}
     m_Modifications:
+    - target: {fileID: 6807190244180491633, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Close Button
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1075124076}
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -18429,6 +18334,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: close_click
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2039009985}
+    - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244393987012, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
@@ -18459,13 +18374,13 @@ PrefabInstance:
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1075124076}
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -18496,10 +18411,25 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: click
       objectReference: {fileID: 0}
+    - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 2039009985}
+    - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708158, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_Name
       value: Info Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244654708158, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Button
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708159, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
@@ -18643,6 +18573,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb22ee586e082c844a6b35f1ec73cc1c, type: 3}
+--- !u!1 &2039009985 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6807190245759220562, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+    type: 3}
+  m_PrefabInstance: {fileID: 2039009984}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2041975568
 GameObject:
   m_ObjectHideFlags: 0
@@ -18793,7 +18729,7 @@ GameObject:
   - component: {fileID: 2042686222}
   m_Layer: 5
   m_Name: Store 3 Button
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -18861,17 +18797,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: click
-          m_BoolArgument: 0
-        m_CallState: 1
       - m_Target: {fileID: 1075124075}
         m_MethodName: UnlockMinigame
         m_Mode: 3
@@ -19070,7 +18995,7 @@ GameObject:
   - component: {fileID: 2071463577}
   m_Layer: 5
   m_Name: Close Deactivation Button
-  m_TagString: Untagged
+  m_TagString: Close Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19147,17 +19072,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1075124076}
-        m_MethodName: PlaySound
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: close_click
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2071463578
@@ -19548,16 +19462,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1405733847}
     m_Modifications:
+    - target: {fileID: 6807190244180491633, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Close Button
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1075124076}
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -19582,6 +19501,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: close_click
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244180491635, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244393987012, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
@@ -19615,13 +19539,13 @@ PrefabInstance:
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1075124076}
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
@@ -19652,10 +19576,20 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: click
       objectReference: {fileID: 0}
+    - target: {fileID: 6807190244654708153, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetActive
+      objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708158, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}
       propertyPath: m_Name
       value: Info Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 6807190244654708158, guid: bb22ee586e082c844a6b35f1ec73cc1c,
+        type: 3}
+      propertyPath: m_TagString
+      value: Button
       objectReference: {fileID: 0}
     - target: {fileID: 6807190244654708159, guid: bb22ee586e082c844a6b35f1ec73cc1c,
         type: 3}

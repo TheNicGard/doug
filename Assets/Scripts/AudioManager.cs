@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
@@ -6,6 +7,9 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField]
     Sound[] sounds = null;
+    
+    [SerializeField]
+    public AudioMixer mixer;
 
     void Awake()
     {
@@ -18,7 +22,7 @@ public class AudioManager : MonoBehaviour
         {
             GameObject _go = new GameObject("Sound_" + i + "_" + sounds[i].name);
             _go.transform.SetParent(this.transform);
-            sounds[i].SetSource(_go.AddComponent<AudioSource>());
+            sounds[i].SetSource(_go.AddComponent<AudioSource>(), mixer);
         }
     }
 
@@ -59,6 +63,16 @@ public class AudioManager : MonoBehaviour
                 sounds[i].Stop();
         }
     }
+
+    public void ToggleSoundFXVolume(bool toggle)
+    {
+        mixer.SetFloat("Sound FX Volume", (toggle) ? 0f : -80f);
+    }
+
+    public void ToggleMusicVolume(bool toggle)
+    {
+        mixer.SetFloat("Music Volume", (toggle) ? 0f : -80f);
+    }
 }
 
 
@@ -80,11 +94,16 @@ public class Sound
     public bool loops = false;
     private AudioSource source;
 
-    public void SetSource(AudioSource _source)
+    public void SetSource(AudioSource _source, AudioMixer mixer)
     {
         source = _source;
         source.clip = clip;
         source.loop = loops;
+
+        if (isMusic)
+            source.outputAudioMixerGroup = mixer.FindMatchingGroups("Music")[0];
+        else
+            source.outputAudioMixerGroup = mixer.FindMatchingGroups("Sound FX")[0];
     }
 
     public void Play()

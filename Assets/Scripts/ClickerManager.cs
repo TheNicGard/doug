@@ -21,12 +21,6 @@ public class ClickerManager : MonoBehaviour
     private string[] soundNames = new string[] {"woof", "woof", "arf", "bark", "bork" };
     private int lastClickedVideo = 0;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        GetComponent<AudioManager>().PlaySound("music");
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -45,7 +39,7 @@ public class ClickerManager : MonoBehaviour
             popupInstance.transform.localScale = buttonPrefab.transform.localScale;
             LoadButton(popupInstance, PersistentGameManager.instance.videos[i]);
             popupInstance.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {AssignVideoButtons(value);});
-            popupInstance.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {GetComponent<AudioManager>().PlaySound("click");});
+            popupInstance.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {PersistentGameManager.instance.audioManager.PlaySound("click");});
         }
 
         UpdateText();
@@ -60,7 +54,7 @@ public class ClickerManager : MonoBehaviour
     {
         PersistentGameManager.instance.IncrementCoinz(1f);
         particles.Emit(1);
-        GetComponent<AudioManager>().PlayRandomSound(soundNames);
+        PersistentGameManager.instance.audioManager.PlayRandomSound(soundNames);
 
         Random.InitState(System.DateTime.Now.Millisecond);
         if(Random.Range(0, (int) (1 / GlobalConfig.stardomChance)) == 0)
@@ -118,7 +112,7 @@ public class ClickerManager : MonoBehaviour
         videoButtons.transform.Find("Add Video Button").GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
 
         videoButtons.transform.Find("Add Video Button").GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {AddVideo(videoNumber);});
-        videoButtons.transform.Find("Add Video Button").GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {gameObject.GetComponent<AudioManager>().PlaySound("click");});
+        videoButtons.transform.Find("Add Video Button").GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {PersistentGameManager.instance.audioManager.PlaySound("click");});
 
         videoButtons.transform.Find("Buy Comment 1 Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text =
             (PersistentGameManager.instance.playerData.playerData.clickerVideosComments[videoNumber] >= 2) ? "(x2 cps) wow funny dog" : "buy comment:\n" + ConvertToShortNumber(CommentCost(videoNumber, 0)) + " coinz";
@@ -132,7 +126,7 @@ public class ClickerManager : MonoBehaviour
             int temp = i;
             videoButtons.transform.Find("Buy Comment " + (temp + 1).ToString() + " Button").GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
             videoButtons.transform.Find("Buy Comment " + (temp + 1).ToString() + " Button").GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {BuyComment(videoNumber, temp);});
-            videoButtons.transform.Find("Buy Comment " + (temp + 1).ToString() + " Button").GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {gameObject.GetComponent<AudioManager>().PlaySound("click");});
+            videoButtons.transform.Find("Buy Comment " + (temp + 1).ToString() + " Button").GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {PersistentGameManager.instance.audioManager.PlaySound("click");});
         }
     }
 

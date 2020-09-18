@@ -214,13 +214,13 @@ public class GuessingManager : MonoBehaviour
             if (i == 0)
             {
                 MakePopupDoug(true);
-                GetComponent<AudioManager>().PlaySound("bork");
+                PersistentGameManager.instance.audioManager.PlaySound("bork");
                 IncrementScore();
             }
             else
             {
                 MakePopupDoug(false);
-                GetComponent<AudioManager>().PlaySound("boo");
+                PersistentGameManager.instance.audioManager.PlaySound("boo");
             }
             bisco.transform.SetParent(cup1.transform.parent);
             bisco.transform.localPosition = new Vector3(cup1.transform.localPosition.x, biscoHeight, bisco.transform.localPosition.z);
@@ -230,13 +230,13 @@ public class GuessingManager : MonoBehaviour
             if (i == 1)
             {
                 MakePopupDoug(true);
-                GetComponent<AudioManager>().PlaySound("bork");
+                PersistentGameManager.instance.audioManager.PlaySound("bork");
                 IncrementScore();
             }
             else
             {
                 MakePopupDoug(false);
-                GetComponent<AudioManager>().PlaySound("boo");
+                PersistentGameManager.instance.audioManager.PlaySound("boo");
             }
             bisco.transform.SetParent(cup2.transform.parent);
             bisco.transform.localPosition = new Vector3(cup2.transform.localPosition.x, biscoHeight, bisco.transform.localPosition.z);
@@ -246,13 +246,13 @@ public class GuessingManager : MonoBehaviour
             if (i == 2)
             {
                 MakePopupDoug(true);
-                GetComponent<AudioManager>().PlaySound("bork");
+                PersistentGameManager.instance.audioManager.PlaySound("bork");
                 IncrementScore();
             }
             else
             {
                 MakePopupDoug(false);
-                GetComponent<AudioManager>().PlaySound("boo");
+                PersistentGameManager.instance.audioManager.PlaySound("boo");
             }
             bisco.transform.SetParent(cup3.transform.parent);
             bisco.transform.localPosition = new Vector3(cup3.transform.localPosition.x, biscoHeight, bisco.transform.localPosition.z);

@@ -439,6 +439,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2120454825}
   - component: {fileID: 2120454824}
+  - component: {fileID: 2120454826}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -478,6 +479,7 @@ MonoBehaviour:
       guessingHardHiScore: 0
   videos: []
   clickerData: {fileID: 4900000, guid: 8c5324903bb3ed94eb0859563c156751, type: 3}
+  audioManager: {fileID: 2120454826}
 --- !u!4 &2120454825
 Transform:
   m_ObjectHideFlags: 0
@@ -492,3 +494,107 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2120454826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120454823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18bb3448351799b429ef48df4fb446ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: woof
+    clip: {fileID: 8300000, guid: 1921a2bbb5e0b514ebdfe3997ddb5392, type: 3}
+    volume: 1
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.05
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: woff
+    clip: {fileID: 8300000, guid: 9ee76ab8e9478934dbad707019941b3d, type: 3}
+    volume: 0.7
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.05
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: arf
+    clip: {fileID: 8300000, guid: e120e75a47cd6dd4c98f02d973eeffb6, type: 3}
+    volume: 0.7
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.05
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: bork
+    clip: {fileID: 8300000, guid: 8ce8c19dba59d8a49be6a8d8259e68fe, type: 3}
+    volume: 0.7
+    pitch: 1.1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.05
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: bark
+    clip: {fileID: 8300000, guid: de84690a3ff9cc14ba92969deec4a5d6, type: 3}
+    volume: 0.7
+    pitch: 1.1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.05
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: boo
+    clip: {fileID: 8300000, guid: cbb128a833f3f4d4b9aed73980991d22, type: 3}
+    volume: 0.75
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.05
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: click
+    clip: {fileID: 8300000, guid: 0e6d4d48fef8bd34f9a18cc6b7ed156c, type: 3}
+    volume: 1
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: close_click
+    clip: {fileID: 8300000, guid: 0e6d4d48fef8bd34f9a18cc6b7ed156c, type: 3}
+    volume: 1
+    pitch: 0.75
+    volumeAdjustment: 0
+    pitchAdjustment: 0
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: wholesome
+    clip: {fileID: 8300000, guid: 9847d25292a2db34a978bc3a3233c5f2, type: 3}
+    volume: 0.25
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0
+    isSound: 0
+    isMusic: 1
+    loops: 1
+  - name: carefree
+    clip: {fileID: 8300000, guid: a1dcf8c58b4e4594096515e17f7d2110, type: 3}
+    volume: 0.2
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0
+    isSound: 0
+    isMusic: 1
+    loops: 1
+  mixer: {fileID: 24100000, guid: 2c50f4b235c9e064f94ef2c00c288ac1, type: 2}

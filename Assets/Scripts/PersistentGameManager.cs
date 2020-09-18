@@ -15,6 +15,8 @@ public class PersistentGameManager : MonoBehaviour
     public ClickerData[] videos = null;
     [SerializeField]
     TextAsset clickerData = null;
+    [SerializeField]
+    public AudioManager audioManager;
 
     private void Awake()
     {
@@ -37,6 +39,9 @@ public class PersistentGameManager : MonoBehaviour
         InvokeRepeating("Woof", 0.0f, 1.0f / GlobalConfig.incrementsPerSecond);
         InvokeRepeating("DepleteStardom", 15f, 15f * 1f);
         PersistentGameManager.instance.playerData.playerData.coinz += minutes * 60f * CoinzPerSecond(false);
+
+        PersistentGameManager.instance.audioManager.ToggleMusicVolume(PlayerPrefs.GetInt("musicEnabled") == 1);
+        PersistentGameManager.instance.audioManager.ToggleSoundFXVolume(PlayerPrefs.GetInt("soundEnabled") == 1);  
 
         if (currentScene == (int) SceneIndexes.MANAGER)
             SceneManager.LoadSceneAsync((int) SceneIndexes.MAIN_MENU, LoadSceneMode.Additive);
@@ -63,6 +68,26 @@ public class PersistentGameManager : MonoBehaviour
         {
             while (!scenesLoading[i].isDone)
                 yield return null;
+        }
+
+        GameObject[] go = (GameObject[]) Resources.FindObjectsOfTypeAll(typeof(GameObject));
+        foreach (GameObject g in go)
+        {
+            if (g.tag == "Button")
+                g.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {PersistentGameManager.instance.audioManager.PlaySound("click");});
+            else if (g.tag == "Close Button")
+                g.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {PersistentGameManager.instance.audioManager.PlaySound("close_click");});
+        }
+
+        audioManager.StopMusic();
+        switch (currentScene)
+        {
+            case (int) SceneIndexes.HOME_SCREEN:
+                audioManager.PlaySound("wholesome");
+                break;
+            case (int) SceneIndexes.CLICKER:
+                audioManager.PlaySound("carefree");
+                break;
         }
 
         loadingScreen.SetActive(false);
