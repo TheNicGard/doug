@@ -52,6 +52,8 @@ public class HomeScreenManager : MonoBehaviour
     GameObject deactivationPanel = null;
     [SerializeField]
     GameObject disableInteractionPanel = null;
+    [SerializeField]
+    GameObject unlockPanel = null;
 
     private Vector3 dougSpriteDefaultScale = new Vector3(3f, 3f, 1f);
     private Vector3 dougSpriteDefaultPosition;
@@ -81,10 +83,14 @@ public class HomeScreenManager : MonoBehaviour
             case "Guessing":
                 if (PersistentGameManager.instance.playerData.playerData.unlockedGuessing)
                     PersistentGameManager.instance.SwitchScene((int) SceneIndexes.GUESSING);
+                else
+                    OpenUnlockPanel();
                     break;
             case "Chacha Trail":
                 if (PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail)
                     MakePopup("NYI!");
+                else if (PersistentGameManager.instance.playerData.playerData.unlockedGuessing)
+                    OpenUnlockPanel();
                 break;
 
         }
@@ -94,7 +100,7 @@ public class HomeScreenManager : MonoBehaviour
     {
         coinzText.GetComponent<TextMeshProUGUI>().text = PersistentGameManager.instance.playerData.playerData.coinz.ToString("F1") + " coinz";
         UpdateText();
-        UnlockMinigame(-1);
+        UpdateMinigameText();
         UpdateBars();
         PersistentGameManager.instance.SaveGame();
         CheckDeactivateDoug();
@@ -197,6 +203,20 @@ public class HomeScreenManager : MonoBehaviour
         UpdateText();
     }
 
+    public void OpenUnlockPanel()
+    {
+        UpdateText();
+        unlockPanel.transform.Find("Unlock Layout/Yes Button").GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
+        unlockPanel.transform.Find("Unlock Layout/Yes Button").GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
+            {
+                if (PersistentGameManager.instance.playerData.playerData.unlockedGuessing)
+                    UnlockMinigame(2);
+                else
+                    UnlockMinigame(1);
+            });
+        unlockPanel.SetActive(true);
+    }
+
     public void UpdateText()
     {
         coinzText.GetComponent<TextMeshProUGUI>().text = PersistentGameManager.instance.playerData.playerData.coinz.ToString("F1") + " coinz";
@@ -213,6 +233,14 @@ public class HomeScreenManager : MonoBehaviour
             toggleAdsButtonText.GetComponent<TextMeshProUGUI>().text = "ads: on";
         else
             toggleAdsButtonText.GetComponent<TextMeshProUGUI>().text = "ads: off";
+
+        if (PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail)
+            unlockPanel.transform.Find("Unlock Text").GetComponent<TextMeshProUGUI>().text = "you shouldn't be able to see this!";
+        else if (PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail)
+            unlockPanel.transform.Find("Unlock Text").GetComponent<TextMeshProUGUI>().text = "spend 100 luv to unlock Chacha Trail?";
+        else
+            unlockPanel.transform.Find("Unlock Text").GetComponent<TextMeshProUGUI>().text = "spend 100 luv to unlock Find the Bisco?";
+            
     }
 
     public void modifyBar(float amount, string text, GameObject stat)
@@ -253,8 +281,6 @@ public class HomeScreenManager : MonoBehaviour
             PersistentGameManager.instance.ModifyStat(Stat.Love, 1);
         }
 
-        //Vector3 a = ;
-        //LeanTween.scale(gameObject, originalScale * (1 - animationGrowth), animationSpeed * 2).setFrom(originalScale).setLoopPingPong().setEaseInOutSine();
         Random.InitState(System.DateTime.Now.Millisecond);
         LeanTween.move(doug, Random.insideUnitCircle * 0.5f, 0.75f).setFrom(dougSpriteDefaultPosition).setEasePunch();
     }
@@ -295,20 +321,13 @@ public class HomeScreenManager : MonoBehaviour
 
     public float GetDougWeightScale()
     {
-        
         float weight = (float)PersistentGameManager.instance.playerData.playerData.weight / (float)GlobalConfig.maxWeight;
         if (weight < 0.25)
-        {
             return (weight * 2f) + .5f;
-        }
         else if (weight > 0.75)
-        {
             return (weight * 8f) - 5f;
-        }
         else
-        {
             return 1f;
-        }
     }
 
     public string GetAgeOfDoug()
@@ -322,47 +341,68 @@ public class HomeScreenManager : MonoBehaviour
             return age.Hours.ToString() + (age.Days == 1 ? " day, " : " days, ") + age.Hours.ToString() + (age.Hours == 1 ? " hour old" : " hours old");
     }
 
-    public void UnlockMinigame(int i)
+    public void UnlockMinigame(int num)
     {
-        if (i == 2)
+        bool unlockedGuessing = PersistentGameManager.instance.playerData.playerData.unlockedGuessing;
+        bool unlockedChachaTrail = PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail;
+
+        if (num == 1 && !unlockedGuessing && PersistentGameManager.instance.playerData.playerData.love >= 100)
         {
+            PersistentGameManager.instance.ModifyStat(Stat.Love, -105);
             PersistentGameManager.instance.playerData.playerData.unlockedGuessing = true;
             UpdateText();
+            UpdateMinigameText();
             PersistentGameManager.instance.SaveGame();
             Debug.Log("unlocked guessing: " + PersistentGameManager.instance.playerData.playerData.unlockedGuessing.ToString());
-        }
-        else if (i == 3 && PersistentGameManager.instance.playerData.playerData.unlockedGuessing)
-        {
-            PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail = true;
-            UpdateText();
-            PersistentGameManager.instance.SaveGame();
-            Debug.Log("unlocked chacha: " + PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail.ToString());
+            unlockPanel.SetActive(false);
+            GoToScene("Guessing");
         }
 
-        if (!PersistentGameManager.instance.playerData.playerData.unlockedGuessing)
+        else if (num == 2 && !unlockedChachaTrail && unlockedGuessing && PersistentGameManager.instance.playerData.playerData.love >= 100)
         {
-            guessingGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.disabledTextColor;
-            guessingGameButton.transform.Find("Unlock Text").gameObject.SetActive(true);
+            PersistentGameManager.instance.ModifyStat(Stat.Love, -105);
+            PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail = true;
+            UpdateText();
+            UpdateMinigameText();
+            PersistentGameManager.instance.SaveGame();
+            Debug.Log("unlocked chacha: " + PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail.ToString());
+            unlockPanel.SetActive(false);
+            GoToScene("Chacha Trail");
         }
-        else
+    }
+
+    public void UpdateMinigameText()
+    {
+        bool unlockedGuessing = PersistentGameManager.instance.playerData.playerData.unlockedGuessing;
+        bool unlockedChachaTrail = PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail;
+
+        if (unlockedGuessing)
         {
             guessingGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.textColor;
             guessingGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "find the bisco";
             guessingGameButton.transform.Find("Unlock Text").gameObject.SetActive(false);
-        }
-        if (!PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail)
-        {
-            chachaGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.disabledTextColor;
-            if (PersistentGameManager.instance.playerData.playerData.unlockedGuessing)
+
+            if (unlockedChachaTrail)
+            {
+                chachaGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.textColor;
+                chachaGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "chacha trail";
+                chachaGameButton.transform.Find("Unlock Text").gameObject.SetActive(false);
+            }
+            else
+            {
+                chachaGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.disabledTextColor;
                 chachaGameButton.transform.Find("Unlock Text").gameObject.SetActive(true);
+            }
         }
         else
         {
-            chachaGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.textColor;
-            chachaGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "chacha trail";
-            chachaGameButton.transform.Find("Unlock Text").gameObject.SetActive(false);
-
+            guessingGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.disabledTextColor;
+            guessingGameButton.transform.Find("Unlock Text").gameObject.SetActive(true);
+            chachaGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.disabledTextColor;
+            chachaGameButton.transform.Find("Unlock Text").gameObject.SetActive(true);
         }
+
+        
     }
 
     public void TempDecreaseWeight()
