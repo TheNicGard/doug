@@ -79,13 +79,18 @@ public class PersistentGameManager : MonoBehaviour
                 g.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {PersistentGameManager.instance.audioManager.PlaySound("close_click");});
         }
 
-        audioManager.StopMusic();
         switch (currentScene)
         {
             case (int) SceneIndexes.HOME_SCREEN:
-                audioManager.PlaySound("wholesome");
+            case (int) SceneIndexes.GUESSING:
+                if (!audioManager.IsPlaying("wholesome"))
+                {
+                    audioManager.StopMusic();
+                    audioManager.PlaySound("wholesome");
+                }
                 break;
             case (int) SceneIndexes.CLICKER:
+                audioManager.StopMusic();
                 audioManager.PlaySound("carefree");
                 break;
         }

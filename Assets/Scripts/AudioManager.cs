@@ -54,6 +54,16 @@ public class AudioManager : MonoBehaviour
         
         Debug.LogError("AudioManager: Sound \"" + soundName + "\" not found!");
     }
+    
+    public bool IsPlaying(string _name)
+    {
+        for (int i = 0; i < sounds.Length; i++)
+            if (sounds[i].name == _name)
+                return sounds[i].IsPlaying();
+
+        Debug.LogError("AudioManager: Sound \"" + _name + "\" not found!");
+        return false;
+    }
 
     public void StopMusic()
     {
@@ -114,6 +124,11 @@ public class Sound
             source.pitch = pitch + Random.Range(-pitchAdjustment, pitchAdjustment);
             source.Play();
         }
+    }
+
+    public bool IsPlaying()
+    {
+        return source.isPlaying;
     }
 
     public void Stop()

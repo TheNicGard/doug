@@ -440,6 +440,7 @@ GameObject:
   - component: {fileID: 2120454825}
   - component: {fileID: 2120454824}
   - component: {fileID: 2120454826}
+  - component: {fileID: 2120454827}
   m_Layer: 0
   m_Name: __Manager
   m_TagString: Untagged
@@ -598,3 +599,11 @@ MonoBehaviour:
     isMusic: 1
     loops: 1
   mixer: {fileID: 24100000, guid: 2c50f4b235c9e064f94ef2c00c288ac1, type: 2}
+--- !u!81 &2120454827
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2120454823}
+  m_Enabled: 1
