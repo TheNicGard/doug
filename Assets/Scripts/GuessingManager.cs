@@ -152,6 +152,9 @@ public class GuessingManager : MonoBehaviour
 
         cupAObject.LeanMoveLocalY(cupBPosition.y + 200, speed / 2f).setEaseOutQuad().setLoopPingPong(1).trans.LeanMoveLocalX(cupBPosition.x, speed);
         cupBObject.LeanMoveLocalY(cupAPosition.y - 200, speed / 2f).setEaseOutQuad().setLoopPingPong(1).trans.LeanMoveLocalX(cupAPosition.x, speed);
+
+        PersistentGameManager.instance.audioManager.PlayRandomSound(new string[] {"cup1", "cup2", "cup3", "cup4", "cup5"});
+        
         yield return new WaitForSeconds(swapSpeed);
         NextAnimation();
     }

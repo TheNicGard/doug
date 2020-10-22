@@ -598,6 +598,51 @@ MonoBehaviour:
     isSound: 0
     isMusic: 1
     loops: 1
+  - name: cup1
+    clip: {fileID: 8300000, guid: 09130e75c9debdc449afe66434ff899d, type: 3}
+    volume: 0.5
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.1
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: cup2
+    clip: {fileID: 8300000, guid: 457a0b8a5f9779944a66bf7861440956, type: 3}
+    volume: 0.5
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.1
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: cup3
+    clip: {fileID: 8300000, guid: 5ca67fc6c91b12740bc2877d90bf18a3, type: 3}
+    volume: 0.5
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.1
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: cup4
+    clip: {fileID: 8300000, guid: 3b56aed1107a71448961904d2fbfde28, type: 3}
+    volume: 0.5
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.1
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: cup5
+    clip: {fileID: 8300000, guid: 4efc714540e790d44aa9ac2393a50d20, type: 3}
+    volume: 0.5
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.1
+    isSound: 1
+    isMusic: 0
+    loops: 0
   mixer: {fileID: 24100000, guid: 2c50f4b235c9e064f94ef2c00c288ac1, type: 2}
 --- !u!81 &2120454827
 AudioListener:
