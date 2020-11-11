@@ -137,9 +137,7 @@ public class PersistentGameManager : MonoBehaviour
                 else playerData.playerData.weight += amount;
                 break;
             case Stat.Love:
-                if (playerData.playerData.love + amount > GlobalConfig.maxLove)
-                    playerData.playerData.love = GlobalConfig.maxLove;
-                else if (playerData.playerData.love + amount < 0)
+                if (playerData.playerData.love + amount < 0)
                     playerData.playerData.love = 0;
                 else playerData.playerData.love += amount;
                 break;
