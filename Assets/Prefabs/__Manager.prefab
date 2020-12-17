@@ -1,0 +1,226 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5056492804983895869
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5056492804983895859}
+  - component: {fileID: 5056492804983895858}
+  - component: {fileID: 5056492804983895856}
+  - component: {fileID: 5056492804983895857}
+  m_Layer: 0
+  m_Name: __Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5056492804983895859
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5056492804983895869}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.9105857, y: -0.093191564, z: 126.61348}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5056492804983895858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5056492804983895869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3821ee009d85f3a4499bab96311b55c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingScreen: {fileID: 1733221441355444602, guid: dbf8e677ad3e3534a809808937c91bc9,
+    type: 3}
+  currentScene: 0
+  loadedGame: 0
+  playerData:
+    playerData:
+      hunger: 0
+      boredom: 0
+      weight: 0
+      love: 0
+      coinz: 0
+      clickerVideos: 
+      clickerVideosComments: 
+      unlockedGuessing: 0
+      unlockedChachaTrail: 0
+      stardomBonus: 0
+      guessingEasyHiScore: 0
+      guessingNormalHiScore: 0
+      guessingHardHiScore: 0
+  videos: []
+  clickerData: {fileID: 4900000, guid: 8c5324903bb3ed94eb0859563c156751, type: 3}
+  audioManager: {fileID: 5056492804983895856}
+--- !u!114 &5056492804983895856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5056492804983895869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18bb3448351799b429ef48df4fb446ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: woof
+    clip: {fileID: 8300000, guid: 1921a2bbb5e0b514ebdfe3997ddb5392, type: 3}
+    volume: 1
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.05
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: woff
+    clip: {fileID: 8300000, guid: 9ee76ab8e9478934dbad707019941b3d, type: 3}
+    volume: 0.7
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.05
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: arf
+    clip: {fileID: 8300000, guid: e120e75a47cd6dd4c98f02d973eeffb6, type: 3}
+    volume: 0.7
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.05
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: bork
+    clip: {fileID: 8300000, guid: 8ce8c19dba59d8a49be6a8d8259e68fe, type: 3}
+    volume: 0.7
+    pitch: 1.1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.05
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: bark
+    clip: {fileID: 8300000, guid: de84690a3ff9cc14ba92969deec4a5d6, type: 3}
+    volume: 0.7
+    pitch: 1.1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.05
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: boo
+    clip: {fileID: 8300000, guid: cbb128a833f3f4d4b9aed73980991d22, type: 3}
+    volume: 0.75
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.05
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: click
+    clip: {fileID: 8300000, guid: 0e6d4d48fef8bd34f9a18cc6b7ed156c, type: 3}
+    volume: 1
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: close_click
+    clip: {fileID: 8300000, guid: 0e6d4d48fef8bd34f9a18cc6b7ed156c, type: 3}
+    volume: 1
+    pitch: 0.75
+    volumeAdjustment: 0
+    pitchAdjustment: 0
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: wholesome
+    clip: {fileID: 8300000, guid: 9847d25292a2db34a978bc3a3233c5f2, type: 3}
+    volume: 0.25
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0
+    isSound: 0
+    isMusic: 1
+    loops: 1
+  - name: carefree
+    clip: {fileID: 8300000, guid: a1dcf8c58b4e4594096515e17f7d2110, type: 3}
+    volume: 0.2
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0
+    isSound: 0
+    isMusic: 1
+    loops: 1
+  - name: cup1
+    clip: {fileID: 8300000, guid: 09130e75c9debdc449afe66434ff899d, type: 3}
+    volume: 0.5
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.1
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: cup2
+    clip: {fileID: 8300000, guid: 457a0b8a5f9779944a66bf7861440956, type: 3}
+    volume: 0.5
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.1
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: cup3
+    clip: {fileID: 8300000, guid: 5ca67fc6c91b12740bc2877d90bf18a3, type: 3}
+    volume: 0.5
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.1
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: cup4
+    clip: {fileID: 8300000, guid: db4780838bc7ae04089c60f1b544546f, type: 3}
+    volume: 0.5
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.1
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: cup5
+    clip: {fileID: 8300000, guid: 4efc714540e790d44aa9ac2393a50d20, type: 3}
+    volume: 0.5
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.1
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  mixer: {fileID: 24100000, guid: 2c50f4b235c9e064f94ef2c00c288ac1, type: 2}
+--- !u!81 &5056492804983895857
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5056492804983895869}
+  m_Enabled: 1

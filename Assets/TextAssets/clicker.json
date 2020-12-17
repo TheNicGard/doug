@@ -25,37 +25,49 @@
 	},
 
 	{
-		"title": "building 6",
+		"title": "building 5",
 		"requiredCoinz": 130000,
 		"coinzPerSecond": 260
 	},
 	
 	{
-		"title": "building 7",
+		"title": "building 6",
 		"requiredCoinz": 1400000,
 		"coinzPerSecond": 1400
 	},
 
 	{
-		"title": "building 8",
+		"title": "building 7",
 		"requiredCoinz": 20000000,
 		"coinzPerSecond": 78000
 	},
 
 	{
-		"title": "building 9",
+		"title": "building 8",
 		"requiredCoinz": 330000000,
 		"coinzPerSecond": 44000
 	},
 
 	{
-		"title": "building 10",
+		"title": "building 9",
 		"requiredCoinz": 5100000000,
 		"coinzPerSecond": 260000
 	},
 
 	{
 		"title": "doug flies away!!!! lol jk",
+		"requiredCoinz": 75000000000,
+		"coinzPerSecond": 1600000
+	},
+
+	{
+		"title": "building 11",
+		"requiredCoinz": 75000000000,
+		"coinzPerSecond": 1600000
+	},
+
+	{
+		"title": "building 12",
 		"requiredCoinz": 75000000000,
 		"coinzPerSecond": 1600000
 	}

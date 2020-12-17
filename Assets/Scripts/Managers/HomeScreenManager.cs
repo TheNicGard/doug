@@ -65,6 +65,13 @@ public class HomeScreenManager : MonoBehaviour
         InvokeRepeating("CheckDeactivateDoug", 0f, 60f * 1f);
         doug.transform.localScale = new Vector3(dougSpriteDefaultScale.x * GetDougWeightScale(), dougSpriteDefaultScale.y, dougSpriteDefaultScale.z);
         dougSpriteDefaultPosition = doug.transform.position;
+
+        coinzText.GetComponent<TextMeshProUGUI>().text = PersistentGameManager.instance.playerData.playerData.coinz.ToString("F1") + " coinz";
+        UpdateText();
+        UpdateMinigameText();
+        UpdateBars();
+        PersistentGameManager.instance.SaveGame();
+        CheckDeactivateDoug();
     }
 
     // Update is called once per frame
@@ -98,12 +105,14 @@ public class HomeScreenManager : MonoBehaviour
 
     void OnEnable()
     {
+        /*
         coinzText.GetComponent<TextMeshProUGUI>().text = PersistentGameManager.instance.playerData.playerData.coinz.ToString("F1") + " coinz";
         UpdateText();
         UpdateMinigameText();
         UpdateBars();
         PersistentGameManager.instance.SaveGame();
         CheckDeactivateDoug();
+        */
     }
 
     public void EnablePanel(string panelName)

@@ -14,7 +14,7 @@ public class AudioManager : MonoBehaviour
     void Awake()
     {
         if (instance != null)
-            Debug.LogError("AudioManager: More than one AudioManager in the scene!");
+            Destroy(gameObject);
         else
             instance = this;
 
@@ -32,6 +32,14 @@ public class AudioManager : MonoBehaviour
         {
             if (sounds[i].name == _name)
             {
+                if (sounds[i].isMusic)
+                {
+                    if (!IsPlaying(_name))
+                        StopMusic();
+                    else
+                        return;
+                }
+
                 sounds[i].Play();
                 return;
             }

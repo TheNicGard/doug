@@ -10,7 +10,6 @@ public class PersistentGameManager : MonoBehaviour
     GameObject loadingScreen = null;
     private List<AsyncOperation> scenesLoading = new List<AsyncOperation>();
     public int currentScene = 0;
-    public bool loadedGame = false;
     public SaveData playerData;
     public ClickerData[] videos = null;
     [SerializeField]
@@ -18,9 +17,19 @@ public class PersistentGameManager : MonoBehaviour
     [SerializeField]
     public AudioManager audioManager;
 
-    private void Awake()
+    private void Start()
     {
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+            
+        } else
+        {
+            Destroy(gameObject);
+        }
+
+        DontDestroyOnLoad(instance);
+        DontDestroyOnLoad(loadingScreen);
 
         playerData = new SaveData();
         playerData.playerData = new PlayerData();
@@ -41,63 +50,28 @@ public class PersistentGameManager : MonoBehaviour
         PersistentGameManager.instance.playerData.playerData.coinz += minutes * 60f * CoinzPerSecond(false);
 
         PersistentGameManager.instance.audioManager.ToggleMusicVolume(PlayerPrefs.GetInt("musicEnabled") == 1);
-        PersistentGameManager.instance.audioManager.ToggleSoundFXVolume(PlayerPrefs.GetInt("soundEnabled") == 1);  
+        PersistentGameManager.instance.audioManager.ToggleSoundFXVolume(PlayerPrefs.GetInt("soundEnabled") == 1);
 
-        if (currentScene == (int) SceneIndexes.MANAGER)
-            SceneManager.LoadSceneAsync((int) SceneIndexes.MAIN_MENU, LoadSceneMode.Additive);
+        currentScene = (int) SceneManager.GetActiveScene().buildIndex;
+
+        LoadButtonSounds();
+        GetSceneMusic();
     }
 
     public void LoadGame()
     {
-        currentScene = 1;
+        currentScene = (int) SceneIndexes.MAIN_MENU;
         SwitchScene((int) SceneIndexes.HOME_SCREEN);
     }
 
     public void SwitchScene(int newSceneIndex)
     {
         loadingScreen.SetActive(true);
-        scenesLoading.Add(SceneManager.UnloadSceneAsync(currentScene));
-        scenesLoading.Add(SceneManager.LoadSceneAsync(newSceneIndex, LoadSceneMode.Additive));
+        scenesLoading.Add(SceneManager.LoadSceneAsync(newSceneIndex, LoadSceneMode.Single));
         currentScene = newSceneIndex;
-        StartCoroutine(GetSceneLoadProgress(newSceneIndex == (int) SceneIndexes.HOME_SCREEN));
-    }
-
-    public IEnumerator GetSceneLoadProgress(bool initialLoad)
-    {
-        for (int i = 0; i < scenesLoading.Count; i++)
-        {
-            while (!scenesLoading[i].isDone)
-                yield return null;
-        }
-
-        GameObject[] go = (GameObject[]) Resources.FindObjectsOfTypeAll(typeof(GameObject));
-        foreach (GameObject g in go)
-        {
-            if (g.tag == "Button")
-                g.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {PersistentGameManager.instance.audioManager.PlaySound("click");});
-            else if (g.tag == "Close Button")
-                g.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {PersistentGameManager.instance.audioManager.PlaySound("close_click");});
-        }
-
-        switch (currentScene)
-        {
-            case (int) SceneIndexes.HOME_SCREEN:
-            case (int) SceneIndexes.GUESSING:
-                if (!audioManager.IsPlaying("wholesome"))
-                {
-                    audioManager.StopMusic();
-                    audioManager.PlaySound("wholesome");
-                }
-                break;
-            case (int) SceneIndexes.CLICKER:
-                audioManager.StopMusic();
-                audioManager.PlaySound("carefree");
-                break;
-        }
-
+        LoadButtonSounds();
+        GetSceneMusic();
         loadingScreen.SetActive(false);
-        if (initialLoad)
-            loadedGame = true;
     }
 
     public void SaveGame()
@@ -155,7 +129,6 @@ public class PersistentGameManager : MonoBehaviour
     {
         switch (currentScene)
         {
-            case (int) SceneIndexes.MANAGER:
             case (int) SceneIndexes.MAIN_MENU:
             case (int) SceneIndexes.HOME_SCREEN:
                 if (updateStatsCounter++ == depletionTickTime)
@@ -214,10 +187,23 @@ public class PersistentGameManager : MonoBehaviour
     public float CoinzPerSecond(bool useStardom)
     {
         float coinzPerSecond = 0f;
-        for (int i = 0; i < videos.Length; i++)
+        for (int i = 0; i < videos.Length; i++) {
+            
             coinzPerSecond += videos[i].coinzPerSecond * 
             playerData.playerData.clickerVideos[i] * 
-            playerData.playerData.clickerVideosComments[i];
+            playerData.playerData.clickerVideosComments[i]; 
+            
+            /*
+            var tempBoost = videos[i].coinzPerSecond;
+            tempBoost *= playerData.playerData.clickerVideos[i];
+            tempBoost *= playerData.playerData.clickerVideosComments[i];
+            coinzPerSecond += tempBoost;
+            */
+            /*
+            Debug.Log("video index [" + i + "/" + videos.Length + "], c. video [/" +
+            playerData.playerData.clickerVideos.Length + "], comments [/" + playerData.playerData.clickerVideosComments.Length + "]");
+            */
+        }
         if (useStardom)
             coinzPerSecond *= (1f + (playerData.playerData.stardomBonus / 100f));
         return coinzPerSecond;
@@ -226,5 +212,31 @@ public class PersistentGameManager : MonoBehaviour
     public void LoadClickerData()
     {
         videos = JsonHelper.FromJson<ClickerData>(clickerData.text);
+    }
+
+    public void GetSceneMusic()
+    {
+        switch (currentScene)
+        {
+            case (int) SceneIndexes.HOME_SCREEN:
+            case (int) SceneIndexes.GUESSING:
+                audioManager.PlaySound("wholesome");
+                break;
+            case (int) SceneIndexes.CLICKER:
+                audioManager.PlaySound("carefree");
+                break;
+        }
+    }
+
+    public void LoadButtonSounds()
+    {
+        GameObject[] go = (GameObject[]) Resources.FindObjectsOfTypeAll(typeof(GameObject));
+        foreach (GameObject g in go)
+        {
+            if (g.tag == "Button")
+                g.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {PersistentGameManager.instance.audioManager.PlaySound("click");});
+            else if (g.tag == "Close Button")
+                g.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {PersistentGameManager.instance.audioManager.PlaySound("close_click");});
+        }
     }
 }
