@@ -28,7 +28,7 @@ public class ClickerManager : MonoBehaviour
         UpdateTextColors();
     }
 
-    void OnEnable()
+    void Start()
     {
         for (int i = 0; i < PersistentGameManager.instance.videos.Length; i++)
         {

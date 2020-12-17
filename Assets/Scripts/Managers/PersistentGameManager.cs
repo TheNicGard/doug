@@ -19,6 +19,11 @@ public class PersistentGameManager : MonoBehaviour
 
     private void Start()
     {
+        initialize();
+    }
+
+    public void initialize()
+    {
         if (instance == null)
         {
             instance = this;
@@ -72,6 +77,8 @@ public class PersistentGameManager : MonoBehaviour
         LoadButtonSounds();
         GetSceneMusic();
         loadingScreen.SetActive(false);
+        if (currentScene == (int) SceneIndexes.MAIN_MENU)
+            initialize();
     }
 
     public void SaveGame()
@@ -191,18 +198,7 @@ public class PersistentGameManager : MonoBehaviour
             
             coinzPerSecond += videos[i].coinzPerSecond * 
             playerData.playerData.clickerVideos[i] * 
-            playerData.playerData.clickerVideosComments[i]; 
-            
-            /*
-            var tempBoost = videos[i].coinzPerSecond;
-            tempBoost *= playerData.playerData.clickerVideos[i];
-            tempBoost *= playerData.playerData.clickerVideosComments[i];
-            coinzPerSecond += tempBoost;
-            */
-            /*
-            Debug.Log("video index [" + i + "/" + videos.Length + "], c. video [/" +
-            playerData.playerData.clickerVideos.Length + "], comments [/" + playerData.playerData.clickerVideosComments.Length + "]");
-            */
+            playerData.playerData.clickerVideosComments[i];
         }
         if (useStardom)
             coinzPerSecond *= (1f + (playerData.playerData.stardomBonus / 100f));

@@ -103,18 +103,6 @@ public class HomeScreenManager : MonoBehaviour
         }
     }
 
-    void OnEnable()
-    {
-        /*
-        coinzText.GetComponent<TextMeshProUGUI>().text = PersistentGameManager.instance.playerData.playerData.coinz.ToString("F1") + " coinz";
-        UpdateText();
-        UpdateMinigameText();
-        UpdateBars();
-        PersistentGameManager.instance.SaveGame();
-        CheckDeactivateDoug();
-        */
-    }
-
     public void EnablePanel(string panelName)
     {
         foreach(GameObject go in panels)
@@ -162,6 +150,7 @@ public class HomeScreenManager : MonoBehaviour
         PlayerPrefs.SetInt("soundEnabled", 1);
         PlayerPrefs.SetInt("musicEnabled", 1);
         PlayerPrefs.SetInt("adsEnabled", 1);
+        PersistentGameManager.instance.audioManager.StopMusic();
         PersistentGameManager.instance.SwitchScene((int) SceneIndexes.MAIN_MENU);
     }
 
@@ -327,9 +316,7 @@ public class HomeScreenManager : MonoBehaviour
         else
             modifyBar((float)PersistentGameManager.instance.playerData.playerData.love / GlobalConfig.maxLove, "luv: " + PersistentGameManager.instance.playerData.playerData.love.ToString() + "/" + GlobalConfig.maxLove.ToString(), loveStat);
         doug.transform.localScale = new Vector3(dougSpriteDefaultScale.x * GetDougWeightScale(), dougSpriteDefaultScale.y, dougSpriteDefaultScale.z);
-    }
-
-    
+    } 
 
     public float GetDougWeightScale()
     {
@@ -412,9 +399,7 @@ public class HomeScreenManager : MonoBehaviour
             guessingGameButton.transform.Find("Unlock Text").gameObject.SetActive(true);
             chachaGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.disabledTextColor;
             chachaGameButton.transform.Find("Unlock Text").gameObject.SetActive(true);
-        }
-
-        
+        }        
     }
 
     public void TempDecreaseWeight()
