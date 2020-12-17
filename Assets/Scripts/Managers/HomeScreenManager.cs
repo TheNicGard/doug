@@ -85,7 +85,7 @@ public class HomeScreenManager : MonoBehaviour
                     PersistentGameManager.instance.SwitchScene((int) SceneIndexes.GUESSING);
                 else
                     OpenUnlockPanel();
-                    break;
+                break;
             case "Chacha Trail":
                 if (PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail)
                     MakePopup("NYI!");

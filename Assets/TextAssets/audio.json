@@ -1,0 +1,171 @@
+{
+    "sounds":
+    [
+        {
+            "name": "woof",
+            "clip": "woof.wav",
+            "volume": 1,
+            "pitch": 1,
+            "volume adjustment": 0,
+            "pitch adjustment": 0.05,
+            "is sound": 1,
+            "is music": 0,
+            "loops": 0
+        },
+        {
+            "name": "woff",
+            "clip": "woff.wav",
+            "volume": 0.7,
+            "pitch": 1,
+            "volume adjustment": 0,
+            "pitch adjustment": 0.05,
+            "is sound": 1,
+            "is music": 0,
+            "loops": 0
+        },
+        {
+            "name": "arf",
+            "clip": "arf.wav",
+            "volume": 0.7,
+            "pitch": 1,
+            "volume adjustment": 0,
+            "pitch adjustment": 0.05,
+            "is sound": 1,
+            "is music": 0,
+            "loops": 0
+        },
+        {
+            "name": "bork",
+            "clip": "bork.wav",
+            "volume": 0.7,
+            "pitch": 1.1,
+            "volume adjustment": 0,
+            "pitch adjustment": 0.05,
+            "is sound": 1,
+            "is music": 0,
+            "loops": 0
+        },
+        {
+            "name": "bark",
+            "clip": "bark.wav",
+            "volume": 0.7,
+            "pitch": 1.1,
+            "volume adjustment": 0,
+            "pitch adjustment": 0.05,
+            "is sound": 1,
+            "is music": 0,
+            "loops": 0
+        },
+        {
+            "name": "boo",
+            "clip": "boo.wav",
+            "volume": 0.75,
+            "pitch": 1,
+            "volume adjustment": 0,
+            "pitch adjustment": 0.05,
+            "is sound": 1,
+            "is music": 0,
+            "loops": 0
+        },
+
+        {
+            "name": "click",
+            "clip": "Coarse Click_Minimal UI Sounds.wav",
+            "volume": 1,
+            "pitch": 1,
+            "volume adjustment": 0,
+            "pitch adjustment": 0,
+            "is sound": 1,
+            "is music": 0,
+            "loops": 0
+        },
+        {
+            "name": "close_click",
+            "clip": "Coarse Click_Minimal UI Sounds.wav",
+            "volume": 1,
+            "pitch": 0.75,
+            "volume adjustment": 0,
+            "pitch adjustment": 0,
+            "is sound": 1,
+            "is music": 0,
+            "loops": 0
+        },
+        {
+            "name": "wholesome",
+            "clip": "Wholesome.wav",
+            "volume": 0.25,
+            "pitch": 1,
+            "volume adjustment": 0,
+            "pitch adjustment": 0,
+            "is sound": 0,
+            "is music": 1,
+            "loops": 1
+        },
+        {
+            "name": "carefree",
+            "clip": "Carefree.wav",
+            "volume": 0.2,
+            "pitch": 1,
+            "volume adjustment": 0,
+            "pitch adjustment": 0,
+            "is sound": 0,
+            "is music": 1,
+            "loops": 1
+        },
+        {
+            "name": "cup1",
+            "clip": "cup1.wav",
+            "volume": 0.5,
+            "pitch": 1,
+            "volume adjustment": 0,
+            "pitch adjustment": 0.1,
+            "is sound": 1,
+            "is music": 0,
+            "loops": 0
+        },
+        {
+            "name": "cup2",
+            "clip": "cup2.wav",
+            "volume": 0.5,
+            "pitch": 1,
+            "volume adjustment": 0,
+            "pitch adjustment": 0.1,
+            "is sound": 1,
+            "is music": 0,
+            "loops": 0
+        },
+        {
+            "name": "cup3",
+            "clip": "cup3.wav",
+            "volume": 0.5,
+            "pitch": 1,
+            "volume adjustment": 0,
+            "pitch adjustment": 0.1,
+            "is sound": 1,
+            "is music": 0,
+            "loops": 0
+        },
+        {
+            "name": "cup4",
+            "clip": "cup4.wav",
+            "volume": 0.5,
+            "pitch": 1,
+            "volume adjustment": 0,
+            "pitch adjustment": 0.1,
+            "is sound": 1,
+            "is music": 0,
+            "loops": 0
+        },
+        {
+            "name": "cup5",
+            "clip": "cup5.wav",
+            "volume": 0.5,
+            "pitch": 1,
+            "volume adjustment": 0,
+            "pitch adjustment": 0.1,
+            "is sound": 1,
+            "is music": 0,
+            "loops": 0
+        }
+    ]
+}
