@@ -67,6 +67,7 @@ public class HomeScreenManager : MonoBehaviour
         dougSpriteDefaultPosition = doug.transform.position;
 
         coinzText.GetComponent<TextMeshProUGUI>().text = PersistentGameManager.instance.playerData.playerData.coinz.ToString("F1") + " coinz";
+        //unlockPanel.transform.Find("Unlock Layout/No Button/Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.textColor;
         UpdateText();
         UpdateMinigameText();
         UpdateBars();
@@ -139,7 +140,6 @@ public class HomeScreenManager : MonoBehaviour
                     go.transform.Find("Info Button/Info Panel").gameObject.SetActive(false);
                 go.GetComponent<PanelBounce>().Close();
                 go.SetActive(false);
-                
             }
         }
     }
@@ -235,9 +235,17 @@ public class HomeScreenManager : MonoBehaviour
         if (PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail)
             unlockPanel.transform.Find("Unlock Text").GetComponent<TextMeshProUGUI>().text = "you shouldn't be able to see this!";
         else if (PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail)
+        {
+            unlockPanel.transform.Find("Unlock Layout/Yes Button/Text (TMP)").GetComponent<TextMeshProUGUI>().color =
+                (PersistentGameManager.instance.playerData.playerData.love > 100f) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
             unlockPanel.transform.Find("Unlock Text").GetComponent<TextMeshProUGUI>().text = "spend 100 luv to unlock Chacha Trail?";
+        }
         else
+        {
+            unlockPanel.transform.Find("Unlock Layout/Yes Button/Text (TMP)").GetComponent<TextMeshProUGUI>().color =
+                (PersistentGameManager.instance.playerData.playerData.love > 100f) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
             unlockPanel.transform.Find("Unlock Text").GetComponent<TextMeshProUGUI>().text = "spend 100 luv to unlock Find the Bisco?";
+        }
             
     }
 

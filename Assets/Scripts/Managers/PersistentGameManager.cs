@@ -61,6 +61,13 @@ public class PersistentGameManager : MonoBehaviour
 
         LoadButtonSounds();
         GetSceneMusic();
+
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        LoadButtonSounds();
     }
 
     public void LoadGame()
@@ -71,12 +78,11 @@ public class PersistentGameManager : MonoBehaviour
 
     public void SwitchScene(int newSceneIndex)
     {
-        loadingScreen.SetActive(true);
-        scenesLoading.Add(SceneManager.LoadSceneAsync(newSceneIndex, LoadSceneMode.Single));
+        //loadingScreen.SetActive(true);
+        SceneManager.LoadSceneAsync(newSceneIndex, LoadSceneMode.Single);
         currentScene = newSceneIndex;
-        LoadButtonSounds();
         GetSceneMusic();
-        loadingScreen.SetActive(false);
+        //loadingScreen.SetActive(false);
         if (currentScene == (int) SceneIndexes.MAIN_MENU)
             initialize();
     }
@@ -228,11 +234,15 @@ public class PersistentGameManager : MonoBehaviour
     {
         GameObject[] go = (GameObject[]) Resources.FindObjectsOfTypeAll(typeof(GameObject));
         foreach (GameObject g in go)
-        {
+        {   
             if (g.tag == "Button")
+            {
                 g.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {PersistentGameManager.instance.audioManager.PlaySound("click");});
+            }
             else if (g.tag == "Close Button")
+            {
                 g.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {PersistentGameManager.instance.audioManager.PlaySound("close_click");});
+            }
         }
     }
 }
