@@ -78,11 +78,9 @@ public class PersistentGameManager : MonoBehaviour
 
     public void SwitchScene(int newSceneIndex)
     {
-        //loadingScreen.SetActive(true);
         SceneManager.LoadSceneAsync(newSceneIndex, LoadSceneMode.Single);
         currentScene = newSceneIndex;
         GetSceneMusic();
-        //loadingScreen.SetActive(false);
         if (currentScene == (int) SceneIndexes.MAIN_MENU)
             initialize();
     }

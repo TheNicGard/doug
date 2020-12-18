@@ -339,7 +339,10 @@ public class HomeScreenManager : MonoBehaviour
 
     public string GetAgeOfDoug()
     {
-        System.TimeSpan age = System.DateTime.Now - PersistentGameManager.instance.playerData.playerData.acquisitionDate;
+        System.TimeSpan age = System.DateTime.UtcNow.Subtract(PersistentGameManager.instance.playerData.playerData.acquisitionDate);
+        Debug.Log("now is " + System.DateTime.UtcNow.ToString() + ", acquisitionDate is " +
+        PersistentGameManager.instance.playerData.playerData.acquisitionDate.ToString() + ", age is " + age.ToString());
+
         if (age.Hours < 1)
             return age.Minutes.ToString() + (age.Minutes == 1 ? " minute old" : " minutes old");
         else if (age.Days < 1)
@@ -462,5 +465,10 @@ public class HomeScreenManager : MonoBehaviour
         UpdateBars();
         doug.transform.eulerAngles = new Vector3(0f, 0f, 0f);
         LeanTween.moveLocalX(doug, 0, 1.2f).setEaseOutQuart();
+    }
+
+    public void DebugButton()
+    {
+        PersistentGameManager.instance.ModifyStat(Stat.Weight, -200);
     }
 }

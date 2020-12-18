@@ -26,7 +26,7 @@ public class SaveData
             PlayerPrefs.DeleteAll();
             playerData.clickerVideos = new int [12] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
             playerData.clickerVideosComments = new int [12] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-            playerData.lastDate = System.DateTime.Now;
+            playerData.lastDate = System.DateTime.UtcNow;
             playerData.unlockedGuessing = false;
             playerData.unlockedChachaTrail = false;
             playerData.stardomBonus = 0;
@@ -40,7 +40,7 @@ public class SaveData
         playerData.weight = 75;
         playerData.love = 0;
         playerData.coinz = 0f;
-        playerData.acquisitionDate = System.DateTime.Now;
+        playerData.acquisitionDate = System.DateTime.UtcNow;
         playerData.guessingEasyHiScore = 0;
         playerData.guessingNormalHiScore = 0;
         playerData.guessingHardHiScore = 0;
