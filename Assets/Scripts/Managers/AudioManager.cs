@@ -26,7 +26,7 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    public void PlaySound(string _name)
+    public void PlaySound(string _name, float volumeMult = 1f, float pitchMult = 1f)
     {
         for (int i = 0; i < sounds.Length; i++)
         {
@@ -40,7 +40,7 @@ public class AudioManager : MonoBehaviour
                         return;
                 }
 
-                sounds[i].Play();
+                sounds[i].Play(volumeMult, pitchMult);
                 return;
             }
         }
@@ -124,12 +124,19 @@ public class Sound
             source.outputAudioMixerGroup = mixer.FindMatchingGroups("Sound FX")[0];
     }
 
-    public void Play()
+    public void Play(float volumeMult = 1f, float pitchMult = 1f)
     {
         if ((isSound && PlayerPrefs.GetInt("soundEnabled") == 1) || (isMusic && PlayerPrefs.GetInt("musicEnabled") == 1))
         {
-            source.volume = volume + Random.Range(-volumeAdjustment, volumeAdjustment);
-            source.pitch = pitch + Random.Range(-pitchAdjustment, pitchAdjustment);
+            if (volumeMult >= 0f)
+                source.volume = volumeMult * (volume + Random.Range(-volumeAdjustment, volumeAdjustment));
+            else
+                source.volume = volume + Random.Range(-volumeAdjustment, volumeAdjustment);
+
+            if (volumeMult >= 0f)
+                source.pitch = pitchMult * (pitch + Random.Range(-pitchAdjustment, pitchAdjustment));
+            else
+                source.pitch = pitch + Random.Range(-pitchAdjustment, pitchAdjustment);
             source.Play();
         }
     }

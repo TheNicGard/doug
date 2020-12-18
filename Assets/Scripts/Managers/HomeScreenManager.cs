@@ -280,7 +280,9 @@ public class HomeScreenManager : MonoBehaviour
 
     public void PetDoug()
     {
-        PersistentGameManager.instance.audioManager.PlaySound("woof");
+        float weight = (float) PersistentGameManager.instance.playerData.playerData.weight / (float)GlobalConfig.maxWeight;
+        PersistentGameManager.instance.audioManager.PlaySound("woof", pitchMult: (weight < 0.25) ? (weight * -0.8f) + 1.2f : ((weight > 0.75) ? (weight * -0.8f) + 1.6f : 1f));
+
         if (Random.Range(0, 4) == 3)
         {
             MakePopupHeart();
@@ -411,11 +413,6 @@ public class HomeScreenManager : MonoBehaviour
             chachaGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.disabledTextColor;
             chachaGameButton.transform.Find("Unlock Text").gameObject.SetActive(true);
         }        
-    }
-
-    public void TempDecreaseWeight()
-    {
-        PersistentGameManager.instance.ModifyStat(Stat.Weight, -5);
     }
 
     public bool CheckDeactivateDoug()
