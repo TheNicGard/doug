@@ -58,6 +58,7 @@ public class HomeScreenManager : MonoBehaviour
     private Vector3 dougSpriteDefaultScale = new Vector3(3f, 3f, 1f);
     private Vector3 dougSpriteDefaultPosition;
     private bool deactivated = false;
+    private string[] uselessStats = {"charisma", "sassiness", "boldness", "reading", "flame resistance", "sprinting speed", "moxie", "special", "bagel", "patience", "linguistic ability"};
 
     // Start is called before the first frame update
     void Start()
@@ -440,9 +441,28 @@ public class HomeScreenManager : MonoBehaviour
     {
         doug.transform.eulerAngles = new Vector3(0f, 0f, 180f);
         disableInteractionPanel.SetActive(true);
+        /*
         string t = deactivationPanel.transform.Find("Deactivation Layout/Deactivation Text").GetComponent<TextMeshProUGUI>().text.Replace("{0}", (deathByWeight) ? "starvation" : "boredom")
         .Replace("{1}", Random.Range(int.Parse("100000", System.Globalization.NumberStyles.HexNumber), int.Parse("1000000", System.Globalization.NumberStyles.HexNumber)).ToString("X"));
         deactivationPanel.transform.Find("Deactivation Layout/Deactivation Text").GetComponent<TextMeshProUGUI>().text = t;
+        */
+
+        string t = "it appears that your doug has been \"deactivated\" due to {0}!\n\nyou are being delivered a new doug:\n\ndoug #{1}\n{2}";
+        t = t.Replace("{0}", (deathByWeight) ? "starvation" : "boredom");
+        t = t.Replace("{1}", Random.Range(int.Parse("100000", System.Globalization.NumberStyles.HexNumber),
+                                          int.Parse("1000000", System.Globalization.NumberStyles.HexNumber)).ToString("X"));
+        System.Random rnd = new System.Random();
+        string stat1 = uselessStats[rnd.Next(uselessStats.Length)];
+        string stat2, stat3;
+        do stat2 = uselessStats[rnd.Next(uselessStats.Length)];
+        while (stat2.Equals(stat1));
+        do stat3 = uselessStats[rnd.Next(uselessStats.Length)];
+        while (stat3.Equals(stat1) || stat3.Equals(stat2));
+        t = t.Replace("{2}", stat1 + ": " + rnd.Next(3, 21).ToString() + "\n" +
+                             stat2 + ": " + rnd.Next(3, 21).ToString() + "\n" +
+                             stat3 + ": " + rnd.Next(3, 21).ToString());
+        deactivationPanel.transform.Find("Deactivation Layout/Deactivation Text").GetComponent<TextMeshProUGUI>().text = t;
+
         yield return new WaitForSeconds(3.5f);
         disableInteractionPanel.SetActive(false);
         deactivationPanel.SetActive(true);
@@ -457,6 +477,7 @@ public class HomeScreenManager : MonoBehaviour
 
     public IEnumerator RemoveDoug()
     {
+        deactivated = false;
         LeanTween.moveLocalX(doug, 1500f, 1.2f).setEaseInQuart();
         yield return new WaitForSeconds(1.5f);
         doug.transform.localPosition = new Vector3(-1500f, 0f, 0f);

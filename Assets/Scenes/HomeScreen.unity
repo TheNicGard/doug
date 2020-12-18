@@ -6117,12 +6117,7 @@ MonoBehaviour:
 
     doug #{1}
 
-    sassiness: #
-
-    boldness:
-    #
-
-    haughtiness: #
+    {2}
 
 '
   m_isRightToLeft: 0
