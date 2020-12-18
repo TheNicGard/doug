@@ -314,6 +314,7 @@ public class HomeScreenManager : MonoBehaviour
                 MakePopup("-3 hungy\n-1 luv");
                 break;
         }
+        UpdateBars();
     }
 
     public void UpdateBars()
@@ -467,5 +468,6 @@ public class HomeScreenManager : MonoBehaviour
     public void DebugButton()
     {
         PersistentGameManager.instance.ModifyStat(Stat.Weight, -200);
+        UpdateBars();
     }
 }
