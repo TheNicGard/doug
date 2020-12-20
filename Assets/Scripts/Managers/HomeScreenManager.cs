@@ -101,7 +101,6 @@ public class HomeScreenManager : MonoBehaviour
                 else if (PersistentGameManager.instance.playerData.playerData.unlockedGuessing)
                     OpenUnlockPanel();
                 break;
-
         }
     }
 
@@ -441,11 +440,6 @@ public class HomeScreenManager : MonoBehaviour
     {
         doug.transform.eulerAngles = new Vector3(0f, 0f, 180f);
         disableInteractionPanel.SetActive(true);
-        /*
-        string t = deactivationPanel.transform.Find("Deactivation Layout/Deactivation Text").GetComponent<TextMeshProUGUI>().text.Replace("{0}", (deathByWeight) ? "starvation" : "boredom")
-        .Replace("{1}", Random.Range(int.Parse("100000", System.Globalization.NumberStyles.HexNumber), int.Parse("1000000", System.Globalization.NumberStyles.HexNumber)).ToString("X"));
-        deactivationPanel.transform.Find("Deactivation Layout/Deactivation Text").GetComponent<TextMeshProUGUI>().text = t;
-        */
 
         string t = "it appears that your doug has been \"deactivated\" due to {0}!\n\nyou are being delivered a new doug:\n\ndoug #{1}\n{2}";
         t = t.Replace("{0}", (deathByWeight) ? "starvation" : "boredom");
@@ -488,7 +482,11 @@ public class HomeScreenManager : MonoBehaviour
 
     public void DebugButton()
     {
+        /*
         PersistentGameManager.instance.ModifyStat(Stat.Weight, -200);
         UpdateBars();
+        */
+        
+        PersistentGameManager.instance.ChangeWallpaper((WallpaperNum) Random.Range(0, 5));
     }
 }

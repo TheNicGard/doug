@@ -16,6 +16,7 @@ public class PersistentGameManager : MonoBehaviour
     TextAsset clickerData = null;
     [SerializeField]
     public AudioManager audioManager;
+    private WallpaperNum backgroundNum = WallpaperNum.PRINTER;
 
     private void Start()
     {
@@ -27,8 +28,8 @@ public class PersistentGameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            
-        } else
+        }
+        else
         {
             Destroy(gameObject);
         }
@@ -68,6 +69,7 @@ public class PersistentGameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         LoadButtonSounds();
+        ChangeWallpaper(backgroundNum);
     }
 
     public void LoadGame()
@@ -169,6 +171,29 @@ public class PersistentGameManager : MonoBehaviour
     void OnDisable()
     {
         SaveGame();
+    }
+
+    public void ChangeWallpaper(WallpaperNum num)
+    {
+        backgroundNum = num;
+
+        string background;
+        switch (num)
+        {
+            default:
+            case WallpaperNum.PRINTER:
+                background = "printer"; break;
+            case WallpaperNum.PRINTER_DAMAGED:
+                background = "damaged_printer"; break;
+            case WallpaperNum.LINED:
+                background = "notebook"; break;
+            case WallpaperNum.LINED_DAMAGED:
+                background = "damaged_notebook"; break;
+            case WallpaperNum.WALL_PAINT:
+                background = "notebook"; break;
+        }
+
+        GameObject.FindGameObjectsWithTag("Background")[0].GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<UnityEngine.Sprite>(background);
     }
 
     /*~~~~~ Clicker Management ~~~~~*/
