@@ -2,74 +2,74 @@
 "Items": [
 	{
 		"title": "doog flips",
-		"requiredCoinz": 15,
-		"coinzPerSecond": 0.1
+		"requiredCoinz": 8,
+		"coinzPerSecond": 0.2
 	},
 
 	{
 		"title": "hog flips",
-		"requiredCoinz": 100,
+		"requiredCoinz": 64,
 		"coinzPerSecond": 1
 	},
 
 	{
 		"title": "bob does it",
-		"requiredCoinz": 1100,
-		"coinzPerSecond": 8
+		"requiredCoinz": 1024,
+		"coinzPerSecond": 6
 	},
 
 	{
 		"title": "little bobby",
-		"requiredCoinz": 12000,
-		"coinzPerSecond": 47
+		"requiredCoinz": 16384,
+		"coinzPerSecond": 40
 	},
 
 	{
 		"title": "building 5",
-		"requiredCoinz": 130000,
-		"coinzPerSecond": 260
+		"requiredCoinz": 262144,
+		"coinzPerSecond": 250
 	},
 	
 	{
 		"title": "building 6",
-		"requiredCoinz": 1400000,
-		"coinzPerSecond": 1400
+		"requiredCoinz": 4194304,
+		"coinzPerSecond": 1600
 	},
 
 	{
 		"title": "building 7",
-		"requiredCoinz": 20000000,
-		"coinzPerSecond": 78000
+		"requiredCoinz": 67108864,
+		"coinzPerSecond": 10000
 	},
 
 	{
 		"title": "building 8",
-		"requiredCoinz": 330000000,
-		"coinzPerSecond": 44000
+		"requiredCoinz": 1073741824,
+		"coinzPerSecond": 63100
 	},
 
 	{
 		"title": "building 9",
-		"requiredCoinz": 5100000000,
-		"coinzPerSecond": 260000
+		"requiredCoinz": 17179869184,
+		"coinzPerSecond": 398000
 	},
 
 	{
-		"title": "doug flies away!!!! lol jk",
-		"requiredCoinz": 75000000000,
-		"coinzPerSecond": 1600000
+		"title": "doug sneezes!?!?! [gone wrogn]",
+		"requiredCoinz": 274877906944,
+		"coinzPerSecond": 2152000
 	},
 
 	{
 		"title": "building 11",
-		"requiredCoinz": 75000000000,
-		"coinzPerSecond": 1600000
+		"requiredCoinz": 4398046511104,
+		"coinzPerSecond": 15850000
 	},
 
 	{
-		"title": "building 12",
-		"requiredCoinz": 75000000000,
-		"coinzPerSecond": 1600000
+		"title": "doug flies away!!!! lol jk",
+		"requiredCoinz": 70368744177664,
+		"coinzPerSecond": 100000000
 	}
 ]
 }
