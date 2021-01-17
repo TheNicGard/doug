@@ -57,6 +57,12 @@ public class ClickerManager : MonoBehaviour
         PersistentGameManager.instance.audioManager.PlayRandomSound(soundNames);
 
         Random.InitState(System.DateTime.Now.Millisecond);
+
+        if (Random.Range(0f, 1f) < 0.15f)
+        {
+            PersistentGameManager.instance.ModifyStat(Stat.Boredom, -1);
+        }
+
         if(Random.Range(0, (int) (1 / GlobalConfig.stardomChance)) == 0)
         {
             PersistentGameManager.instance.playerData.playerData.stardomBonus += 1;

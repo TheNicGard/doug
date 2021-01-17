@@ -161,7 +161,7 @@ public class PersistentGameManager : MonoBehaviour
                 }
                 break;
             case (int) SceneIndexes.CLICKER:
-                ModifyStat(Stat.Boredom, -2);
+                ModifyStat(Stat.Boredom, -3);
                 ModifyStat(Stat.Weight, -1);
                 break;
             case (int) SceneIndexes.GUESSING:
