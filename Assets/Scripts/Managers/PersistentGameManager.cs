@@ -73,8 +73,7 @@ public class PersistentGameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         LoadButtonSounds();
-        Debug.Log("changing wallpaper to: " + instance.playerData.playerData.currentWallpaper);
-        ChangeWallpaper(instance.playerData.playerData.currentWallpaper);
+        ChangeWallpaper((int) instance.playerData.playerData.currentWallpaper);
     }
 
     public void LoadGame()
@@ -178,29 +177,12 @@ public class PersistentGameManager : MonoBehaviour
         SaveGame();
     }
 
-    public void ChangeWallpaper(WallpaperNum num)
+    public void ChangeWallpaper(int num)
     {
-        WallpaperNum backgroundNum = num;
-
-        string background;
-        switch (num)
-        {
-            default:
-            case WallpaperNum.PRINTER:
-                background = "printer"; break;
-            case WallpaperNum.PRINTER_DAMAGED:
-                background = "damaged_printer"; break;
-            case WallpaperNum.LINED:
-                background = "notebook"; break;
-            case WallpaperNum.LINED_DAMAGED:
-                background = "damaged_notebook"; break;
-            case WallpaperNum.WALL_PAINT:
-                background = "paint"; break;
-            case WallpaperNum.COTTON_CLOTH:
-                background = "cloth"; break;
-        }
-
-        GameObject.FindGameObjectsWithTag("Background")[0].GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<UnityEngine.Sprite>(background);
+        if (num >= 0 && num <= (int) WallpaperNum.COTTON_CLOTH && num <= (int) instance.playerData.playerData.unlockedWallpaper)
+            GameObject.FindGameObjectsWithTag("Background")[0].GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<UnityEngine.Sprite>(GlobalConfig.wallpaperFileNames[num]);
+        else
+            GameObject.FindGameObjectsWithTag("Background")[0].GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<UnityEngine.Sprite>(GlobalConfig.wallpaperFileNames[0]);
     }
 
     /*~~~~~ Clicker Management ~~~~~*/

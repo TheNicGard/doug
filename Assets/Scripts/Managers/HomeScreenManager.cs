@@ -120,7 +120,7 @@ public class HomeScreenManager : MonoBehaviour
             PersistentGameManager.instance.playerData.playerData.coinz -= nextCost;
             PersistentGameManager.instance.SaveGame();
             PersistentGameManager.instance.playerData.playerData.currentWallpaper = PersistentGameManager.instance.playerData.playerData.unlockedWallpaper;
-            PersistentGameManager.instance.ChangeWallpaper(PersistentGameManager.instance.playerData.playerData.currentWallpaper);
+            PersistentGameManager.instance.ChangeWallpaper((int) PersistentGameManager.instance.playerData.playerData.currentWallpaper);
             MakePopup("wallpaper unlocked!");
             DisablePanel("Store Panel");
             UpdateWallpaperButtons();
@@ -550,7 +550,7 @@ public class HomeScreenManager : MonoBehaviour
         */
         
         PersistentGameManager.instance.playerData.playerData.currentWallpaper = (WallpaperNum) Random.Range(0, 6);
-        PersistentGameManager.instance.ChangeWallpaper(PersistentGameManager.instance.playerData.playerData.currentWallpaper);
+        PersistentGameManager.instance.ChangeWallpaper((int) PersistentGameManager.instance.playerData.playerData.currentWallpaper);
         //unlockWallpaper();
     }
 }
