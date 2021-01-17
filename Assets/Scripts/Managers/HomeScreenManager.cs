@@ -325,7 +325,7 @@ public class HomeScreenManager : MonoBehaviour
         float weight = (float) PersistentGameManager.instance.playerData.playerData.weight / (float)GlobalConfig.maxWeight;
         PersistentGameManager.instance.audioManager.PlaySound("woof", pitchMult: (weight < 0.25) ? (weight * -0.8f) + 1.2f : ((weight > 0.75) ? (weight * -0.8f) + 1.6f : 1f));
 
-        if (Random.Range(0, 4) == 3)
+        if (Random.Range(0f, 1f) < 0.33f)
         {
             MakePopupHeart();
             PersistentGameManager.instance.ModifyStat(Stat.Love, 1);
