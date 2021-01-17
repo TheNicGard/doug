@@ -190,7 +190,7 @@ public class ClickerManager : MonoBehaviour
         ModifyButton(button, "Cost Text", video.coinzPerSecond.ToString() + " coinz/sec");
     }
 
-    string ConvertToShortNumber(long number)
+    public static string ConvertToShortNumber(long number)
     {
         if (number < 1000 * 1000)
             return number.ToString("N0");
@@ -204,7 +204,7 @@ public class ClickerManager : MonoBehaviour
             return number.ToString("E2");
     }
 
-    string ConvertToShortNumber(double number)
+    public static string ConvertToShortNumber(double number)
     {
         if (number < 1)
             return number.ToString("N1");

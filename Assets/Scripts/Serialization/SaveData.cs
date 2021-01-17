@@ -30,6 +30,11 @@ public class SaveData
             playerData.unlockedGuessing = false;
             playerData.unlockedChachaTrail = false;
             playerData.stardomBonus = 0;
+            playerData.unlockedWallpaper = (WallpaperNum) 0;
+            playerData.currentWallpaper = (WallpaperNum) 0;
+            playerData.guessingEasyHiScore = 0;
+            playerData.guessingNormalHiScore = 0;
+            playerData.guessingHardHiScore = 0;
             PlayerPrefs.SetInt("soundEnabled", 1);
             PlayerPrefs.SetInt("musicEnabled", 1);
             PlayerPrefs.SetInt("adsEnabled", 1);
@@ -41,9 +46,6 @@ public class SaveData
         playerData.love = 0;
         playerData.coinz = 0f;
         playerData.acquisitionDate = System.DateTime.UtcNow;
-        playerData.guessingEasyHiScore = 0;
-        playerData.guessingNormalHiScore = 0;
-        playerData.guessingHardHiScore = 0;
     }
 
     override public string ToString()

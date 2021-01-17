@@ -20,4 +20,6 @@ public class PlayerData
     public int guessingEasyHiScore;
     public int guessingNormalHiScore;
     public int guessingHardHiScore;
+    public WallpaperNum unlockedWallpaper;
+    public WallpaperNum currentWallpaper;
 }

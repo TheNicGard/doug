@@ -16,11 +16,15 @@ public class PersistentGameManager : MonoBehaviour
     TextAsset clickerData = null;
     [SerializeField]
     public AudioManager audioManager;
-    private WallpaperNum backgroundNum = WallpaperNum.PRINTER;
 
-    private void Start()
+    void Start()
     {
         initialize();
+    }
+
+    void Awake()
+    {
+
     }
 
     public void initialize()
@@ -69,7 +73,8 @@ public class PersistentGameManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         LoadButtonSounds();
-        ChangeWallpaper(backgroundNum);
+        Debug.Log("changing wallpaper to: " + instance.playerData.playerData.currentWallpaper);
+        ChangeWallpaper(instance.playerData.playerData.currentWallpaper);
     }
 
     public void LoadGame()
@@ -175,7 +180,7 @@ public class PersistentGameManager : MonoBehaviour
 
     public void ChangeWallpaper(WallpaperNum num)
     {
-        backgroundNum = num;
+        WallpaperNum backgroundNum = num;
 
         string background;
         switch (num)
@@ -190,7 +195,9 @@ public class PersistentGameManager : MonoBehaviour
             case WallpaperNum.LINED_DAMAGED:
                 background = "damaged_notebook"; break;
             case WallpaperNum.WALL_PAINT:
-                background = "notebook"; break;
+                background = "paint"; break;
+            case WallpaperNum.COTTON_CLOTH:
+                background = "cloth"; break;
         }
 
         GameObject.FindGameObjectsWithTag("Background")[0].GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<UnityEngine.Sprite>(background);

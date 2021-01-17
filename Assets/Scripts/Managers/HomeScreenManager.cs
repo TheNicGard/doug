@@ -54,6 +54,10 @@ public class HomeScreenManager : MonoBehaviour
     GameObject disableInteractionPanel = null;
     [SerializeField]
     GameObject unlockPanel = null;
+    [SerializeField]
+    GameObject buyText = null;
+    [SerializeField]
+    List<GameObject> wallpaperButtons = new List<GameObject>();
 
     private Vector3 dougSpriteDefaultScale = new Vector3(3f, 3f, 1f);
     private Vector3 dougSpriteDefaultPosition;
@@ -67,19 +71,20 @@ public class HomeScreenManager : MonoBehaviour
         doug.transform.localScale = new Vector3(dougSpriteDefaultScale.x * GetDougWeightScale(), dougSpriteDefaultScale.y, dougSpriteDefaultScale.z);
         dougSpriteDefaultPosition = doug.transform.position;
 
-        coinzText.GetComponent<TextMeshProUGUI>().text = PersistentGameManager.instance.playerData.playerData.coinz.ToString("F1") + " coinz";
+        coinzText.GetComponent<TextMeshProUGUI>().text = ClickerManager.ConvertToShortNumber(PersistentGameManager.instance.playerData.playerData.coinz) + " coinz";
         //unlockPanel.transform.Find("Unlock Layout/No Button/Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.textColor;
         UpdateText();
         UpdateMinigameText();
         UpdateBars();
         PersistentGameManager.instance.SaveGame();
         CheckDeactivateDoug();
+        UpdateWallpaperButtons();
     }
 
     // Update is called once per frame
     void Update()
     {
-        coinzText.GetComponent<TextMeshProUGUI>().text = PersistentGameManager.instance.playerData.playerData.coinz.ToString("F1") + " coinz";
+        coinzText.GetComponent<TextMeshProUGUI>().text = ClickerManager.ConvertToShortNumber(PersistentGameManager.instance.playerData.playerData.coinz) + " coinz";
     }
 
     public void GoToScene(string scene_name)
@@ -104,6 +109,24 @@ public class HomeScreenManager : MonoBehaviour
         }
     }
 
+    public void unlockWallpaper()
+    {
+        WallpaperNum currentWallpaper = PersistentGameManager.instance.playerData.playerData.unlockedWallpaper;
+        float nextCost = (currentWallpaper != WallpaperNum.COTTON_CLOTH) ? GlobalConfig.wallpaperCosts[currentWallpaper + 1] : 0;
+
+        if (currentWallpaper != WallpaperNum.COTTON_CLOTH && PersistentGameManager.instance.playerData.playerData.coinz >= nextCost) 
+        {
+            PersistentGameManager.instance.playerData.playerData.unlockedWallpaper++;
+            PersistentGameManager.instance.playerData.playerData.coinz -= nextCost;
+            PersistentGameManager.instance.SaveGame();
+            PersistentGameManager.instance.playerData.playerData.currentWallpaper = PersistentGameManager.instance.playerData.playerData.unlockedWallpaper;
+            PersistentGameManager.instance.ChangeWallpaper(PersistentGameManager.instance.playerData.playerData.currentWallpaper);
+            MakePopup("wallpaper unlocked!");
+            DisablePanel("Store Panel");
+            UpdateWallpaperButtons();
+        }
+    }
+
     public void EnablePanel(string panelName)
     {
         foreach(GameObject go in panels)
@@ -121,6 +144,26 @@ public class HomeScreenManager : MonoBehaviour
         {
             UpdateBars();
             ageText.GetComponent<TextMeshProUGUI>().text = GetAgeOfDoug();
+        }
+
+        if (panelName == "Store Panel")
+        {
+            WallpaperNum currentWallpaper = PersistentGameManager.instance.playerData.playerData.unlockedWallpaper;
+            float nextCost = (currentWallpaper != WallpaperNum.COTTON_CLOTH) ? GlobalConfig.wallpaperCosts[currentWallpaper + 1] : 0;
+
+            buyText.GetComponent<TextMeshProUGUI>().color =
+                (PersistentGameManager.instance.playerData.playerData.coinz >= ((currentWallpaper != WallpaperNum.COTTON_CLOTH) ? GlobalConfig.wallpaperCosts[currentWallpaper + 1] : 0))
+                ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
+
+            string t = "buy {0}:\n{1} coinz";
+
+            if ((int) currentWallpaper < (int) WallpaperNum.COTTON_CLOTH)
+                t = t.Replace("{0}", GlobalConfig.wallpaperNames[(int) currentWallpaper + 1]);
+            else
+                t = "all wallpapers have been bought!";
+            t = t.Replace("{1}", ClickerManager.ConvertToShortNumber(nextCost));
+
+            buyText.GetComponent<TextMeshProUGUI>().text = t;
         }
 
         foreach(GameObject go in panels)
@@ -217,7 +260,7 @@ public class HomeScreenManager : MonoBehaviour
 
     public void UpdateText()
     {
-        coinzText.GetComponent<TextMeshProUGUI>().text = PersistentGameManager.instance.playerData.playerData.coinz.ToString("F1") + " coinz";
+        coinzText.GetComponent<TextMeshProUGUI>().text = ClickerManager.ConvertToShortNumber(PersistentGameManager.instance.playerData.playerData.coinz) + " coinz";
         ageText.GetComponent<TextMeshProUGUI>().text = GetAgeOfDoug();
         if (PlayerPrefs.GetInt("soundEnabled") == 1)
             toggleSoundButtonText.GetComponent<TextMeshProUGUI>().text = "sound: on";
@@ -245,8 +288,7 @@ public class HomeScreenManager : MonoBehaviour
             unlockPanel.transform.Find("Unlock Layout/Yes Button/Text (TMP)").GetComponent<TextMeshProUGUI>().color =
                 (PersistentGameManager.instance.playerData.playerData.love > 100f) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
             unlockPanel.transform.Find("Unlock Text").GetComponent<TextMeshProUGUI>().text = "spend 100 luv to unlock Find the Bisco?";
-        }
-            
+        }    
     }
 
     public void modifyBar(float amount, string text, GameObject stat)
@@ -345,13 +387,16 @@ public class HomeScreenManager : MonoBehaviour
         System.TimeSpan age = System.DateTime.UtcNow.Subtract(PersistentGameManager.instance.playerData.playerData.acquisitionDate);
         Debug.Log("now is " + System.DateTime.UtcNow.ToString() + ", acquisitionDate is " +
         PersistentGameManager.instance.playerData.playerData.acquisitionDate.ToString() + ", age is " + age.ToString());
-
-        if (age.Hours < 1)
-            return age.Minutes.ToString() + (age.Minutes == 1 ? " minute old" : " minutes old");
-        else if (age.Days < 1)
-            return age.Hours.ToString() + (age.Hours == 1 ? " hour, " : " hours, ") + age.Minutes.ToString() + (age.Minutes == 1 ? " minute old" : " minutes old");
+        
+        if (age.TotalDays < 1)
+        {
+            if (age.Hours == 0)
+                return age.Minutes.ToString() + (age.Minutes == 1 ? " minute old" : " minutes old");
+            else
+                return age.Hours.ToString() + (age.Hours == 1 ? " hour, " : " hours, ") + age.Minutes.ToString() + (age.Minutes == 1 ? " minute old" : " minutes old");
+        }
         else
-            return age.Hours.ToString() + (age.Days == 1 ? " day, " : " days, ") + age.Hours.ToString() + (age.Hours == 1 ? " hour old" : " hours old");
+            return ((int) age.TotalDays).ToString() + (age.TotalDays == 1 ? " day, " : " days, ") + age.Hours.ToString() + (age.Hours == 1 ? " hour old" : " hours old");
     }
 
     public void UnlockMinigame(int num)
@@ -480,6 +525,23 @@ public class HomeScreenManager : MonoBehaviour
         LeanTween.moveLocalX(doug, 0, 1.2f).setEaseOutQuart();
     }
 
+    public void UpdateWallpaperButtons()
+    {
+        for (int i = 1; i < 6; i++) //TODO: this is the total number of wallpapers
+        {
+            if ((int) PersistentGameManager.instance.playerData.playerData.unlockedWallpaper >= i)
+            {
+                wallpaperButtons[i].transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = GlobalConfig.wallpaperNames[i];
+                wallpaperButtons[i].GetComponent<Image>().sprite = Resources.Load<Sprite>(GlobalConfig.wallpaperFileNames[i]);
+            }
+            else
+            {
+                wallpaperButtons[i].transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "?";
+                //wallpaperButtons[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("paint");
+            }
+        }
+    }
+
     public void DebugButton()
     {
         /*
@@ -487,6 +549,8 @@ public class HomeScreenManager : MonoBehaviour
         UpdateBars();
         */
         
-        PersistentGameManager.instance.ChangeWallpaper((WallpaperNum) Random.Range(0, 5));
+        PersistentGameManager.instance.playerData.playerData.currentWallpaper = (WallpaperNum) Random.Range(0, 6);
+        PersistentGameManager.instance.ChangeWallpaper(PersistentGameManager.instance.playerData.playerData.currentWallpaper);
+        //unlockWallpaper();
     }
 }
