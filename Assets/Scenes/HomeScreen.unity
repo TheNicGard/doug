@@ -1996,7 +1996,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 289972675}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2009573157}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18bb3448351799b429ef48df4fb446ae, type: 3}
@@ -2656,7 +2656,7 @@ GameObject:
   - component: {fileID: 370302456}
   m_Layer: 5
   m_Name: Wallpaper 5
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2724,13 +2724,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2009573157}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 2009573159}
+        m_MethodName: ChangeWallpaper
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 4
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -6294,7 +6294,7 @@ GameObject:
   - component: {fileID: 925160469}
   m_Layer: 5
   m_Name: Wallpaper 2
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6362,13 +6362,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2009573157}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 2009573159}
+        m_MethodName: ChangeWallpaper
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -8231,7 +8231,7 @@ GameObject:
   - component: {fileID: 1139377834}
   m_Layer: 5
   m_Name: Wallpaper 1
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -8299,12 +8299,12 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2009573157}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 2009573159}
+        m_MethodName: ChangeWallpaper
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -9089,7 +9089,7 @@ GameObject:
   - component: {fileID: 1255971520}
   m_Layer: 5
   m_Name: Wallpaper 6
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9157,13 +9157,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2009573157}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 2009573159}
+        m_MethodName: ChangeWallpaper
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 5
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -10004,7 +10004,7 @@ GameObject:
   - component: {fileID: 1371496431}
   m_Layer: 5
   m_Name: Wallpaper 3
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -10072,13 +10072,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2009573157}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 2009573159}
+        m_MethodName: ChangeWallpaper
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 2
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -12101,7 +12101,7 @@ GameObject:
   - component: {fileID: 1720899130}
   m_Layer: 5
   m_Name: Wallpaper 4
-  m_TagString: Untagged
+  m_TagString: Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -12169,13 +12169,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2009573157}
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 2009573159}
+        m_MethodName: ChangeWallpaper
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 3
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -14747,12 +14747,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2009573157 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5056492804983895869, guid: baebacd058f13434aab3dfb510febe36,
+--- !u!114 &2009573159 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5056492804983895858, guid: baebacd058f13434aab3dfb510febe36,
     type: 3}
   m_PrefabInstance: {fileID: 289972675}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3821ee009d85f3a4499bab96311b55c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2029529169
 PrefabInstance:
   m_ObjectHideFlags: 0

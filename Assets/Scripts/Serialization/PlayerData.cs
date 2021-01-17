@@ -5,6 +5,8 @@ using System.Collections.Generic;
 [System.Serializable]
 public class PlayerData
 {
+    public int savefileVersionMajor;
+    public int savefileVersionMinor;
     public int hunger;
     public int boredom;
     public int weight;

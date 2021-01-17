@@ -46,6 +46,8 @@ public class SaveData
         playerData.love = 0;
         playerData.coinz = 0f;
         playerData.acquisitionDate = System.DateTime.UtcNow;
+        playerData.savefileVersionMajor = GlobalConfig.major_version;
+        playerData.savefileVersionMajor = GlobalConfig.minor_version;
     }
 
     override public string ToString()
