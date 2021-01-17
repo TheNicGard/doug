@@ -55,7 +55,7 @@ public class PersistentGameManager : MonoBehaviour
         for (int i = 0; i < minutes; i++)
             UpdateStats();
         InvokeRepeating("UpdateStats", 60f, 60f * 1f);
-        InvokeRepeating("Woof", 0.0f, 1.0f / GlobalConfig.incrementsPerSecond);
+        InvokeRepeating("ClickerTick", 0.0f, 1.0f / GlobalConfig.incrementsPerSecond);
         InvokeRepeating("DepleteStardom", 15f, 15f * 1f);
         PersistentGameManager.instance.playerData.playerData.coinz += minutes * 60f * CoinzPerSecond(false);
 
@@ -199,7 +199,7 @@ public class PersistentGameManager : MonoBehaviour
         playerData.playerData.coinz += dCoinz;
     }
 
-    public void Woof()
+    public void ClickerTick()
     {
         IncrementCoinz(CoinzPerSecond(true) / GlobalConfig.incrementsPerSecond);
     }
