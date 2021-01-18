@@ -180,7 +180,10 @@ public class PersistentGameManager : MonoBehaviour
     public void ChangeWallpaper(int num)
     {
         if (num >= 0 && num <= (int) WallpaperNum.COTTON_CLOTH && num <= (int) instance.playerData.playerData.unlockedWallpaper)
+        {
+            instance.playerData.playerData.currentWallpaper = (WallpaperNum) num;
             GameObject.FindGameObjectsWithTag("Background")[0].GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<UnityEngine.Sprite>(GlobalConfig.wallpaperFileNames[num]);
+        }
         else
             GameObject.FindGameObjectsWithTag("Background")[0].GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<UnityEngine.Sprite>(GlobalConfig.wallpaperFileNames[0]);
     }
