@@ -1380,12 +1380,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5056492804983895858, guid: baebacd058f13434aab3dfb510febe36,
-        type: 3}
-      propertyPath: loadingScreen
-      value: 
-      objectReference: {fileID: 1733221441355444602, guid: dbf8e677ad3e3534a809808937c91bc9,
-        type: 3}
     - target: {fileID: 5056492804983895859, guid: baebacd058f13434aab3dfb510febe36,
         type: 3}
       propertyPath: m_LocalPosition.x

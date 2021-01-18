@@ -16,6 +16,8 @@ public class PersistentGameManager : MonoBehaviour
     TextAsset clickerData = null;
     [SerializeField]
     public AudioManager audioManager;
+    [SerializeField]
+    GameObject textPopup = null;
 
     void Start()
     {
@@ -281,7 +283,20 @@ public class PersistentGameManager : MonoBehaviour
             instance.playerData.playerData.clickerVideos[videos.Length - 1] > 0)
         {     
             instance.playerData.playerData.unlockedWallpaper = WallpaperNum.COOKIE_PAPER;
-            audioManager.PlaySound("bork");
+            audioManager.PlaySound("tada");
+            MakePopup("cookie paper unlocked!");
         }
+    }
+
+    public void MakePopup(string text)
+    {
+        GameObject popupInstance = Instantiate(textPopup);
+
+        popupInstance.transform.SetParent(GameObject.Find("Canvas").transform); //finding the canvas is such a bad idea lol
+        popupInstance.GetComponent<TMPro.TextMeshPro>().text = text;
+        popupInstance.transform.localScale = textPopup.transform.localScale;
+        popupInstance.GetComponent<Rigidbody2D>().velocity = new Vector3(Random.Range(-5f, 5f), Random.Range(5f, 10f), 0f);
+
+        Destroy(popupInstance, 2f);
     }
 }

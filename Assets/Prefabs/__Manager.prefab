@@ -48,9 +48,10 @@ MonoBehaviour:
   loadingScreen: {fileID: 1733221441355444602, guid: dbf8e677ad3e3534a809808937c91bc9,
     type: 3}
   currentScene: 0
-  loadedGame: 0
   playerData:
     playerData:
+      savefileVersionMajor: 0
+      savefileVersionMinor: 0
       hunger: 0
       boredom: 0
       weight: 0
@@ -64,9 +65,13 @@ MonoBehaviour:
       guessingEasyHiScore: 0
       guessingNormalHiScore: 0
       guessingHardHiScore: 0
+      unlockedWallpaper: 0
+      currentWallpaper: 0
   videos: []
   clickerData: {fileID: 4900000, guid: 8c5324903bb3ed94eb0859563c156751, type: 3}
   audioManager: {fileID: 5056492804983895856}
+  textPopup: {fileID: 1013398626277923218, guid: 88d472232213d564991cdbe7d89f25be,
+    type: 3}
 --- !u!114 &5056492804983895856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +217,15 @@ MonoBehaviour:
     pitch: 1
     volumeAdjustment: 0
     pitchAdjustment: 0.1
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: tada
+    clip: {fileID: 8300000, guid: 7bb42c1a7ed29624bab2fcb16fad1626, type: 3}
+    volume: 0.2
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0
     isSound: 1
     isMusic: 0
     loops: 0
