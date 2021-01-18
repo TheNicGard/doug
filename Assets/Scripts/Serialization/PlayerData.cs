@@ -14,8 +14,8 @@ public class PlayerData
     public float coinz;
     public int[] clickerVideos;
     public int[] clickerVideosComments;
-    public System.DateTime lastDate;
-    public System.DateTime acquisitionDate;
+    public SerializableDate lastDate;
+    public SerializableDate acquisitionDate;
     public bool unlockedGuessing;
     public bool unlockedChachaTrail;
     public int stardomBonus;

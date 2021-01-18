@@ -72,7 +72,6 @@ public class HomeScreenManager : MonoBehaviour
         dougSpriteDefaultPosition = doug.transform.position;
 
         coinzText.GetComponent<TextMeshProUGUI>().text = ClickerManager.ConvertToShortNumber(PersistentGameManager.instance.playerData.playerData.coinz) + " coinz";
-        //unlockPanel.transform.Find("Unlock Layout/No Button/Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.textColor;
         UpdateText();
         UpdateMinigameText();
         UpdateBars();
@@ -386,10 +385,10 @@ public class HomeScreenManager : MonoBehaviour
 
     public string GetAgeOfDoug()
     {
-        Debug.Log("acquisitionDate is " +  PersistentGameManager.instance.playerData.playerData.acquisitionDate.ToString() +
+        Debug.Log("acquisitionDate is " +  PersistentGameManager.instance.playerData.playerData.acquisitionDate.date.ToString() +
                     "\nnow is " + System.DateTime.UtcNow.ToString());
 
-        System.TimeSpan age = System.DateTime.UtcNow.Subtract(PersistentGameManager.instance.playerData.playerData.acquisitionDate);
+        System.TimeSpan age = System.DateTime.UtcNow.Subtract(PersistentGameManager.instance.playerData.playerData.acquisitionDate.date);
         //var age = new System.TimeSpan();
         Debug.Log("\nage is " + age.ToString());
         
@@ -549,13 +548,7 @@ public class HomeScreenManager : MonoBehaviour
 
     public void DebugButton()
     {
-        /*
-        PersistentGameManager.instance.ModifyStat(Stat.Weight, -200);
-        UpdateBars();
-        */
-        
-        PersistentGameManager.instance.playerData.playerData.currentWallpaper = (WallpaperNum) Random.Range(0, 6);
-        PersistentGameManager.instance.ChangeWallpaper((int) PersistentGameManager.instance.playerData.playerData.currentWallpaper);
-        //unlockWallpaper();
+        PersistentGameManager.instance.playerData.playerData.unlockedWallpaper = WallpaperNumMethods.getMaxWallpaperNum();
+        UpdateWallpaperButtons();
     }
 }

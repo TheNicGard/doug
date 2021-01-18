@@ -26,7 +26,7 @@ public class SaveData
             PlayerPrefs.DeleteAll();
             playerData.clickerVideos = new int [12] {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
             playerData.clickerVideosComments = new int [12] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-            playerData.lastDate = System.DateTime.UtcNow;
+            playerData.lastDate = new SerializableDate(){date = System.DateTime.UtcNow};
             playerData.unlockedGuessing = false;
             playerData.unlockedChachaTrail = false;
             playerData.stardomBonus = 0;
@@ -45,7 +45,11 @@ public class SaveData
         playerData.weight = 75;
         playerData.love = 0;
         playerData.coinz = 0f;
-        playerData.acquisitionDate = System.DateTime.UtcNow;
+        Debug.Log("[RESETTING, OLD]\nacquisitionDate is " +  PersistentGameManager.instance.playerData.playerData.acquisitionDate.ToString() +
+                    "\nnow is " + System.DateTime.UtcNow.ToString());
+        playerData.acquisitionDate = new SerializableDate(){date = System.DateTime.UtcNow};
+        Debug.Log("[RESETTING, NEW]\nacquisitionDate is " +  PersistentGameManager.instance.playerData.playerData.acquisitionDate.ToString() +
+                    "\nnow is " + System.DateTime.UtcNow.ToString());
         playerData.savefileVersionMajor = GlobalConfig.major_version;
         playerData.savefileVersionMajor = GlobalConfig.minor_version;
     }

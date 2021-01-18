@@ -51,7 +51,7 @@ public class PersistentGameManager : MonoBehaviour
         LoadSave();
         LoadClickerData();
 
-        int minutes = (int) System.DateTime.Now.Subtract(playerData.playerData.lastDate).TotalMinutes;
+        int minutes = (int) System.DateTime.UtcNow.Subtract(playerData.playerData.lastDate.date).TotalMinutes;
         for (int i = 0; i < minutes; i++)
             UpdateStats();
         InvokeRepeating("UpdateStats", 60f, 60f * 1f);
@@ -93,7 +93,7 @@ public class PersistentGameManager : MonoBehaviour
 
     public void SaveGame()
     {
-        playerData.playerData.lastDate = System.DateTime.Now;
+        playerData.playerData.lastDate = new SerializableDate(){date = System.DateTime.UtcNow};
         SerializationManager.Save("save", playerData);
     }
 
@@ -179,7 +179,7 @@ public class PersistentGameManager : MonoBehaviour
 
     public void ChangeWallpaper(int num)
     {
-        if (num >= 0 && num <= (int) WallpaperNum.COTTON_CLOTH && num <= (int) instance.playerData.playerData.unlockedWallpaper)
+        if (num >= 0 && num <= (int) WallpaperNumMethods.getMaxWallpaperNum() && num <= (int) instance.playerData.playerData.unlockedWallpaper)
         {
             instance.playerData.playerData.currentWallpaper = (WallpaperNum) num;
             GameObject.FindGameObjectsWithTag("Background")[0].GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<UnityEngine.Sprite>(GlobalConfig.wallpaperFileNames[num]);
