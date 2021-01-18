@@ -17,6 +17,8 @@ public class ClickerManager : MonoBehaviour
     GameObject buttonPrefab = null;
     [SerializeField]
     ParticleSystem particles = null;
+    [SerializeField]
+    ParticleSystem stardomParticles = null;
     
     private string[] soundNames = new string[] {"woof", "woof", "arf", "bark", "bork" };
     private int lastClickedVideo = 0;
@@ -26,6 +28,12 @@ public class ClickerManager : MonoBehaviour
     {
         coinzText.GetComponent<TextMeshProUGUI>().text = ConvertToShortNumber(PersistentGameManager.instance.playerData.playerData.coinz) + " coinz";
         UpdateTextColors();
+
+        var emission = stardomParticles.emission;
+        if (PersistentGameManager.instance.playerData.playerData.stardomBonus <= 100)
+            emission.rateOverTime = PersistentGameManager.instance.playerData.playerData.stardomBonus * 10f;
+        else
+            emission.rateOverTime = 1000f;
     }
 
     void Start()
@@ -43,6 +51,8 @@ public class ClickerManager : MonoBehaviour
         }
 
         UpdateText();
+        var emission = stardomParticles.emission;
+        emission.rateOverTime = 0f;
     }
 
     void OnDisable()
