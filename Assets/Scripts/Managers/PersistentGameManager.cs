@@ -278,7 +278,6 @@ public class PersistentGameManager : MonoBehaviour
 
     public void CheckUnlockCookieWallpaper()
     {
-        Debug.Log("number of doug flies: " + instance.playerData.playerData.clickerVideos[videos.Length - 1]);
         if (instance.playerData.playerData.unlockedWallpaper == WallpaperNumMethods.getMaxPurchasableWallpaperNum() &&
             instance.playerData.playerData.clickerVideos[videos.Length - 1] > 0)
         {     
