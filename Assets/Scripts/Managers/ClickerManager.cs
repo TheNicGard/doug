@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class ClickerManager : MonoBehaviour
 {
@@ -12,7 +13,11 @@ public class ClickerManager : MonoBehaviour
     [SerializeField]
     GameObject buttonScrollRect = null;
     [SerializeField]
+    GameObject videoScrollbar = null;
+    [SerializeField]
     GameObject videoButtons = null;
+    [SerializeField]
+    GameObject currentVideoTitle = null;
     [SerializeField]
     GameObject buttonPrefab = null;
     [SerializeField]
@@ -53,6 +58,9 @@ public class ClickerManager : MonoBehaviour
         UpdateText();
         var emission = stardomParticles.emission;
         emission.rateOverTime = 0f;
+
+        videoScrollbar.GetComponent<Scrollbar>().value = 1f;
+        buttonScrollRect.transform.Find("Button " + lastClickedVideo.ToString() + "/Video Indicator").gameObject.SetActive(true);
     }
 
     void OnDisable()
@@ -120,7 +128,10 @@ public class ClickerManager : MonoBehaviour
 
     public void AssignVideoButtons(int videoNumber)
     {
+        buttonScrollRect.transform.Find("Button " + lastClickedVideo.ToString() + "/Video Indicator").gameObject.SetActive(false);
         lastClickedVideo = videoNumber;
+        buttonScrollRect.transform.Find("Button " + lastClickedVideo.ToString() + "/Video Indicator").gameObject.SetActive(true);
+
         UpdateTextColors();
         videoButtons.transform.Find("Add Video Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text =
             "uplaod \"" + PersistentGameManager.instance.videos[videoNumber].title + "\":\n" + ConvertToShortNumber(requiredCoinz(videoNumber)) + " coinz";
@@ -133,9 +144,9 @@ public class ClickerManager : MonoBehaviour
         videoButtons.transform.Find("Buy Comment 1 Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text =
             (PersistentGameManager.instance.playerData.playerData.clickerVideosComments[videoNumber] >= 2) ? "(x2 cps) wow funny dog" : "buy comment:\n" + ConvertToShortNumber(CommentCost(videoNumber, 0)) + " coinz";
         videoButtons.transform.Find("Buy Comment 2 Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text =
-            (PersistentGameManager.instance.playerData.playerData.clickerVideosComments[videoNumber] >= 4) ? "(x2 cps) wow funny dog" : "buy comment:\n" + ConvertToShortNumber(CommentCost(videoNumber, 1)) + " coinz";
+            (PersistentGameManager.instance.playerData.playerData.clickerVideosComments[videoNumber] >= 4) ? "(x2 cps) haha it did the thing" : "buy comment:\n" + ConvertToShortNumber(CommentCost(videoNumber, 1)) + " coinz";
         videoButtons.transform.Find("Buy Comment 3 Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text =
-            (PersistentGameManager.instance.playerData.playerData.clickerVideosComments[videoNumber] >= 8) ? "(x2 cps) wow funny dog" : "buy comment:\n" + ConvertToShortNumber(CommentCost(videoNumber, 2)) + " coinz";
+            (PersistentGameManager.instance.playerData.playerData.clickerVideosComments[videoNumber] >= 8) ? "(x2 cps) amazign xD" : "buy comment:\n" + ConvertToShortNumber(CommentCost(videoNumber, 2)) + " coinz";
 
         for (int i = 0; i < 3; i++)
         {
@@ -175,6 +186,10 @@ public class ClickerManager : MonoBehaviour
         for (int i = 0; i < PersistentGameManager.instance.videos.Length; i++)
             buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject.transform.Find("Name Text").gameObject.GetComponent<TextMeshProUGUI>().color = 
                 (PersistentGameManager.instance.playerData.playerData.coinz > requiredCoinz(i)) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
+
+        string t = "{0}";
+        t = t.Replace("{0}", PersistentGameManager.instance.videos[lastClickedVideo].title);
+        currentVideoTitle.GetComponent<TextMeshProUGUI>().text = t;
 
         videoButtons.transform.Find("Add Video Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color =
             (PersistentGameManager.instance.playerData.playerData.coinz > requiredCoinz(lastClickedVideo)) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
