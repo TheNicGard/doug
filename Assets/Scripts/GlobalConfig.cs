@@ -42,6 +42,6 @@ public class GlobalConfig
         {WallpaperNum.COTTON_CLOTH, 5f}  
     };
     */
-    public static string[] wallpaperNames = {"printer sheet", "damagde printer sheet", "lined paper", "damaged lined paper", "paint wall", "cotton clothe"};
-    public static string[] wallpaperFileNames = {"printer", "damaged_printer", "notebook", "damaged_notebook", "paint", "cloth"};
+    public static string[] wallpaperNames = {"printer sheet", "damagde printer sheet", "lined paper", "damaged lined paper", "paint wall", "cotton clothe", "cookie paper"};
+    public static string[] wallpaperFileNames = {"printer", "damaged_printer", "notebook", "damaged_notebook", "paint", "cloth", "cookie_paper"};
 }

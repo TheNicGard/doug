@@ -17,4 +17,9 @@ static class WallpaperNumMethods
     {
         return System.Enum.GetValues(typeof(WallpaperNum)).Cast<WallpaperNum>().Max();
     }
+
+    public static WallpaperNum getMaxPurchasableWallpaperNum()
+    {
+        return WallpaperNum.COTTON_CLOTH; //must be manually updated
+    }
 }

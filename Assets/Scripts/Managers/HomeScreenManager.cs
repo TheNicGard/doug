@@ -112,9 +112,9 @@ public class HomeScreenManager : MonoBehaviour
     public void unlockWallpaper()
     {
         WallpaperNum currentWallpaper = PersistentGameManager.instance.playerData.playerData.unlockedWallpaper;
-        float nextCost = (currentWallpaper != WallpaperNum.COTTON_CLOTH) ? GlobalConfig.wallpaperCosts[currentWallpaper + 1] : 0;
+        float nextCost = (currentWallpaper < WallpaperNumMethods.getMaxPurchasableWallpaperNum()) ? GlobalConfig.wallpaperCosts[currentWallpaper + 1] : 0;
 
-        if (currentWallpaper != WallpaperNum.COTTON_CLOTH && PersistentGameManager.instance.playerData.playerData.coinz >= nextCost) 
+        if (currentWallpaper != WallpaperNumMethods.getMaxPurchasableWallpaperNum() && PersistentGameManager.instance.playerData.playerData.coinz >= nextCost) 
         {
             PersistentGameManager.instance.playerData.playerData.unlockedWallpaper++;
             PersistentGameManager.instance.playerData.playerData.coinz -= nextCost;
@@ -149,15 +149,15 @@ public class HomeScreenManager : MonoBehaviour
         if (panelName == "Store Panel")
         {
             WallpaperNum currentWallpaper = PersistentGameManager.instance.playerData.playerData.unlockedWallpaper;
-            float nextCost = (currentWallpaper != WallpaperNum.COTTON_CLOTH) ? GlobalConfig.wallpaperCosts[currentWallpaper + 1] : 0;
+            float nextCost = (currentWallpaper < WallpaperNumMethods.getMaxPurchasableWallpaperNum()) ? GlobalConfig.wallpaperCosts[currentWallpaper + 1] : 0;
 
             buyText.GetComponent<TextMeshProUGUI>().color =
-                (PersistentGameManager.instance.playerData.playerData.coinz >= ((currentWallpaper != WallpaperNum.COTTON_CLOTH) ? GlobalConfig.wallpaperCosts[currentWallpaper + 1] : 0))
+                (PersistentGameManager.instance.playerData.playerData.coinz >= ((currentWallpaper < WallpaperNumMethods.getMaxPurchasableWallpaperNum()) ? GlobalConfig.wallpaperCosts[currentWallpaper + 1] : 0))
                 ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
 
             string t = "buy {0}:\n{1} coinz";
 
-            if ((int) currentWallpaper < (int) WallpaperNum.COTTON_CLOTH)
+            if ((int) currentWallpaper < (int) WallpaperNumMethods.getMaxPurchasableWallpaperNum())
                 t = t.Replace("{0}", GlobalConfig.wallpaperNames[(int) currentWallpaper + 1]);
             else
                 t = "all wallpapers have been bought!";
@@ -531,7 +531,7 @@ public class HomeScreenManager : MonoBehaviour
 
     public void UpdateWallpaperButtons()
     {
-        for (int i = 1; i < 6; i++) //TODO: this is the total number of wallpapers
+        for (int i = 1; i < (int) WallpaperNumMethods.getMaxWallpaperNum() + 1; i++)
         {
             if ((int) PersistentGameManager.instance.playerData.playerData.unlockedWallpaper >= i)
             {
@@ -548,7 +548,8 @@ public class HomeScreenManager : MonoBehaviour
 
     public void DebugButton()
     {
-        PersistentGameManager.instance.playerData.playerData.unlockedWallpaper = WallpaperNumMethods.getMaxWallpaperNum();
+        PersistentGameManager.instance.playerData.playerData.unlockedWallpaper = WallpaperNumMethods.getMaxPurchasableWallpaperNum();
+        PersistentGameManager.instance.playerData.playerData.coinz += 10000000000000000f;
         UpdateWallpaperButtons();
     }
 }

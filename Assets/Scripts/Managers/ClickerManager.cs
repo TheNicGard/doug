@@ -39,6 +39,8 @@ public class ClickerManager : MonoBehaviour
             emission.rateOverTime = PersistentGameManager.instance.playerData.playerData.stardomBonus * 10f;
         else
             emission.rateOverTime = 1000f;
+
+        PersistentGameManager.instance.CheckUnlockCookieWallpaper();
     }
 
     void Start()
