@@ -257,4 +257,17 @@ public class PersistentGameManager : MonoBehaviour
             }
         }
     }
+
+    public void LoadWallpaperButtons()
+    {
+        GameObject[] go = (GameObject[]) Resources.FindObjectsOfTypeAll(typeof(GameObject));
+        foreach (GameObject g in go)
+        {   
+            if (g.tag == "Button" && g.name.Contains("Wallpaper"))
+            {
+                int wallpaperButtonNum = System.Convert.ToInt32(g.name[g.name.Length - 1].ToString());
+                g.GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() => {PersistentGameManager.instance.ChangeWallpaper(wallpaperButtonNum - 1);});
+            }
+        }
+    }
 }

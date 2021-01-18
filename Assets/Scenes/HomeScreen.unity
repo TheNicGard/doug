@@ -2723,18 +2723,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 370302457}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2009573159}
-        m_MethodName: ChangeWallpaper
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 4
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &370302457
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6361,18 +6350,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 925160470}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2009573159}
-        m_MethodName: ChangeWallpaper
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 1
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &925160470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8298,18 +8276,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1139377835}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2009573159}
-        m_MethodName: ChangeWallpaper
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1139377835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9156,18 +9123,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1255971521}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2009573159}
-        m_MethodName: ChangeWallpaper
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 5
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1255971521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10071,18 +10027,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1371496432}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2009573159}
-        m_MethodName: ChangeWallpaper
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 2
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1371496432
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12168,18 +12113,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1720899131}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2009573159}
-        m_MethodName: ChangeWallpaper
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 3
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1720899131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14747,18 +14681,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2009573159 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5056492804983895858, guid: baebacd058f13434aab3dfb510febe36,
-    type: 3}
-  m_PrefabInstance: {fileID: 289972675}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3821ee009d85f3a4499bab96311b55c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2029529169
 PrefabInstance:
   m_ObjectHideFlags: 0

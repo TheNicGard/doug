@@ -79,6 +79,7 @@ public class HomeScreenManager : MonoBehaviour
         PersistentGameManager.instance.SaveGame();
         CheckDeactivateDoug();
         UpdateWallpaperButtons();
+        PersistentGameManager.instance.LoadWallpaperButtons();
     }
 
     // Update is called once per frame
@@ -373,7 +374,8 @@ public class HomeScreenManager : MonoBehaviour
 
     public float GetDougWeightScale()
     {
-        float weight = (float)PersistentGameManager.instance.playerData.playerData.weight / (float)GlobalConfig.maxWeight;
+        float weight = (float) PersistentGameManager.instance.playerData.playerData.weight / (float) GlobalConfig.maxWeight;
+
         if (weight < 0.25)
             return (weight * 2f) + .5f;
         else if (weight > 0.75)
@@ -384,9 +386,12 @@ public class HomeScreenManager : MonoBehaviour
 
     public string GetAgeOfDoug()
     {
+        Debug.Log("acquisitionDate is " +  PersistentGameManager.instance.playerData.playerData.acquisitionDate.ToString() +
+                    "\nnow is " + System.DateTime.UtcNow.ToString());
+
         System.TimeSpan age = System.DateTime.UtcNow.Subtract(PersistentGameManager.instance.playerData.playerData.acquisitionDate);
-        Debug.Log("now is " + System.DateTime.UtcNow.ToString() + ", acquisitionDate is " +
-        PersistentGameManager.instance.playerData.playerData.acquisitionDate.ToString() + ", age is " + age.ToString());
+        //var age = new System.TimeSpan();
+        Debug.Log("\nage is " + age.ToString());
         
         if (age.TotalDays < 1)
         {
