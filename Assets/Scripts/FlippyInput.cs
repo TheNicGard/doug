@@ -19,13 +19,6 @@ public class FlippyInput : MonoBehaviour
         originalScale = gameObject.transform.localScale;
     }
 
-    public void ResetGame()
-    {
-        /*
-        gameObject.transform.position = originalPosition;
-        */
-    }
-
     // Update is called once per frame
     void Update()
     {
@@ -69,7 +62,6 @@ public class FlippyInput : MonoBehaviour
                 if (manager.GetComponent<FlippyManager>().playerIsPlaying)
                 {
                     manager.GetComponent<FlippyManager>().playerIsPlaying = false;
-                    Time.timeScale = 0f;
                 }     
             }
         }

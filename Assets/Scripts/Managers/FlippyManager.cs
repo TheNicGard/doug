@@ -28,7 +28,6 @@ public class FlippyManager : MonoBehaviour
     {
         respawnTimeAdjustmentAdjusted = respawnAdjustment / 2f;
         StartCoroutine(SpawnCycle());
-        Time.timeScale = 0f;
         UpdateText();
     }
 
@@ -37,9 +36,18 @@ public class FlippyManager : MonoBehaviour
     {
         
     }
+    public void GoToHomeScreen()
+    {
+        PersistentGameManager.instance.SwitchScene((int) SceneIndexes.HOME_SCREEN);
+    }
 
     public void StartGame()
     {
+        GameObject[] pipes = GameObject.FindGameObjectsWithTag("Pipe");
+        GameObject[] pipeColliders = GameObject.FindGameObjectsWithTag("Pipe Collider");
+        foreach (GameObject p in pipes) Destroy(p);
+        foreach (GameObject pc in pipeColliders) Destroy(pc);
+
         startButton.SetActive(false);
         infoButton.SetActive(false);
         Destroy(doug);
@@ -48,18 +56,13 @@ public class FlippyManager : MonoBehaviour
         doug.transform.localScale = dougPrefab.transform.localScale;
         doug.transform.localPosition = dougPrefab.transform.localPosition;
         doug.GetComponent<FlippyInput>().manager = gameObject;
+        doug.GetComponent<Rigidbody2D>().gravityScale = 1f;
         
         playerIsDead = false;
-        Time.timeScale = 1f;
         playerIsPlaying = true;
         
         score = 0;
         UpdateText();
-
-        GameObject[] pipes = GameObject.FindGameObjectsWithTag("Pipe");
-        GameObject[] pipeColliders = GameObject.FindGameObjectsWithTag("Pipe Collider");
-        foreach (GameObject p in pipes) Destroy(p);
-        foreach (GameObject pc in pipeColliders) Destroy(pc);
     }
 
     public void PlayerScored()
@@ -67,6 +70,8 @@ public class FlippyManager : MonoBehaviour
         score++;
         PersistentGameManager.instance.audioManager.PlaySound("arf");
         UpdateText();
+        if (score % 5 == 0)
+            PersistentGameManager.instance.ModifyStat(Stat.Boredom, -3);
     }
 
     public void PlayerDied()
@@ -108,7 +113,8 @@ public class FlippyManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(respawnTime + Random.Range(-respawnTimeAdjustmentAdjusted, respawnTimeAdjustmentAdjusted));
-            SpawnPipes();
+            if (playerIsPlaying)  
+                SpawnPipes();
         }
     }
 }

@@ -24,10 +24,10 @@ public class PanelBounce : MonoBehaviour
 
     public void Close()
     {
-        LeanTween.scale(gameObject, new Vector3(0f, 0f, 0f), 0.1f).setOnComplete(ActuallyClose);
+        LeanTween.scale(gameObject, Vector3.zero, 0.1f).setOnComplete(DisablePanel);
     }
 
-    private void ActuallyClose() //TODO: i'm defintely doing something wrong here
+    private void DisablePanel() //TODO: i'm defintely doing something wrong here
     {
         gameObject.SetActive(false);
     }
