@@ -1,0 +1,44 @@
+{
+    "name": "New Controls",
+    "maps": [
+        {
+            "name": "New action map",
+            "id": "65596687-5b9c-4605-80ad-c7dbce0a23c2",
+            "actions": [
+                {
+                    "name": "Flap",
+                    "type": "Button",
+                    "id": "e069af48-18e7-4c22-8d3d-1434e4af58e9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "89e7ff51-6bbb-466c-9d50-cd896a173c13",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "414282ba-d25a-47ef-9a8e-f8c81dba4d34",
+                    "path": "<Touchscreen>/primaryTouch/tap",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

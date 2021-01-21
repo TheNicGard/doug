@@ -22,6 +22,7 @@ public class PlayerData
     public int guessingEasyHiScore;
     public int guessingNormalHiScore;
     public int guessingHardHiScore;
+    public int flippyHiScore;
     public WallpaperNum unlockedWallpaper;
     public WallpaperNum currentWallpaper;
 }

@@ -65,6 +65,7 @@ MonoBehaviour:
       guessingEasyHiScore: 0
       guessingNormalHiScore: 0
       guessingHardHiScore: 0
+      flippyHiScore: 0
       unlockedWallpaper: 0
       currentWallpaper: 0
   videos: []
@@ -226,6 +227,15 @@ MonoBehaviour:
     pitch: 1
     volumeAdjustment: 0
     pitchAdjustment: 0
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: flap
+    clip: {fileID: 8300000, guid: c4fff54ebd1aa34438f4208fb9c8dd4c, type: 3}
+    volume: 0.5
+    pitch: 1
+    volumeAdjustment: 0
+    pitchAdjustment: 0.2
     isSound: 1
     isMusic: 0
     loops: 0

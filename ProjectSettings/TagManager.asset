@@ -8,6 +8,10 @@ TagManager:
   - Close Button
   - Button
   - Background
+  - Pipe Collider
+  - Pipe
+  - Ground
+  - Death Floor
   layers:
   - Default
   - TransparentFX
@@ -17,7 +21,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Object
   - 
   - 
   - 
@@ -44,4 +48,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 2598301557
+    locked: 0
+  - name: Object
+    uniqueID: 2447155569
     locked: 0
