@@ -37,7 +37,7 @@ public class HomeScreenManager : MonoBehaviour
     [SerializeField]
     GameObject guessingGameButton = null;
     [SerializeField]
-    GameObject chachaGameButton = null;
+    GameObject flippyGameButton = null;
 
     [SerializeField]
     Canvas canvas = null;
@@ -79,6 +79,8 @@ public class HomeScreenManager : MonoBehaviour
         CheckDeactivateDoug();
         UpdateWallpaperButtons();
         PersistentGameManager.instance.LoadWallpaperButtons();
+
+        
     }
 
     // Update is called once per frame
@@ -100,9 +102,9 @@ public class HomeScreenManager : MonoBehaviour
                 else
                     OpenUnlockPanel();
                 break;
-            case "Chacha Trail":
-                if (PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail)
-                    MakePopup("NYI!");
+            case "Flippy":
+                if (PersistentGameManager.instance.playerData.playerData.unlockedFlippy)
+                    PersistentGameManager.instance.SwitchScene((int) SceneIndexes.FLIPPY);
                 else if (PersistentGameManager.instance.playerData.playerData.unlockedGuessing)
                     OpenUnlockPanel();
                 break;
@@ -275,19 +277,19 @@ public class HomeScreenManager : MonoBehaviour
         else
             toggleAdsButtonText.GetComponent<TextMeshProUGUI>().text = "ads: off";
 
-        if (PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail)
+        if (PersistentGameManager.instance.playerData.playerData.unlockedFlippy)
             unlockPanel.transform.Find("Unlock Text").GetComponent<TextMeshProUGUI>().text = "you shouldn't be able to see this!";
-        else if (PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail)
+        else if (PersistentGameManager.instance.playerData.playerData.unlockedGuessing)
         {
             unlockPanel.transform.Find("Unlock Layout/Yes Button/Text (TMP)").GetComponent<TextMeshProUGUI>().color =
                 (PersistentGameManager.instance.playerData.playerData.love > 100f) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
-            unlockPanel.transform.Find("Unlock Text").GetComponent<TextMeshProUGUI>().text = "spend 100 luv to unlock Chacha Trail?";
+            unlockPanel.transform.Find("Unlock Text").GetComponent<TextMeshProUGUI>().text = "spend 100 luv to unlock flippy doug?";
         }
         else
         {
             unlockPanel.transform.Find("Unlock Layout/Yes Button/Text (TMP)").GetComponent<TextMeshProUGUI>().color =
                 (PersistentGameManager.instance.playerData.playerData.love > 100f) ? GlobalConfig.textColor : GlobalConfig.disabledTextColor;
-            unlockPanel.transform.Find("Unlock Text").GetComponent<TextMeshProUGUI>().text = "spend 100 luv to unlock Find the Bisco?";
+            unlockPanel.transform.Find("Unlock Text").GetComponent<TextMeshProUGUI>().text = "spend 100 luv to unlock find the bisco?";
         }    
     }
 
@@ -406,7 +408,7 @@ public class HomeScreenManager : MonoBehaviour
     public void UnlockMinigame(int num)
     {
         bool unlockedGuessing = PersistentGameManager.instance.playerData.playerData.unlockedGuessing;
-        bool unlockedChachaTrail = PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail;
+        bool unlockedFlippy = PersistentGameManager.instance.playerData.playerData.unlockedFlippy;
 
         if (num == 1 && !unlockedGuessing && PersistentGameManager.instance.playerData.playerData.love >= 100)
         {
@@ -420,23 +422,23 @@ public class HomeScreenManager : MonoBehaviour
             GoToScene("Guessing");
         }
 
-        else if (num == 2 && !unlockedChachaTrail && unlockedGuessing && PersistentGameManager.instance.playerData.playerData.love >= 100)
+        else if (num == 2 && !unlockedFlippy && unlockedGuessing && PersistentGameManager.instance.playerData.playerData.love >= 100)
         {
             PersistentGameManager.instance.ModifyStat(Stat.Love, -105);
-            PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail = true;
+            PersistentGameManager.instance.playerData.playerData.unlockedFlippy = true;
             UpdateText();
             UpdateMinigameText();
             PersistentGameManager.instance.SaveGame();
-            Debug.Log("unlocked chacha: " + PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail.ToString());
+            Debug.Log("unlocked chacha: " + PersistentGameManager.instance.playerData.playerData.unlockedFlippy.ToString());
             unlockPanel.SetActive(false);
-            GoToScene("Chacha Trail");
+            GoToScene("Flippy");
         }
     }
 
     public void UpdateMinigameText()
     {
         bool unlockedGuessing = PersistentGameManager.instance.playerData.playerData.unlockedGuessing;
-        bool unlockedChachaTrail = PersistentGameManager.instance.playerData.playerData.unlockedChachaTrail;
+        bool unlockedChachaTrail = PersistentGameManager.instance.playerData.playerData.unlockedFlippy;
 
         if (unlockedGuessing)
         {
@@ -446,22 +448,22 @@ public class HomeScreenManager : MonoBehaviour
 
             if (unlockedChachaTrail)
             {
-                chachaGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.textColor;
-                chachaGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "chacha trail";
-                chachaGameButton.transform.Find("Unlock Text").gameObject.SetActive(false);
+                flippyGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.textColor;
+                flippyGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "flippy doug";
+                flippyGameButton.transform.Find("Unlock Text").gameObject.SetActive(false);
             }
             else
             {
-                chachaGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.disabledTextColor;
-                chachaGameButton.transform.Find("Unlock Text").gameObject.SetActive(true);
+                flippyGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.disabledTextColor;
+                flippyGameButton.transform.Find("Unlock Text").gameObject.SetActive(true);
             }
         }
         else
         {
             guessingGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.disabledTextColor;
             guessingGameButton.transform.Find("Unlock Text").gameObject.SetActive(true);
-            chachaGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.disabledTextColor;
-            chachaGameButton.transform.Find("Unlock Text").gameObject.SetActive(true);
+            flippyGameButton.transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().color = GlobalConfig.disabledTextColor;
+            flippyGameButton.transform.Find("Unlock Text").gameObject.SetActive(true);
         }        
     }
 
@@ -550,6 +552,7 @@ public class HomeScreenManager : MonoBehaviour
     {
         PersistentGameManager.instance.playerData.playerData.unlockedWallpaper = WallpaperNumMethods.getMaxPurchasableWallpaperNum();
         PersistentGameManager.instance.playerData.playerData.coinz += 10000000000000000f;
+        PersistentGameManager.instance.ModifyStat(Stat.Love, 105);
         UpdateWallpaperButtons();
     }
 }

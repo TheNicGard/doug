@@ -17,7 +17,7 @@ public class PlayerData
     public SerializableDate lastDate;
     public SerializableDate acquisitionDate;
     public bool unlockedGuessing;
-    public bool unlockedChachaTrail;
+    public bool unlockedFlippy;
     public int stardomBonus;
     public int guessingEasyHiScore;
     public int guessingNormalHiScore;

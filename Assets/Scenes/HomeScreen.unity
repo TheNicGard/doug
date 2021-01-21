@@ -7686,7 +7686,7 @@ MonoBehaviour:
   weightStat: {fileID: 600664857}
   loveStat: {fileID: 696357468}
   guessingGameButton: {fileID: 1854177570}
-  chachaGameButton: {fileID: 1614062322}
+  flippyGameButton: {fileID: 1614062322}
   canvas: {fileID: 856991553}
   doug: {fileID: 862535995}
   textPopup: {fileID: 1013398626277923218, guid: 88d472232213d564991cdbe7d89f25be,
@@ -11236,7 +11236,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Chacha Trail
+          m_StringArgument: Flippy
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1614062325

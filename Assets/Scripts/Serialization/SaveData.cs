@@ -28,7 +28,7 @@ public class SaveData
             playerData.clickerVideosComments = new int [12] {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
             playerData.lastDate = new SerializableDate(){date = System.DateTime.UtcNow};
             playerData.unlockedGuessing = false;
-            playerData.unlockedChachaTrail = false;
+            playerData.unlockedFlippy = false;
             playerData.stardomBonus = 0;
             playerData.unlockedWallpaper = (WallpaperNum) 0;
             playerData.currentWallpaper = (WallpaperNum) 0;
@@ -76,7 +76,7 @@ public class SaveData
         temp += "}\n";
 
         temp += "Unlocked Guessing Game: " + playerData.unlockedGuessing.ToString() + "\n";
-        temp += "Unlocked Chacha Trail: " + playerData.unlockedChachaTrail.ToString() + "\n";
+        temp += "Unlocked Flippy: " + playerData.unlockedFlippy.ToString() + "\n";
 
         return temp;
     }

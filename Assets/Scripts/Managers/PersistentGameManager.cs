@@ -169,6 +169,9 @@ public class PersistentGameManager : MonoBehaviour
             case (int) SceneIndexes.GUESSING:
                 ModifyStat(Stat.Weight, -1);
                 break;
+            case (int) SceneIndexes.FLIPPY:
+                ModifyStat(Stat.Weight, -1);
+                break;
         }
 
         SaveGame();
@@ -243,6 +246,9 @@ public class PersistentGameManager : MonoBehaviour
                 break;
             case (int) SceneIndexes.CLICKER:
                 audioManager.PlaySound("carefree");
+                break;
+            case (int) SceneIndexes.FLIPPY:
+                audioManager.StopMusic();
                 break;
         }
     }

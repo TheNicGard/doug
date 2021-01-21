@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Guessing.unity
     guid: ec61d54d725c6f44fadcb3eafe94e491
+  - enabled: 1
+    path: Assets/Scenes/Flippy.unity
+    guid: 82a20d036be33da4e8932e8564b41aa3
   m_configObjects: {}
