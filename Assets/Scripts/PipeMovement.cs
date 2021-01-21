@@ -9,7 +9,6 @@ public class PipeMovement : MonoBehaviour
     [SerializeField] float speed = 10f;
     [SerializeField] Rigidbody2D rb = null;
     private FlippyManager manager = null;
-    private bool moving = true;
 
     // Start is called before the first frame update
     void Start()
