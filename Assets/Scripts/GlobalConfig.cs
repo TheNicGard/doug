@@ -2,9 +2,6 @@
 
 public class GlobalConfig
 {
-    public static int major_version = 1;
-    public static int minor_version = 0;
-    
     public static int maxHunger = 100;
     public static int maxBoredom = 100;
     public static int maxWeight = 200;

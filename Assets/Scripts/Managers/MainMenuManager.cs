@@ -10,7 +10,7 @@ public class MainMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        versionNumberText.GetComponent<TMPro.TextMeshProUGUI>().text = "v. " + GlobalConfig.major_version + "." + GlobalConfig.minor_version;
+        versionNumberText.GetComponent<TMPro.TextMeshProUGUI>().text = "v. " + Application.version;
     }
 
     bool instantiated = false;
@@ -19,8 +19,7 @@ public class MainMenuManager : MonoBehaviour
     {
         if (!instantiated && PersistentGameManager.instance != null)
         {
-            if (GlobalConfig.major_version != PersistentGameManager.instance.playerData.playerData.savefileVersionMajor &&
-            GlobalConfig.minor_version != PersistentGameManager.instance.playerData.playerData.savefileVersionMinor)
+            if (Application.version != PersistentGameManager.instance.playerData.playerData.savefileVersion)
             versionNoticeText.SetActive(true);
             instantiated = true;
         }

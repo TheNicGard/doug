@@ -50,8 +50,7 @@ public class SaveData
         playerData.acquisitionDate = new SerializableDate(){date = System.DateTime.UtcNow};
         Debug.Log("[RESETTING, NEW]\nacquisitionDate is " +  PersistentGameManager.instance.playerData.playerData.acquisitionDate.ToString() +
                     "\nnow is " + System.DateTime.UtcNow.ToString());
-        playerData.savefileVersionMajor = GlobalConfig.major_version;
-        playerData.savefileVersionMajor = GlobalConfig.minor_version;
+        playerData.savefileVersion = Application.version;
     }
 
     override public string ToString()
