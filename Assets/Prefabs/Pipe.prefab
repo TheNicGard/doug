@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 2678538444211427554}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 138.62779}
-  m_LocalScale: {x: 0.022230906, y: 0.7222223, z: 0.011284724}
+  m_LocalScale: {x: 5, y: 97.50001, z: 0.011284724}
   m_Children: []
   m_Father: {fileID: 2678538444680156742}
   m_RootOrder: 2
@@ -77,10 +77,10 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bda17ef1bf8fde14180ef536abe94c64, type: 3}
-  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+  m_Color: {r: 0.22, g: 0.22, b: 0.22, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 1
   m_Size: {x: 0.16, y: 0.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -107,11 +107,11 @@ BoxCollider2D:
     oldSize: {x: 38.399998, y: 21.599998}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 38.399998, y: 21.599998}
+  m_Size: {x: 0.15, y: 0.16}
   m_EdgeRadius: 0
 --- !u!1 &2678538444680156743
 GameObject:
@@ -124,7 +124,7 @@ GameObject:
   - component: {fileID: 2678538444680156742}
   - component: {fileID: 2678538444680156745}
   - component: {fileID: 2678538444680156744}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Pipe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 6
-  manager: {fileID: 0}
   rb: {fileID: 2678538444680156745}
 --- !u!1 &2678538445098451688
 GameObject:
@@ -211,7 +210,7 @@ RectTransform:
   m_GameObject: {fileID: 2678538445098451688}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 138.62779}
-  m_LocalScale: {x: 0.022230906, y: 0.7222223, z: 0.011284724}
+  m_LocalScale: {x: 5, y: 97.50001, z: 0.011284724}
   m_Children: []
   m_Father: {fileID: 2678538444680156742}
   m_RootOrder: 0
@@ -261,10 +260,10 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: bda17ef1bf8fde14180ef536abe94c64, type: 3}
-  m_Color: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
+  m_Color: {r: 0.22, g: 0.22, b: 0.22, a: 1}
   m_FlipX: 0
   m_FlipY: 0
-  m_DrawMode: 0
+  m_DrawMode: 1
   m_Size: {x: 0.16, y: 0.16}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
@@ -291,11 +290,11 @@ BoxCollider2D:
     oldSize: {x: 38.399998, y: 21.599998}
     newSize: {x: 0.16, y: 0.16}
     adaptiveTilingThreshold: 0.5
-    drawMode: 0
+    drawMode: 1
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 38.399998, y: 21.599998}
+  m_Size: {x: 0.15, y: 0.16}
   m_EdgeRadius: 0
 --- !u!1 &2678538445475304558
 GameObject:

@@ -28,7 +28,7 @@ public class FlippyInput : MonoBehaviour
         if (manager.GetComponent<FlippyManager>().playerIsPlaying && !manager.GetComponent<FlippyManager>().playerIsDead)
         {
             // these are hardcoded based on the velocity used during testing; let's hope it doesn't change
-            gameObject.transform.eulerAngles = new Vector3(0f, 0f, (3.4f * rb.velocity.y) + 1.2f);
+            //gameObject.transform.eulerAngles = new Vector3(0f, 0f, (3.4f * rb.velocity.y) + 1.2f);
 
             if ((mouse != null && mouse.leftButton.wasPressedThisFrame) || (touchscreen != null && touchscreen.press.wasPressedThisFrame))
             {
@@ -42,6 +42,8 @@ public class FlippyInput : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("collided with: " + other.gameObject.tag);
+
         if (!manager.GetComponent<FlippyManager>().playerIsDead)
         {
             if (other.gameObject.tag == "Pipe" || other.gameObject.tag == "Ground")

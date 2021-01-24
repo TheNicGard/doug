@@ -20,6 +20,7 @@ public class FlippyManager : MonoBehaviour
     [SerializeField] GameObject startButton = null;
     [SerializeField] GameObject startButtonText = null;
     [SerializeField] GameObject infoButton = null;
+    [SerializeField] GameObject ground = null;
     private Transform originalTransform;
     
 
@@ -29,6 +30,8 @@ public class FlippyManager : MonoBehaviour
         respawnTimeAdjustmentAdjusted = respawnAdjustment / 2f;
         StartCoroutine(SpawnCycle());
         UpdateText();
+        ground.GetComponent<UnityEngine.UI.Image>().sprite =
+            Resources.Load<UnityEngine.Sprite>(GlobalConfig.wallpaperFileNames[(int) PersistentGameManager.instance.playerData.playerData.currentWallpaper]);
     }
 
     // Update is called once per frame
@@ -36,6 +39,7 @@ public class FlippyManager : MonoBehaviour
     {
         
     }
+    
     public void GoToHomeScreen()
     {
         PersistentGameManager.instance.SwitchScene((int) SceneIndexes.HOME_SCREEN);
