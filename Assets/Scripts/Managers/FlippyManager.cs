@@ -22,6 +22,7 @@ public class FlippyManager : MonoBehaviour
     [SerializeField] GameObject infoButton = null;
     [SerializeField] GameObject ground = null;
     private Transform originalTransform;
+    public int pipeValue = 0;
     
 
     // Start is called before the first frame update
@@ -47,6 +48,8 @@ public class FlippyManager : MonoBehaviour
 
     public void StartGame()
     {
+        pipeValue = 0;
+
         GameObject[] pipes = GameObject.FindGameObjectsWithTag("Pipe");
         GameObject[] pipeColliders = GameObject.FindGameObjectsWithTag("Pipe Collider");
         foreach (GameObject p in pipes) Destroy(p);
@@ -69,13 +72,16 @@ public class FlippyManager : MonoBehaviour
         UpdateText();
     }
 
-    public void PlayerScored()
+    public void PlayerScored(int pipeValue)
     {
-        score++;
-        PersistentGameManager.instance.audioManager.PlaySound("arf");
-        UpdateText();
-        if (score % 5 == 0)
-            PersistentGameManager.instance.ModifyStat(Stat.Boredom, -3);
+        if (pipeValue > score)
+        {
+            score++;
+            PersistentGameManager.instance.audioManager.PlaySound("arf");
+            UpdateText();
+            if (score % 5 == 0)
+                PersistentGameManager.instance.ModifyStat(Stat.Boredom, -3);
+        }
     }
 
     public void PlayerDied()
