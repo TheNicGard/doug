@@ -1206,6 +1206,7 @@ MonoBehaviour:
   startButtonText: {fileID: 1476336040}
   infoButton: {fileID: 1491453561}
   ground: {fileID: 1601390891}
+  pipeValue: 0
 --- !u!4 &1295442761
 Transform:
   m_ObjectHideFlags: 0
@@ -1721,7 +1722,7 @@ PrefabInstance:
     - target: {fileID: 2062532048628376420, guid: 359dbbdbad6aa4c4ead770509b8f434d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.29999924
+      value: 0.30000305
       objectReference: {fileID: 0}
     - target: {fileID: 2062532048718850107, guid: 359dbbdbad6aa4c4ead770509b8f434d,
         type: 3}
@@ -2205,7 +2206,7 @@ PrefabInstance:
     - target: {fileID: 2678538444680156743, guid: 3f2d2f290a3561d4fa38c87d9834a7bb,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2678538444680156744, guid: 3f2d2f290a3561d4fa38c87d9834a7bb,
         type: 3}
