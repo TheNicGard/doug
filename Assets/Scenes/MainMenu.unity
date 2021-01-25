@@ -1718,12 +1718,12 @@ PrefabInstance:
     - target: {fileID: 2062532047588583127, guid: 359dbbdbad6aa4c4ead770509b8f434d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -105.2
+      value: 260.8
       objectReference: {fileID: 0}
     - target: {fileID: 2062532047588583127, guid: 359dbbdbad6aa4c4ead770509b8f434d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 464.7
+      value: -429.85
       objectReference: {fileID: 0}
     - target: {fileID: 2062532047661963346, guid: 359dbbdbad6aa4c4ead770509b8f434d,
         type: 3}
@@ -1758,6 +1758,16 @@ PrefabInstance:
         by Kevin MacLeod\r\nLink: https://incompetech.filmmusic.io/song/5050-wholesome\r\nLicense:
         http://creativecommons.org/licenses/by/4.0/\r"
       objectReference: {fileID: 0}
+    - target: {fileID: 2062532048624288250, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062532048624288250, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2062532048628376420, guid: 359dbbdbad6aa4c4ead770509b8f434d,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -1776,7 +1786,27 @@ PrefabInstance:
     - target: {fileID: 2062532048628376420, guid: 359dbbdbad6aa4c4ead770509b8f434d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: -20.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062532048718850107, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062532048718850107, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062532048718850107, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062532048718850107, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4821220559696679973, guid: 359dbbdbad6aa4c4ead770509b8f434d,
         type: 3}
@@ -1841,12 +1871,12 @@ PrefabInstance:
     - target: {fileID: 4821220560158158589, guid: 359dbbdbad6aa4c4ead770509b8f434d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 4821220560158158589, guid: 359dbbdbad6aa4c4ead770509b8f434d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 4821220560158158589, guid: 359dbbdbad6aa4c4ead770509b8f434d,
         type: 3}
@@ -1861,22 +1891,22 @@ PrefabInstance:
     - target: {fileID: 4821220560158158589, guid: 359dbbdbad6aa4c4ead770509b8f434d,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4821220560158158589, guid: 359dbbdbad6aa4c4ead770509b8f434d,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4821220560158158589, guid: 359dbbdbad6aa4c4ead770509b8f434d,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4821220560158158589, guid: 359dbbdbad6aa4c4ead770509b8f434d,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4821220560158158589, guid: 359dbbdbad6aa4c4ead770509b8f434d,
         type: 3}
