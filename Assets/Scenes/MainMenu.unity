@@ -1700,6 +1700,89 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2053554705}
     m_Modifications:
+    - target: {fileID: 2062532047588583126, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062532047588583127, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 868.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062532047588583127, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 522.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062532047588583127, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -105.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062532047588583127, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 464.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062532047661963346, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_Spacing
+      value: -262.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062532047901079104, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062532047901079104, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062532047901079104, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 434.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062532047901079104, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -95.55
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062532047901079105, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_text
+      value: "Music Credits:\r\n\"Carefree\"\r\nKevin MacLeod (incompetech.com)\r\nLicensed
+        under Creative Commons: By Attribution 3.0\r\nhttp://creativecommons.org/licenses/by/3.0/\r\n\r\nWholesome
+        by Kevin MacLeod\r\nLink: https://incompetech.filmmusic.io/song/5050-wholesome\r\nLicense:
+        http://creativecommons.org/licenses/by/4.0/\r"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062532048628376420, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062532048628376420, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062532048628376420, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 434.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2062532048628376420, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821220559696679973, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4821220560158158589, guid: 359dbbdbad6aa4c4ead770509b8f434d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1809,6 +1892,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Info Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 4821220560287643061, guid: 359dbbdbad6aa4c4ead770509b8f434d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 359dbbdbad6aa4c4ead770509b8f434d, type: 3}
