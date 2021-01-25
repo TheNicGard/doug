@@ -44,7 +44,7 @@ public class PersistentGameManager : MonoBehaviour
         DontDestroyOnLoad(instance);
         DontDestroyOnLoad(loadingScreen);
 
-        Advertisement.Initialize(AdConfig.monetizeProjectID, true);
+        Advertisement.Initialize(AdConfig.monetizeProjectID, Debug.isDebugBuild);
 
         playerData = new SaveData();
         playerData.playerData = new PlayerData();
@@ -167,13 +167,13 @@ public class PersistentGameManager : MonoBehaviour
                 break;
             case (int) SceneIndexes.CLICKER:
                 ModifyStat(Stat.Boredom, -3);
-                ModifyStat(Stat.Weight, -1);
+                ModifyStat(Stat.Weight, -3);
                 break;
             case (int) SceneIndexes.GUESSING:
-                ModifyStat(Stat.Weight, -1);
+                ModifyStat(Stat.Weight, -3);
                 break;
             case (int) SceneIndexes.FLIPPY:
-                ModifyStat(Stat.Weight, -1);
+                ModifyStat(Stat.Weight, -3);
                 break;
         }
 
