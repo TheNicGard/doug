@@ -373,7 +373,6 @@ public class HomeScreenManager : MonoBehaviour
                     "\nnow is " + System.DateTime.UtcNow.ToString());
 
         System.TimeSpan age = System.DateTime.UtcNow.Subtract(PersistentGameManager.instance.playerData.playerData.acquisitionDate.date);
-        //var age = new System.TimeSpan();
         Debug.Log("\nage is " + age.ToString());
         
         if (age.TotalDays < 1)
@@ -399,7 +398,6 @@ public class HomeScreenManager : MonoBehaviour
             UpdateText();
             UpdateMinigameText();
             PersistentGameManager.instance.SaveGame();
-            Debug.Log("unlocked guessing: " + PersistentGameManager.instance.playerData.playerData.unlockedGuessing.ToString());
             unlockPanel.SetActive(false);
             GoToScene("Guessing");
         }
@@ -411,7 +409,6 @@ public class HomeScreenManager : MonoBehaviour
             UpdateText();
             UpdateMinigameText();
             PersistentGameManager.instance.SaveGame();
-            Debug.Log("unlocked chacha: " + PersistentGameManager.instance.playerData.playerData.unlockedFlippy.ToString());
             unlockPanel.SetActive(false);
             GoToScene("Flippy");
         }
@@ -525,16 +522,12 @@ public class HomeScreenManager : MonoBehaviour
             else
             {
                 wallpaperButtons[i].transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text = "?";
-                //wallpaperButtons[i].GetComponent<Image>().sprite = Resources.Load<Sprite>("paint");
             }
         }
     }
 
     public void DebugButton()
     {
-        PersistentGameManager.instance.playerData.playerData.unlockedWallpaper = WallpaperNumMethods.getMaxPurchasableWallpaperNum();
-        PersistentGameManager.instance.playerData.playerData.coinz += 10000000000000000f;
-        PersistentGameManager.instance.ModifyStat(Stat.Love, 105);
-        UpdateWallpaperButtons();
+        
     }
 }

@@ -28,17 +28,7 @@ public class GlobalConfig
         {WallpaperNum.WALL_PAINT, 100000000f},
         {WallpaperNum.COTTON_CLOTH, 10000000000f}  
     };
-    /* debug prices for wallpapers
-    public static Dictionary<WallpaperNum, float> wallpaperCosts = new Dictionary<WallpaperNum, float>()
-    {
-        {WallpaperNum.PRINTER, 0f},
-        {WallpaperNum.PRINTER_DAMAGED, 1f},
-        {WallpaperNum.LINED, 2f},
-        {WallpaperNum.LINED_DAMAGED, 3f},
-        {WallpaperNum.WALL_PAINT, 4f},
-        {WallpaperNum.COTTON_CLOTH, 5f}  
-    };
-    */
+
     public static string[] wallpaperNames = {"printer sheet", "damagde printer sheet", "lined paper", "damaged lined paper", "paint wall", "cotton clothe", "cookie paper"};
     public static string[] wallpaperFileNames = {"printer", "damaged_printer", "notebook", "damaged_notebook", "paint", "cloth", "cookie_paper"};
 }

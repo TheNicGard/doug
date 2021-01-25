@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
 
+//code taken from: https://unityads.unity3d.com/help/unity/integration-guide-unity#rewarded-video-ads
 [RequireComponent (typeof (Button))]
 public class RewardedAdsButton : MonoBehaviour, IUnityAdsListener {
 

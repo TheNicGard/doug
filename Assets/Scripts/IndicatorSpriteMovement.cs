@@ -12,10 +12,4 @@ public class IndicatorSpriteMovement : MonoBehaviour
         var originalPosition = transform.localPosition;
         LeanTween.moveLocalX(gameObject, originalPosition.x + 2f, speed / 3).setEaseInOutSine().setLoopPingPong();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-    
-    }
 }

@@ -42,8 +42,6 @@ public class FlippyInput : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("collided with: " + other.gameObject.tag);
-
         if (!manager.GetComponent<FlippyManager>().playerIsDead)
         {
             if (other.gameObject.tag == "Pipe" || other.gameObject.tag == "Ground")

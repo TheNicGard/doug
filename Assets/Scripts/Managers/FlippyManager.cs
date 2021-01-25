@@ -21,7 +21,6 @@ public class FlippyManager : MonoBehaviour
     [SerializeField] GameObject startButtonText = null;
     [SerializeField] GameObject infoButton = null;
     [SerializeField] GameObject ground = null;
-    private Transform originalTransform;
     public int pipeValue = 0;
     
 
@@ -33,12 +32,6 @@ public class FlippyManager : MonoBehaviour
         UpdateText();
         ground.GetComponent<UnityEngine.UI.Image>().sprite =
             Resources.Load<UnityEngine.Sprite>(GlobalConfig.wallpaperFileNames[(int) PersistentGameManager.instance.playerData.playerData.currentWallpaper]);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
     
     public void GoToHomeScreen()

@@ -23,10 +23,4 @@ public class PipeMovement : MonoBehaviour
             rb.velocity = new Vector3(-speed, 0f, 0f);
         }
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 }

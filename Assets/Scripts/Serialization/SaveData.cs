@@ -44,11 +44,13 @@ public class SaveData
         playerData.weight = 75;
         playerData.love = 0;
         playerData.coinz = 0f;
-        Debug.Log("[RESETTING, OLD]\nacquisitionDate is " +  PersistentGameManager.instance.playerData.playerData.acquisitionDate.ToString() +
+
+        Debug.Log("[RESETTING, OLD]\nacquisitionDate is " + PersistentGameManager.instance.playerData.playerData.acquisitionDate.ToString() +
                     "\nnow is " + System.DateTime.UtcNow.ToString());
         playerData.acquisitionDate = new SerializableDate(){date = System.DateTime.UtcNow};
-        Debug.Log("[RESETTING, NEW]\nacquisitionDate is " +  PersistentGameManager.instance.playerData.playerData.acquisitionDate.ToString() +
+        Debug.Log("[RESETTING, NEW]\nacquisitionDate is " + PersistentGameManager.instance.playerData.playerData.acquisitionDate.ToString() +
                     "\nnow is " + System.DateTime.UtcNow.ToString());
+
         playerData.savefileVersion = Application.version;
     }
 
