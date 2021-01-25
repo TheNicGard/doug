@@ -130,6 +130,9 @@ PlayerSettings:
   - {fileID: 4900000, guid: d1721472e9871ec45a6ddb2c9e7d9d65, type: 3}
   - {fileID: 11400000, guid: c78ec663aac4e044da96a9893b8ea849, type: 2}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -173,8 +176,8 @@ PlayerSettings:
   androidMaxAspectRatio: 2.1
   applicationIdentifier: {}
   buildNumber: {}
-  AndroidBundleVersionCode: 1
-  AndroidMinSdkVersion: 19
+  AndroidBundleVersionCode: 2
+  AndroidMinSdkVersion: 29
   AndroidTargetSdkVersion: 0
   AndroidPreferredInstallLocation: 0
   aotOptions: 
@@ -247,18 +250,18 @@ PlayerSettings:
   clonedFromGUID: 5f34be1353de5cf4398729fda238591b
   templatePackageId: com.unity.template.2d@3.3.1
   templateDefaultScene: Assets/Scenes/SampleScene.unity
-  AndroidTargetArchitectures: 1
+  AndroidTargetArchitectures: 3
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: 
-  AndroidKeyaliasName: 
+  AndroidKeystoreName: '{inproject}: user.keystore'
+  AndroidKeyaliasName: ktg
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1
   AndroidEnableTango: 0
   androidEnableBanner: 1
   androidUseLowAccuracyLocation: 0
-  androidUseCustomKeystore: 0
+  androidUseCustomKeystore: 1
   m_AndroidBanners:
   - width: 320
     height: 180
@@ -662,7 +665,7 @@ PlayerSettings:
   scriptingDefineSymbols: {}
   platformArchitecture: {}
   scriptingBackend:
-    Android: 0
+    Android: 1
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}

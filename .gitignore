@@ -60,3 +60,4 @@ crashlytics-build.properties
 
 Assets/Scripts/AdConfig.cs
 Assets/Scripts/AdConfig.cs.meta
+*.keystore
