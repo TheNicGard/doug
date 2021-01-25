@@ -37,7 +37,6 @@ public class SaveData
             playerData.guessingHardHiScore = 0;
             PlayerPrefs.SetInt("soundEnabled", 1);
             PlayerPrefs.SetInt("musicEnabled", 1);
-            PlayerPrefs.SetInt("adsEnabled", 1);
         }
         
         playerData.hunger = 50;

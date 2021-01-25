@@ -23,8 +23,6 @@ public class HomeScreenManager : MonoBehaviour
     GameObject toggleSoundButtonText = null;
     [SerializeField]
     GameObject toggleMusicButtonText = null;
-    [SerializeField]
-    GameObject toggleAdsButtonText = null;
 
     [SerializeField]
     GameObject hungerStat = null;
@@ -196,7 +194,6 @@ public class HomeScreenManager : MonoBehaviour
         PersistentGameManager.instance.playerData.ResetPlayerData(false);
         PlayerPrefs.SetInt("soundEnabled", 1);
         PlayerPrefs.SetInt("musicEnabled", 1);
-        PlayerPrefs.SetInt("adsEnabled", 1);
         PersistentGameManager.instance.audioManager.StopMusic();
         PersistentGameManager.instance.SwitchScene((int) SceneIndexes.MAIN_MENU);
     }
@@ -233,21 +230,6 @@ public class HomeScreenManager : MonoBehaviour
         UpdateText();
     }
 
-    public void ToggleAds()
-    {
-        MakePopup("this does nothing!");
-        if (PlayerPrefs.GetInt("adsEnabled") == 1)
-        {
-            PlayerPrefs.SetInt("adsEnabled", 0);
-        }
-        else
-        {
-            PlayerPrefs.SetInt("adsEnabled", 1);
-        }
-
-        UpdateText();
-    }
-
     public void OpenUnlockPanel()
     {
         UpdateText();
@@ -274,10 +256,6 @@ public class HomeScreenManager : MonoBehaviour
             toggleMusicButtonText.GetComponent<TextMeshProUGUI>().text = "music: on";
         else
             toggleMusicButtonText.GetComponent<TextMeshProUGUI>().text = "music: off";
-        if (PlayerPrefs.GetInt("adsEnabled") == 1)
-            toggleAdsButtonText.GetComponent<TextMeshProUGUI>().text = "ads: on";
-        else
-            toggleAdsButtonText.GetComponent<TextMeshProUGUI>().text = "ads: off";
 
         if (PersistentGameManager.instance.playerData.playerData.unlockedFlippy)
             unlockPanel.transform.Find("Unlock Text").GetComponent<TextMeshProUGUI>().text = "you shouldn't be able to see this!";
