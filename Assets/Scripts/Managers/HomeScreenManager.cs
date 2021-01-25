@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Advertisements;
 using UnityEngine.UI;
 
 public class HomeScreenManager : MonoBehaviour
@@ -71,16 +72,17 @@ public class HomeScreenManager : MonoBehaviour
         doug.transform.localScale = new Vector3(dougSpriteDefaultScale.x * GetDougWeightScale(), dougSpriteDefaultScale.y, dougSpriteDefaultScale.z);
         dougSpriteDefaultPosition = doug.transform.position;
 
-        coinzText.GetComponent<TextMeshProUGUI>().text = ClickerManager.ConvertToShortNumber(PersistentGameManager.instance.playerData.playerData.coinz) + " coinz";
-        UpdateText();
-        UpdateMinigameText();
-        UpdateBars();
-        PersistentGameManager.instance.SaveGame();
-        CheckDeactivateDoug();
-        UpdateWallpaperButtons();
-        PersistentGameManager.instance.LoadWallpaperButtons();
-
-        
+        if (PersistentGameManager.instance != null)
+        {
+            PersistentGameManager.instance.SaveGame();
+            coinzText.GetComponent<TextMeshProUGUI>().text = ClickerManager.ConvertToShortNumber(PersistentGameManager.instance.playerData.playerData.coinz) + " coinz";
+            PersistentGameManager.instance.LoadWallpaperButtons();   
+            UpdateText();
+            UpdateMinigameText();
+            UpdateBars();
+            CheckDeactivateDoug();
+            UpdateWallpaperButtons();
+        }
     }
 
     // Update is called once per frame
@@ -375,7 +377,9 @@ public class HomeScreenManager : MonoBehaviour
 
     public float GetDougWeightScale()
     {
-        float weight = (float) PersistentGameManager.instance.playerData.playerData.weight / (float) GlobalConfig.maxWeight;
+        float weight = 0.5f;
+        if (PersistentGameManager.instance != null)
+            weight = (float) PersistentGameManager.instance.playerData.playerData.weight / (float) GlobalConfig.maxWeight;
 
         if (weight < 0.25)
             return (weight * 2f) + .5f;

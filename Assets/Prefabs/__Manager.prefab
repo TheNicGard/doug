@@ -50,8 +50,7 @@ MonoBehaviour:
   currentScene: 0
   playerData:
     playerData:
-      savefileVersionMajor: 0
-      savefileVersionMinor: 0
+      savefileVersion: 
       hunger: 0
       boredom: 0
       weight: 0
@@ -60,7 +59,7 @@ MonoBehaviour:
       clickerVideos: 
       clickerVideosComments: 
       unlockedGuessing: 0
-      unlockedChachaTrail: 0
+      unlockedFlippy: 0
       stardomBonus: 0
       guessingEasyHiScore: 0
       guessingNormalHiScore: 0
@@ -160,7 +159,7 @@ MonoBehaviour:
     loops: 0
   - name: wholesome
     clip: {fileID: 8300000, guid: 9847d25292a2db34a978bc3a3233c5f2, type: 3}
-    volume: 0.25
+    volume: 0.4
     pitch: 1
     volumeAdjustment: 0
     pitchAdjustment: 0
@@ -169,7 +168,7 @@ MonoBehaviour:
     loops: 1
   - name: carefree
     clip: {fileID: 8300000, guid: a1dcf8c58b4e4594096515e17f7d2110, type: 3}
-    volume: 0.2
+    volume: 0.4
     pitch: 1
     volumeAdjustment: 0
     pitchAdjustment: 0
@@ -236,6 +235,15 @@ MonoBehaviour:
     pitch: 1
     volumeAdjustment: 0
     pitchAdjustment: 0.2
+    isSound: 1
+    isMusic: 0
+    loops: 0
+  - name: wee
+    clip: {fileID: 8300000, guid: ef0c91bfafc747449ad5ff13171d8b72, type: 3}
+    volume: 0.8
+    pitch: 1.3
+    volumeAdjustment: 0
+    pitchAdjustment: 0.1
     isSound: 1
     isMusic: 0
     loops: 0

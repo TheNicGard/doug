@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Advertisements;
 using UnityEngine.SceneManagement;
 
 public class PersistentGameManager : MonoBehaviour
@@ -42,6 +43,8 @@ public class PersistentGameManager : MonoBehaviour
 
         DontDestroyOnLoad(instance);
         DontDestroyOnLoad(loadingScreen);
+
+        Advertisement.Initialize(AdConfig.monetizeProjectID, true);
 
         playerData = new SaveData();
         playerData.playerData = new PlayerData();
@@ -221,7 +224,6 @@ public class PersistentGameManager : MonoBehaviour
     {
         float coinzPerSecond = 0f;
         for (int i = 0; i < videos.Length; i++) {
-            
             coinzPerSecond += videos[i].coinzPerSecond * 
             playerData.playerData.clickerVideos[i] * 
             playerData.playerData.clickerVideosComments[i];
