@@ -136,7 +136,9 @@ public class ClickerManager : MonoBehaviour
 
         UpdateTextColors();
         videoButtons.transform.Find("Add Video Button").transform.Find("Text (TMP)").GetComponent<TextMeshProUGUI>().text =
-            "uplaod \"" + PersistentGameManager.instance.videos[videoNumber].title + "\":\n" + ConvertToShortNumber(requiredCoinz(videoNumber)) + " coinz";
+            "uplaod \"" + PersistentGameManager.instance.videos[videoNumber].title +
+            "\":\n" + ConvertToShortNumber(requiredCoinz(videoNumber)) + " coinz" +
+            "\n(+" + ConvertToShortNumber(PersistentGameManager.instance.videos[videoNumber].coinzPerSecond) + " subscribers)";
         
         videoButtons.transform.Find("Add Video Button").GetComponent<UnityEngine.UI.Button>().onClick.RemoveAllListeners();
 
@@ -167,7 +169,7 @@ public class ClickerManager : MonoBehaviour
         for (int i = 0; i < PersistentGameManager.instance.videos.Length; i++) 
         {
             ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Count Text", PersistentGameManager.instance.playerData.playerData.clickerVideos[i].ToString());
-            ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Cost Text", "+" + ConvertToShortNumber(PersistentGameManager.instance.videos[i].coinzPerSecond).ToString() + " subscribers");
+            ModifyButton(buttonScrollRect.transform.Find("Button " + i.ToString()).gameObject, "Cost Text", ConvertToShortNumber(requiredCoinz(i)) + " coinz");   
         }
 
         if (PersistentGameManager.instance.playerData.playerData.stardomBonus > 0)
