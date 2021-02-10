@@ -45,19 +45,14 @@ public class SaveData
         playerData.love = 0;
         playerData.coinz = 0f;
 
-        Debug.Log("[RESETTING, OLD]\nacquisitionDate is " + PersistentGameManager.instance.playerData.playerData.acquisitionDate.ToString() +
-                    "\nnow is " + System.DateTime.UtcNow.ToString());
-
         playerData.acquisitionDate = new SerializableDate(){date = System.DateTime.UtcNow};
         if (playerData.acquisitionDate.date.Equals(new System.DateTime()))
         {
             playerData.acquisitionDate.date = playerData.lastDate.date;
-        }
-
-        Debug.Log("[RESETTING, NEW]\nacquisitionDate is " + PersistentGameManager.instance.playerData.playerData.acquisitionDate.ToString() +
-                    "\nnow is " + System.DateTime.UtcNow.ToString());
+        };
 
         playerData.savefileVersion = Application.version;
+        PlayerPrefs.Save();
     }
 
     override public string ToString()

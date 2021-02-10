@@ -44,8 +44,6 @@ public class PersistentGameManager : MonoBehaviour
         DontDestroyOnLoad(instance);
         DontDestroyOnLoad(loadingScreen);
 
-        Advertisement.Initialize(AdConfig.monetizeProjectID, Debug.isDebugBuild);
-
         playerData = new SaveData();
         playerData.playerData = new PlayerData();
         if (!SerializationManager.DoesFileExist("save"))
@@ -55,6 +53,8 @@ public class PersistentGameManager : MonoBehaviour
         }
         LoadSave();
         LoadClickerData();
+
+        Advertisement.Initialize(AdConfig.monetizeProjectID, Debug.isDebugBuild);
 
         int minutes = (int) System.DateTime.UtcNow.Subtract(playerData.playerData.lastDate.date).TotalMinutes;
         for (int i = 0; i < minutes; i++)

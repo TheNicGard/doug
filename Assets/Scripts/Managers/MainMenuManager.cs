@@ -10,6 +10,7 @@ public class MainMenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(Application.persistentDataPath);
         versionNumberText.GetComponent<TMPro.TextMeshProUGUI>().text = "v. " + Application.version;
     }
 
