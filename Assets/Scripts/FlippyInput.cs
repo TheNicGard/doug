@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+//using UnityEngine.InputSystem;
 
 public class FlippyInput : MonoBehaviour
 {
@@ -22,15 +22,12 @@ public class FlippyInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Mouse mouse = Mouse.current;
-        Touchscreen touchscreen = Touchscreen.current;
-
         if (manager.GetComponent<FlippyManager>().playerIsPlaying && !manager.GetComponent<FlippyManager>().playerIsDead)
         {
             // these are hardcoded based on the velocity used during testing; let's hope it doesn't change
             gameObject.transform.eulerAngles = new Vector3(0f, 0f, (3.4f * rb.velocity.y) + 1.2f);
 
-            if ((mouse != null && mouse.leftButton.wasPressedThisFrame) || (touchscreen != null && touchscreen.press.wasPressedThisFrame))
+            if (Input.GetMouseButtonDown(0) || Input.GetTouch(0).phase == TouchPhase.Began)
             {
                 PersistentGameManager.instance.audioManager.PlaySound("flap");
                 rb.AddForce(new Vector2(0f, thrustVelocity));
