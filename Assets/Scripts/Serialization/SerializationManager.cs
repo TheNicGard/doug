@@ -8,20 +8,22 @@ public class SerializationManager
 {
     public static bool DoesFileExist(string saveName)
     {
-        string path = Application.persistentDataPath + "/saves/" + saveName + ".save";
+        string path = Application.persistentDataPath + Path.DirectorySeparatorChar + "saves" + Path.DirectorySeparatorChar + saveName + ".save";
         return File.Exists(path);
     }
 
     public static bool Save(string saveName, object saveData)
     {
+        PlayerPrefs.Save();
+        
         BinaryFormatter formatter = GetBinaryFormatter();
 
-        if (!Directory.Exists(Application.persistentDataPath + "/saves"))
+        if (!Directory.Exists(Application.persistentDataPath + Path.DirectorySeparatorChar + "saves"))
         {
-            Directory.CreateDirectory(Application.persistentDataPath + "/saves");
+            Directory.CreateDirectory(Application.persistentDataPath + Path.DirectorySeparatorChar + "saves");
         }
 
-        string path = Application.persistentDataPath + "/saves/" + saveName + ".save";
+        string path = Application.persistentDataPath + Path.DirectorySeparatorChar + "saves" + Path.DirectorySeparatorChar + saveName + ".save";
 
         FileStream file = File.Create(path);
         formatter.Serialize(file, saveData);
@@ -32,7 +34,7 @@ public class SerializationManager
 
     public static object Load(string saveName)
     {
-        string path = Application.persistentDataPath + "/saves/" + saveName + ".save";
+        string path = Application.persistentDataPath + Path.DirectorySeparatorChar + "saves" + Path.DirectorySeparatorChar + saveName + ".save";
         if (!File.Exists(path))
         {
             return null;
